@@ -10,11 +10,12 @@
 </head>
 
 <body>
-	
+	<% int member_code = (int)session.getAttribute("member_code");%>
 	 
 	<div class="container">
 	<div class="row">
 	<form method="post" action="userBoardWriteAction.usr">
+			<input type="hidden" name="member_code" value="${member_code }">
 		<table class="table table-striped" style="text-align : center; border: 1px solid #dddddd">
 			<thead>
 				<tr>
@@ -27,7 +28,7 @@
 					<td><input type="text" class="form-control" placeholder="글제목" name="post_subject" maxlength="50"></td>
 				</tr>
 				<tr>
-					<td><textarea  class="form-control" placeholder="글 내용" name="bbsContent" maxlength="500" style="height:350px;"></textarea></td>
+					<td><textarea  class="form-control" placeholder="글 내용" name="post_text" maxlength="500" style="height:350px;"></textarea></td>
 				</tr>	
 				<tr>
 					<td><input type="text" class="form-control" placeholder="글 비밀번호" name="post_pwd" maxlength="50"></td>
@@ -35,6 +36,7 @@
 			</tbody>
 		</table>
 			<input type="submit"class="btn btn-primary pull-right" value="글쓰기">
+			
 		</form>
 		</div>
 	

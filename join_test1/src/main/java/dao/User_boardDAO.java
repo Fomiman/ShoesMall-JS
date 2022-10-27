@@ -1,10 +1,16 @@
+/*
+ * CRUD 게시판
+ */
 package dao;
 
+import static db.JdbcUtil.*;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import vo.User_board;
 
@@ -13,145 +19,134 @@ public class User_boardDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-//	private User_boardDAO() {}
-//	
-//	private static User_boardDAO user_boardDAO;
-//	
-//	public static User_boardDAO getInstance() {
-//		if(user_boardDAO == null) {//User_boardDAO객체가 없으면
-//			user_boardDAO = new User_boardDAO();//객체 생성
-//		}
-//		
-//		return user_boardDAO;//기존 User_boardDAO객체의 주소 리턴
-//	}
-//	
-//	public void setConnection(Connection con){//Connection객체를 받아 DB 연결
-//		this.con=con;
-//	}	
+	/*
+	 * public User_boardDAO() { try { String dbURL
+	 * ="jdbc:mysql://localhost:3306/shoes_shoppingmall"; String dbID ="java";
+	 * String dbPassword ="java"; Class.forName("com.mysql.cj.jdbc.Driver"); con =
+	 * DriverManager.getConnection(dbURL,dbID,dbPassword); }catch (Exception e) {
+	 * e.printStackTrace(); } }
+	 */	
 	
-	public User_boardDAO() {
-		try {
-			String dbURL ="jdbc:mysql://localhost:3306/shoes_shoppingmall";
-			String dbID ="java";
-			String dbPassword ="java";
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection(dbURL,dbID,dbPassword);
-		}catch (Exception e) {
-			e.printStackTrace();
+	//1.생성자는 무조건 private
+		private User_boardDAO(){}
+		
+		private static User_boardDAO user_boardDAO;
+		//static이유? 객체를 생성하기 전에 이미 메모리에 올라간 getInstance()메서드를 통해서만 UserDAO객체를 1개만 만들도록 하기 위해
+		public static User_boardDAO getInstance(){
+			if(user_boardDAO == null) {//UserDAO객체가 없으면
+				user_boardDAO = new User_boardDAO();//객체 생성
+			}
+			
+			return user_boardDAO;//기존 UserDAO객체의 주소 리턴
 		}
-	}
+		/************************************************************/
+		
+		public void setConnection(Connection con){//Connection객체를 받아 DB 연결
+			this.con=con;
+		}	
 	
-	public String getDate() {
-		String sql = "select now()";
+	//삽입 (C)
+	public int insertPost(User_board userboard) {
+		int writeCount = 0;
+		
+		String sql2 = "select ifnull(max(post_no),0)+1 as post_no from user_board";
+		//post_no 세팅
+		int post_no = 0 ;
 		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql2);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				return rs.getString(1);
+			
+			if(rs.next()) {
+				post_no = rs.getInt(1);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	public int getNext() {
-		String sql = "select member_id from user_board order by member_id desc";
+			
+		} catch (Exception e) {			
+			System.out.println("[User_boardDAO] post_no 불러오기 에러:"+ e);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		
+		String sql = "insert into user_board"
+				+ "(post_no, member_code, post_date, post_pwd,"
+				+ "post_subject,post_text, post_file) "
+				+ "values(?,?,?,?,?,?,?)";
 		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				return rs.getInt(1) + 1;
-			}
-			return 1;// 첫번째 게시물인경우
-		} catch (Exception e) {
-			e.printStackTrace();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, post_no);				
+			pstmt.setInt(2, userboard.getMember_code());				
+			pstmt.setString(3, userboard.getPost_date());			
+			pstmt.setString(4, userboard.getPost_pwd());			
+			pstmt.setString(5, userboard.getPost_subject());			
+			pstmt.setString(6, userboard.getPost_text());			
+			pstmt.setString(7, userboard.getPost_file());			
+			
+			writeCount = pstmt.executeUpdate();//업데이트를 성공하면 1을 리턴받음			
+			
+		} catch (Exception e) {			
+			System.out.println("[User_boardDAO] write 에러:"+ e);
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
-		return -1;
-	}
-
-	public int write(int post_no, String post_date, String post_pwd, String post_subject, String member_code,
-			String post_text) {
-		String sql = "insert into user_board values(?,?,?,?,?,?,?)";
-		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, post_no);
-			pstmt.setString(2, member_code);
-			pstmt.setString(3, post_date);
-			pstmt.setString(4, post_pwd);
-			pstmt.setString(5, post_subject);
-			pstmt.setString(6, post_text);
-			pstmt.setString(6, post_text);
-			rs = pstmt.executeQuery();
-			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-
-	public ArrayList<User_board> getList(int pageNumber) {
-		String sql = "select * from user_board LIMIT 10";
+		return writeCount;
+	}//C
+	
+	//조회 (R)
+	public ArrayList<User_board> showList(){
+		String sql = "select post_no, post_subject ,member_id, post_date from membertbl natural join user_board ";
 		ArrayList<User_board> list = new ArrayList<User_board>();
 		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
+			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				User_board user_board = new User_board();
-				user_board.setPost_no(rs.getInt(1));
-				user_board.setMember_code(rs.getInt(2));
-				user_board.setPost_date(rs.getString(3));
-				user_board.setPost_pwd(rs.getString(4));
-				user_board.setPost_subject(rs.getString(5));
-				user_board.setPost_text(rs.getString(6));
-				user_board.setPost_file(rs.getString(7));
-				list.add(user_board);
+			while(rs.next()) {
+				User_board ub = new User_board(
+							rs.getInt(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4) );
+				list.add(ub); 
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			
+		}catch (SQLException e) {
+			System.out.println("[User_boardDAO] showList() 에러 : "+e);
+		}finally {
+			close(rs);
+			close(pstmt);
 		}
 		return list;
 	}
-
-	public boolean nextPage(int pageNumber) {
-		String sql = "select * from user_board LIMIT 10";
-		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				return true;
+	
+	//조회 (R)
+		public User_board showPost(int post_no){
+			String sql = "select post_no, post_subject ,member_id, post_date, post_text from membertbl natural join user_board where post_no = ?";
+			User_board ub = null;
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, post_no);;
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					ub = new User_board(
+								rs.getInt(1),
+								rs.getString(2),
+								rs.getString(3),
+								rs.getString(4),
+								rs.getString(5) );
+				}
+				
+			}catch (SQLException e) {
+				System.out.println("[User_boardDAO] showPost() 에러 : "+e);
+			}finally {
+				close(rs);
+				close(pstmt);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			return ub;
 		}
-		return false;
-	}
+	
+	//수정 (U)
+	
+	
+	//삭제 (D)
 
-	public User_board getUser_board(int member_code) {
-		String sql = "select * from user_board where member_code =?";
-		try {
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, member_code);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				User_board user_board = new User_board();
-				user_board.setPost_no(rs.getInt(1));
-				user_board.setMember_code(member_code);
-				user_board.setPost_date(rs.getString(3));
-				user_board.setPost_pwd(rs.getString(4));
-				user_board.setPost_subject(rs.getString(5));
-				user_board.setPost_text(rs.getString(6));
-				return user_board;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

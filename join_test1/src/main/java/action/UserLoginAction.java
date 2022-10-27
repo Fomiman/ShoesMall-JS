@@ -60,24 +60,13 @@ public class UserLoginAction implements Action {
 				 * 차이점 : 서버에서 생성한 Cookie는 클라이언트에서 관리(보안에 취약)
 				 *       Session은 서버에서 생성하고 관리				 
 				 */
-				Cookie cookie = new Cookie("member_id", member_id);//id로 쿠키 객체 생성
-				//쿠키를 생성하면 기본 생존기간이 -1이다.
-				//브라우저가 실행중일 때는 쿠키가 생존하지만 브라우저를 닫으면 쿠키가 사라짐
-				//cookie.setMaxAge(60 * 60 * 24);//단위는 초임(24시간)
-				System.out.println("Cookie객체 생성");
-				if(remember != null) {//'아이디 저장'에 체크했으면
-					response.addCookie(cookie);//response객체에 추가하여 클라이언트쪽을 보냄					
-				}else {//'아이디 저장'에 체크해제되어 있으면 "쿠키 유효시간을 0으로 해서" response객체에 추가하여 클라이언트쪽을 보냄
-					cookie.setMaxAge(0);//쿠키즉시삭제(쿠키는 삭제메서드를 제공하지 않음)
-					//cookie.setMaxAge(-1); //세션이 끝나면 삭제(즉, 세션유효범위인 "브라우저 종료할 때 삭제됨")
-					response.addCookie(cookie);
-				}	
 
 				//세션 영역에 속성으로 저장하기 위해 Session객체를 생성					
 				HttpSession session = request.getSession();
 				//로그인에 성공한 사용자의 u_id,u_password,u_grade,u_name의 이름으로 각 속성값을 공유하여 
 				session.setAttribute("member_id", member_id);
 				session.setAttribute("member_pwd", member_pwd);
+				session.setAttribute("member_code", userInfo.getMember_code());
 				session.setAttribute("member_name", userInfo.getMember_name());
 				session.setAttribute("member_phone", userInfo.getMember_phone());
 				session.setAttribute("member_email", userInfo.getMember_email());

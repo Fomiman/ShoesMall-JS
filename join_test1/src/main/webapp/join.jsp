@@ -20,7 +20,7 @@
 					<input type="text" class="form-control" placeholder="아이디" name="member_id" maxlength="20">
 				</div>
 					<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호" name="member_pw" maxlength="20">
+					<input type="password" class="form-control" placeholder="비밀번호" name="member_pwd" maxlength="20">
 				</div>
 					<div class="form-group">
 					<input type="text" class="form-control" placeholder="이름" name="member_name" maxlength="20">

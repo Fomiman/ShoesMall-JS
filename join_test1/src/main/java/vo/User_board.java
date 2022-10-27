@@ -10,10 +10,33 @@ public class User_board {
 	private String post_text;
 	private String post_file;
 	
+	private String member_id;
+	
 	public User_board() {
 		super();
 	}
+	
+	
+	//게시판 목록 보기용 생성자
+	public User_board(int post_no, String post_subject, String member_id, String post_date) {
+		super();
+		this.post_no = post_no;
+		this.post_subject = post_subject;
+		this.member_id = member_id;
+		this.post_date = post_date;
+	}
+	
+	//게시글 보기 용 생성자
+	public User_board(int post_no, String post_subject, String member_id, String post_date, String post_text) {
+		super();
+		this.post_no = post_no;
+		this.post_subject = post_subject;
+		this.member_id = member_id;
+		this.post_date = post_date;
+		this.post_text = post_text;
+	}
 
+	//글쓰기 저장용 생성자
 	public User_board(int post_no, int member_code, String post_date, String post_pwd, String post_subject,
 			String post_text, String post_file) {
 		super();
@@ -25,6 +48,9 @@ public class User_board {
 		this.post_text = post_text;
 		this.post_file = post_file;
 	}
+
+
+
 
 	public int getPost_no() {
 		return post_no;
@@ -80,6 +106,16 @@ public class User_board {
 
 	public void setPost_file(String post_file) {
 		this.post_file = post_file;
+	}
+
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	
 	

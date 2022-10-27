@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 
 import javax.servlet.http.Cookie;
 
+import com.mysql.cj.Session;
 import com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute;
 
 import util.SHA256;
@@ -63,6 +64,7 @@ public class UserDAO {
 			//암호화O
 			if(rs.next()) {
 				loginId = rs.getString("member_id");//방법-2
+				
 			}
 			
 			
@@ -91,6 +93,7 @@ public class UserDAO {
 					//기본값으로 채워진 UserBean객체에 조회한 회원정보값으로 셋팅
 					userInfo = new MemberTBL();
 					
+					userInfo.setMember_code(rs.getInt("member_code"));
 					userInfo.setMember_id((rs.getString("member_id")));
 					userInfo.setMember_name((rs.getString("member_name")));
 					userInfo.setMember_birth((rs.getString("member_birth")));
@@ -111,17 +114,18 @@ public class UserDAO {
 			
 			String sql2 = "select ifnull(max(member_code),0)+1 as member_code from memberTBL";
 			//member_code 세팅
-			int member_code = 0 ;
 			try {
-				rs = pstmt.executeQuery(sql2);
+				pstmt = con.prepareStatement(sql2);	
+				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
-					member_code = rs.getInt(1);
+					member.setMember_code(rs.getInt(1));
 				}
 				
 			} catch (Exception e) {			
 				System.out.println("[UserDAO] member_code 불러오기 에러:"+ e);
 			} finally {
+				System.out.println("member.getMember_code() : "+member.getMember_code());
 				close(rs);
 				close(pstmt);
 			}	
@@ -129,11 +133,10 @@ public class UserDAO {
 			
 			//----------------------------------------------------------------
 			String sql = "insert into memberTBL(member_code, member_id,member_pwd,member_name,member_birth,member_phone,member_email,member_gender) values(?,?,?,?,?,?,?,?)";
-			
 			try {
 				pstmt = con.prepareStatement(sql);
 				
-				pstmt.setInt(1, member_code);				
+				pstmt.setInt(1, member.getMember_code());				
 				pstmt.setString(2, member.getMember_id());				
 				pstmt.setString(3, member.getMember_pwd());			
 				pstmt.setString(4, member.getMember_name());				

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -13,6 +15,9 @@ import action.Action;
 import action.UserBoardWriteAction;
 import action.UserJoinAction;
 import action.UserLoginAction;
+import action.UserboardShowAcrion;
+import action.postShowAcrion;
+import dao.User_boardDAO;
 import vo.ActionForward;
 
 /**
@@ -74,11 +79,18 @@ public class UserFrontController extends HttpServlet {
 			
 			if(request.getParameter("remember") != null) {
 				Cookie login_id = new Cookie("login_id", request.getParameter("member_id")) ;
+				Cookie save_id = new Cookie("saved_id", request.getParameter("remember")) ;
+				
 				response.addCookie(login_id);
+				response.addCookie(save_id);
+				
 			}else {
 				Cookie login_id = new Cookie("login_id", "") ;
+				Cookie save_id = new Cookie("saved_id", null) ;
 				response.addCookie(login_id);
+				response.addCookie(save_id);
 			}
+			
 			action  = new UserLoginAction();			
 			try {
 				forward = action.execute(request, response);
@@ -111,27 +123,48 @@ public class UserFrontController extends HttpServlet {
 		}
 		
 		else if(command.equals("/userBoard.usr")) {//'게시판 보기' 요청이면
-			request.setAttribute("showPage", "userBoard.jsp");
-			forward = new ActionForward("mainTemplate.jsp", false);
-			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
+			action = new UserboardShowAcrion();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}					
 		}
 		
-		else if(command.equals("/userBoardWrite.usr")) {//'게시판 보기' 요청이면
+		else if(command.equals("/userBoardWrite.usr")) {//'글쓰기 폼 보기' 요청이면
 			request.setAttribute("showPage", "write.jsp");
 			forward = new ActionForward("mainTemplate.jsp", false);
 			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
 		}
 		
-		else if(command.equals("/userBoardWriteAction.usr")) {//'게시판 보기' 요청이면
+		else if(command.equals("/userBoardWriteAction.usr")) {//'글쓰기 처리' 요청이면
 			action  = new UserBoardWriteAction();			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {				
 				e.printStackTrace();
+			}finally {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('게시글이 성공적으로 등록되었습니다.');");
+				out.println("history.back();");
+				out.println("</script>");
+
 			}
 		}
+
+		else if(command.equals("/showPost.usr")) {//'게시글 보기' 요청이면
+			action = new postShowAcrion();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
+		}
 		
-		else if(command.equals("/serviceCenter.usr")) {//'게시판 보기' 요청이면
+		
+		else if(command.equals("/serviceCenter.usr")) {//'고객센터 보기' 요청이면
 			request.setAttribute("showPage", "serviceCenter.jsp");
 			forward = new ActionForward("mainTemplate.jsp", false);
 			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					

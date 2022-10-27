@@ -22,8 +22,11 @@ public class MemberTBL {
 
 
 
-		public MemberTBL(int member_code, String member_id, String member_pwd, String member_name, String member_birth,
-				String member_phone, String member_email, String member_gender) {
+		public MemberTBL(
+				int member_code, String member_id, String member_pwd, 
+				String member_name, String member_birth,
+				String member_phone, String member_email, String member_gender
+				) {
 			super();
 			this.member_code = member_code;
 			this.member_id = member_id;
@@ -88,7 +91,8 @@ public class MemberTBL {
 		public String getMember_birth() {
 			return member_birth;
 		}
-		
+
+
 
 		public void setMember_birth(String member_birth) {
 			this.member_birth = member_birth;
@@ -129,8 +133,9 @@ public class MemberTBL {
 		public void setMember_gender(String member_gender) {
 			this.member_gender = member_gender;
 		}
-		
-		
+
+
+
 		
 		
 } // class

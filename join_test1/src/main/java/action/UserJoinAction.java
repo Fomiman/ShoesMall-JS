@@ -20,6 +20,12 @@ public class UserJoinAction implements Action {
 		//int member_code ; 자동입력
 		String member_id = request.getParameter("member_id");
 		String member_pwd = request.getParameter("member_pwd");
+		
+		
+		System.out.println("member_pwd : "+member_pwd);
+		
+		
+		
 		String member_name = request.getParameter("member_name");
 		
 		//member_birth String 타입으로 받은것을 Date타입으로 변경해야되는데

@@ -9,6 +9,16 @@
 <link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
 <link rel="stylesheet" href="css/custom.css">
 <title>로그인 화면</title>
+<script type="text/javascript">
+	function save_idCheckCheck() {
+		if(f.remember.checked){
+			f.remember.value = 'checked';
+		}else{
+			f.remember.value = null;
+		}
+			
+	}
+</script>
 </head>
 
 <body>
@@ -23,7 +33,7 @@
 	<div class="col-lg-4"></div>
 	<div class="col-lg-4"></div>
 		<div class="jumbotron" style="padding-top : 20px;">
-			<form method="post" action="userLoginAction.usr">
+			<form method="post" action="userLoginAction.usr" name="f">
 				<h3 style="text-align : center;"> 로그인</h3>
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="아이디" name="member_id" id="login_id" maxlength="20" value="${cookie.login_id.value }">
@@ -31,7 +41,7 @@
 					<div class="form-group">
 					<input type="password" class="form-control" placeholder="비밀번호" name="member_pwd" maxlength="20">
 				</div>
-				<input type="checkbox" name="remember" class="remember" />아이디 저장
+				<input type="checkbox" name="remember" class="remember" onclick="save_idCheckCheck()" ${(cookie.save_id.value != null)?'checked':null}/>아이디 저장
 				<input type="submit" class="btn btn-primary form-control" value="로그인">
 			</form>
 		</div>

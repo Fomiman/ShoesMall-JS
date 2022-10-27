@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import vo.User_board;
+
 public class BbsDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -38,7 +40,7 @@ public class BbsDAO {
 	}
 	
 	public int getNext() {
-		String sql="select member_id from user_board order by member_id desc";
+		String sql="select post_no from user_board order by post_no desc";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
@@ -52,41 +54,26 @@ public class BbsDAO {
 		return -1;
 	}
 	
-	public int write (int post_no, String post_date, String post_pw,String post_subject, String post_id, String post_text) {
-		String sql="insert into user_board values(?,?,?,?,?,?)";
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, post_no);
-			pstmt.setString(2, post_id);
-			pstmt.setString(3, post_date);
-			pstmt.setString(4, post_pw);
-			pstmt.setString(5, post_subject);
-			pstmt.setString(6, post_text);
-			rs=pstmt.executeQuery();
-			return pstmt.executeUpdate();
-			
-			}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	public ArrayList<Bbs> getList(int pageNumber){
+	
+	public ArrayList<User_board> getList(int pageNumber){
 		String sql="select * from user_board LIMIT 10";
-		ArrayList<Bbs> list = new ArrayList<Bbs>();
+		ArrayList<User_board> list = new ArrayList<User_board>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, getNext() -(pageNumber -1)*10);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
-				Bbs bbs=new Bbs();
-				bbs.setPost_no(rs.getInt(1));
-				bbs.setPost_id(rs.getString(2));
-				bbs.setPost_date(rs.getString(3));
-				bbs.setPost_pw(rs.getString(4));
-				bbs.setPost_subject(rs.getString(5));
-				bbs.setPost_text(rs.getString(6));
-				list.add(bbs);
+				User_board user_board=new User_board();
+				
+				user_board.setPost_no(rs.getInt(1));
+				user_board.setMember_code(rs.getInt(2));
+				user_board.setPost_date(rs.getString(3));
+				user_board.setPost_pwd(rs.getString(4));
+				user_board.setPost_subject(rs.getString(5));
+				user_board.setPost_text(rs.getString(6));
+				user_board.setPost_file(rs.getString(7));
+				list.add(user_board);
 			}
 			}catch (Exception e) {
 			e.printStackTrace();
@@ -109,7 +96,7 @@ public class BbsDAO {
 		return false;
 	}
 	public Bbs getBbs(int post_id ) {
-		String sql="select * from user_board where post_id =?";
+		String sql="select * from user_board where post_no =?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, post_id);
