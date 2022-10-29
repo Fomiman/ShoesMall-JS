@@ -46,7 +46,7 @@ public class UserUpdateAction implements Action {
 			out.println("history.back();");
 			out.println("</script>");
 		} else {
-			forward = new ActionForward("userLogin.usr", true);// "로그인 폼 보기" 요청(리다이렉트 방식)
+			forward = new ActionForward("userMyPage.usr", true);// "로그인 폼 보기" 요청(리다이렉트 방식)
 		}
 		return forward;
 	}

@@ -195,6 +195,8 @@ public class UserDAO {
 	}
 /****************************************************************************************************************/
 	public int insertAdr(Deliver_address da) {
+		//회원 가입시 멤버코드를 제외한 컬럼은 null로 채워져있고 본 메서드 실행시 업데이트 구문을 통해 주소값 입력함
+		//만들때 insert로 이름 지었지만 현재 update 역할 수행중 추후에 필요시 이름 변경할것
 		int insertAdrCount = 0;
 
 		String sql = "update deliver_address set address1=?, address2=?, address3=?  where member_code=?";
@@ -218,52 +220,33 @@ public class UserDAO {
 	}
 /****************************************************************************************************************/
 	public int updateUser(MemberTBL member) {
-		int insertUserCount = 0;
+		// 회원 정보 수정 메서드
+		int updateUserCount = 0;
 
-		String sql2 = "select ifnull(max(member_code),0)+1 as member_code from memberTBL";
-		// member_code 세팅
-		try {
-			pstmt = con.prepareStatement(sql2);
-			rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				member.setMember_code(rs.getInt(1));
-			}
-
-		} catch (Exception e) {
-			System.out.println("[UserDAO] member_code 불러오기 에러:" + e);
-		} finally {
-			System.out.println("member.getMember_code() : " + member.getMember_code());
-			close(rs);
-			close(pstmt);
-		}
-
-		// ----------회원 가입시 멤버테이블에 회원 정보를 insert하면서 주소 테이블에 멤버 코드를 제외한 값을 null로 하여 미리 값을 생성한다.
-		//이후 주소 등록 페이지에서는 update를 사용하여 주소 등록시 같은 member_code로 새로운 주소가 등록되는 것이 아니고 기존의 row에 column값만 변경한다.
-		String sql = "insert into memberTBL(member_code, member_id,member_pwd,member_name,member_birth,member_phone,member_email,member_gender) values(?,?,?,?,?,?,?,?);"
-				+ "insert into deliver_address values(?, '', '', '')";
+		String sql = "update memberTBL set member_id=?,member_pwd=?,member_name=?,member_birth=?,member_phone=?,member_email=?,member_gender=?"
+				+ " where member_code=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setInt(1, member.getMember_code());
-			pstmt.setString(2, member.getMember_id());
-			pstmt.setString(3, member.getMember_pwd());
-			pstmt.setString(4, member.getMember_name());
-			pstmt.setString(5, member.getMember_birth());
-			pstmt.setString(6, member.getMember_phone());
-			pstmt.setString(7, member.getMember_email());
-			pstmt.setString(8, member.getMember_gender());
-			pstmt.setInt(9, member.getMember_code());
+			pstmt.setInt(8, member.getMember_code());
+			pstmt.setString(1, member.getMember_id());
+			pstmt.setString(2, member.getMember_pwd());
+			pstmt.setString(3, member.getMember_name());
+			pstmt.setString(4, member.getMember_birth());
+			pstmt.setString(5, member.getMember_phone());
+			pstmt.setString(6, member.getMember_email());
+			pstmt.setString(7, member.getMember_gender());
 
-			insertUserCount = pstmt.executeUpdate();// 업데이트를 성공하면 1을 리턴받음
+			updateUserCount = pstmt.executeUpdate();// 업데이트를 성공하면 1을 리턴받음
 
 		} catch (Exception e) {
-			System.out.println("[UserDAO] insertUser 에러:" + e);
+			System.out.println("[UserDAO] updatetUser 에러:" + e);
 		} finally {
 			close(rs);
 			close(pstmt);
 		}
-		return insertUserCount;
+		return updateUserCount;
 	}
 /************************************************************************************************************/
 
