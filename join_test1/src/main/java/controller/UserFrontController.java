@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.InsertAddressAction;
+import action.PostShowAcrion;
 import action.UserBoardWriteAction;
 import action.UserJoinAction;
 import action.UserLoginAction;
+import action.UserUpdateAction;
 import action.UserboardShowAcrion;
-import action.postShowAcrion;
-import dao.User_boardDAO;
 import vo.ActionForward;
 
 /**
@@ -67,7 +68,8 @@ public class UserFrontController extends HttpServlet {
 		System.out.println("[User]command : " + command);//어떤 요청인지 확인하기 위해 출력		
 		
 		if(command.equals("/userHome.usr")) {//'index.jsp에서 userHome.jsp뷰페이지 보기' 요청이면			
-			forward = new  ActionForward("userHome.jsp", false); //반드시 디스패치 방식으로 포워딩 
+			request.setAttribute("showPage", null);
+			forward = new ActionForward("mainTemplate.jsp", false);	//반드시 디스패치 방식으로 포워딩
 		}
 		
 		else if(command.equals("/userLogin.usr")) {//'로그인 폼 보기' 요청이면
@@ -77,6 +79,7 @@ public class UserFrontController extends HttpServlet {
 		
 		else if(command.equals("/userLoginAction.usr")) {//'로그인 처리' 요청이면
 			
+			//아이디 저장 체크박스 처리
 			if(request.getParameter("remember") != null) {
 				Cookie login_id = new Cookie("login_id", request.getParameter("member_id")) ;
 				Cookie save_id = new Cookie("saved_id", request.getParameter("remember")) ;
@@ -95,7 +98,7 @@ public class UserFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {				
-				e.printStackTrace();
+				System.out.println("UserLoginAction() forward 에러"+e);
 			}
 		}
 		
@@ -104,8 +107,18 @@ public class UserFrontController extends HttpServlet {
 			//session.invalidate();//세션의 모든 속성을 삭제-금지(세션에 저장된 사용자 속성도 제거되므로)
 			session.removeAttribute("member_id");
 			session.removeAttribute("member_pwd");
+			session.removeAttribute("member_code");
+			session.removeAttribute("member_name");
+			session.removeAttribute("member_birth");
+			session.removeAttribute("member_phone");
+			session.removeAttribute("member_email");
+			session.removeAttribute("member_gender");
+			session.removeAttribute("address1");
+			session.removeAttribute("address2");
+			session.removeAttribute("address3");
 			
-			forward = new ActionForward("userHome.jsp", true);//리다이렉트 방식으로 포워딩	
+			request.setAttribute("showPage", null);
+			forward = new ActionForward("mainTemplate.jsp", false);
 		}
 		
 		else if(command.equals("/join.usr")) {//'회원가입 폼 보기' 요청이면
@@ -155,7 +168,7 @@ public class UserFrontController extends HttpServlet {
 		}
 
 		else if(command.equals("/showPost.usr")) {//'게시글 보기' 요청이면
-			action = new postShowAcrion();//게시판 글 목록 불러오는 Action
+			action = new PostShowAcrion();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {				
@@ -169,6 +182,36 @@ public class UserFrontController extends HttpServlet {
 			forward = new ActionForward("mainTemplate.jsp", false);
 			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
 		}
+		
+		else if(command.equals("/userMyPage.usr")) {//'마이페이지 보기' 요청이면
+			request.setAttribute("showPage", "userMyPage.jsp");
+			forward = new ActionForward("mainTemplate.jsp", false);
+			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
+		}
+		else if(command.equals("/userMyPageAction.usr")) {//'주소등록 처리' 요청이면
+			action = new UserUpdateAction();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
+		}
+		else if(command.equals("/updateAddressAction.usr")) {//'주소등록 처리' 요청이면
+			action = new InsertAddressAction();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
+		}
+		
+		
+		
+		else if(command.equals("/managerHome.usr")) {//'로그인 폼 보기' 요청이면
+			request.setAttribute("showPage", null);
+			forward = new ActionForward("./manager/managerTemplate.jsp", true);	//반드시 디스패치 방식으로 포워딩					
+		}
+		
 		
 		//
 		/***************************************************************

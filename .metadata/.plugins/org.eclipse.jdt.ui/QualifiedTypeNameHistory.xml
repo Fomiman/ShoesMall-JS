@@ -37,5 +37,18 @@
     <fullyQualifiedTypeName name="svc.PostShowService"/>
     <fullyQualifiedTypeName name="java.lang.ArrayIndexOutOfBoundsException"/>
     <fullyQualifiedTypeName name="vo.User_board"/>
+    <fullyQualifiedTypeName name="action.admin.AdminLoginAction"/>
+    <fullyQualifiedTypeName name="vo.ManagerTBL"/>
+    <fullyQualifiedTypeName name="dao.ManagerDAO"/>
+    <fullyQualifiedTypeName name="action.manager.ManagerLoginAction"/>
+    <fullyQualifiedTypeName name="action.manager.ManagerJoinAction"/>
+    <fullyQualifiedTypeName name="action.manager.ManagerboardShowAcrion"/>
+    <fullyQualifiedTypeName name="action.manager.ManagerBoardWriteAction"/>
+    <fullyQualifiedTypeName name="svc.manager.ManagerLoginService"/>
     <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="action.showNoticeAcrion"/>
+    <fullyQualifiedTypeName name="vo.NoticeTBL"/>
+    <fullyQualifiedTypeName name="svc.ShowNoticeService"/>
+    <fullyQualifiedTypeName name="dao.NoticeDAO"/>
+    <fullyQualifiedTypeName name="action.ShowNoticeAcrion"/>
 </qualifiedTypeNameHistroy>

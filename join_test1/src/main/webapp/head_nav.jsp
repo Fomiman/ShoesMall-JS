@@ -27,11 +27,11 @@
                 <span class ="icon-bar"></span>
                 <span class ="icon-bar"></span>
             </button>
-            <a class ="navbar-brand" href="main.jsp">ShoesMall</a>
+            <a class ="navbar-brand" href="userHome.usr">ShoesMall</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="userHome.jsp">메인</a></li> <!-- 메인 페이지 -->
+                <li class="active"><a href="userHome.usr">메인</a></li> <!-- 메인 페이지 -->
                 <li><a href="product.jsp">나이키</a></li>
                 <li><a href="product2.jsp">아디다스</a></li>
                 <li><a href="userBoard.usr">게시판</a></li>
@@ -49,6 +49,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="userLogin.usr">로그인</a></li>
                         <li><a href="join.usr">회원가입</a></li>                    
+                        <li><a href="managerHome.usr">관리자 페이지 이동</a></li>                    
                     </ul>
                 </li>
             </ul>
@@ -63,6 +64,7 @@
                     aria-expanded="false">회원관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="userLogoutAction.usr">로그아웃</a></li>
+                        <li><a href="userMyPage.usr">마이페이지</a></li>
                     </ul>
                 </li>
             </ul>

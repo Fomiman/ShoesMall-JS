@@ -17,23 +17,23 @@
 			<form method="post" action="userJoinAction.usr">
 				<h3 style="text-align : center;"> 회원가입</h3>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="아이디" name="member_id" maxlength="20">
+					<input type="text" class="form-control" placeholder="아이디" name="member_id" maxlength="12">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" placeholder="비밀번호" name="member_pwd" maxlength="12">
 				</div>
 					<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호" name="member_pwd" maxlength="20">
-				</div>
-					<div class="form-group">
-					<input type="text" class="form-control" placeholder="이름" name="member_name" maxlength="20">
+					<input type="text" class="form-control" placeholder="이름" name="member_name" maxlength="12">
 				</div>
 				
 				<div class="form-group">
-					<input type="date" class="form-control" placeholder="생일" name="member_birth" maxlength="20">
+					<input type="date" class="form-control" placeholder="생일" name="member_birth" >
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="번호" name="member_phone" maxlength="20">
+					<input type="text" class="form-control" placeholder="번호" name="member_phone" maxlength="13">
 				</div>
 				<div class="form-group">
-						<input type="email" class="form-control" placeholder="이메일" name="member_email" maxlength="20">
+						<input type="email" class="form-control" placeholder="이메일" name="member_email" maxlength="45">
 					</div>
 					<div class="form-group" style="text-align:center;">
 						<div class="btn-group" data-toggle="button">

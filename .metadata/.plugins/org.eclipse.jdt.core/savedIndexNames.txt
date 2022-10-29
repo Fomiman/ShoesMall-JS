@@ -1,10 +1,8 @@
 INDEX VERSION 1.131+D:\TeamProject\workspace\.metadata\.plugins\org.eclipse.jdt.core
-280752637.index
 3583959884.index
 2782785306.index
 260764133.index
 827667845.index
-4183374134.index
 3047822695.index
 1488916773.index
 1365325608.index
@@ -23,7 +21,6 @@ INDEX VERSION 1.131+D:\TeamProject\workspace\.metadata\.plugins\org.eclipse.jdt.
 1496516443.index
 3840608332.index
 4276089397.index
-3878243586.index
 2103223441.index
 1747142712.index
 2728177605.index
@@ -32,20 +29,15 @@ INDEX VERSION 1.131+D:\TeamProject\workspace\.metadata\.plugins\org.eclipse.jdt.
 1739154875.index
 817920966.index
 2779065169.index
-1347862404.index
 1854189497.index
 1161792257.index
-1291220605.index
-3498459438.index
 3895185537.index
 1799206330.index
 2218410881.index
 3271100634.index
 3945694047.index
-3909840046.index
 3892730124.index
 2374446020.index
-2162679795.index
 1697235124.index
 2925387548.index
 4023710187.index

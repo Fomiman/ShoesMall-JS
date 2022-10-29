@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import svc.UserLoginService;
 import util.SHA256;
 import vo.ActionForward;
+import vo.Deliver_address;
 import vo.MemberTBL;
 
 public class UserLoginAction implements Action {
@@ -20,8 +21,6 @@ public class UserLoginAction implements Action {
 		
 		String member_id =request.getParameter("member_id");
 		String member_pwd =request.getParameter("member_pwd");
-		
-		String remember =request.getParameter("remember");//아이디 저장 체크 여부를 확인->쿠키객체 생성여부에 사용함
 		
 		MemberTBL member = new MemberTBL();
 		member.setMember_id(member_id);;
@@ -34,6 +33,7 @@ public class UserLoginAction implements Action {
 		boolean isloginSuccess = userLoginService.login(member);
 		
 		MemberTBL userInfo = null;		
+		Deliver_address da = null;		
 		if(!isloginSuccess) {//if(isloginResult == false) {//로그인에 실패하면 경고창을 띄운 후 다시 '로그인 폼 보기'요청
 			response.setContentType("text/html;charset=UTF-8");
 			
@@ -47,6 +47,7 @@ public class UserLoginAction implements Action {
 			//★★입력한 id로 "회원정보"를 가져와(가져오는 이유? 정보를 session영역에 공유하기 위해)
 			//UserBean userInfo = userLoginService.getUserInfo(u_id);
 			userInfo = userLoginService.getUserInfo(member_id);//if문 위(39라인)에 userInfo변수 선언
+			da = userLoginService.getUserAdrInfo(member_id);//if문 위(39라인)에 userInfo변수 선언
 			
 			if(userInfo == null) {//만약 null이면
 				response.setContentType("text/html;charset=UTF-8");
@@ -64,18 +65,35 @@ public class UserLoginAction implements Action {
 				//세션 영역에 속성으로 저장하기 위해 Session객체를 생성					
 				HttpSession session = request.getSession();
 				//로그인에 성공한 사용자의 u_id,u_password,u_grade,u_name의 이름으로 각 속성값을 공유하여 
-				session.setAttribute("member_id", member_id);
-				session.setAttribute("member_pwd", member_pwd);
-				session.setAttribute("member_code", userInfo.getMember_code());
-				session.setAttribute("member_name", userInfo.getMember_name());
-				session.setAttribute("member_phone", userInfo.getMember_phone());
-				session.setAttribute("member_email", userInfo.getMember_email());
+				try {
+					session.setAttribute("member_id", member_id);
+					session.setAttribute("member_pwd", member_pwd);
+					session.setAttribute("member_code", userInfo.getMember_code());
+					session.setAttribute("member_name", userInfo.getMember_name());
+					session.setAttribute("member_birth", userInfo.getMember_birth());
+					session.setAttribute("member_phone", userInfo.getMember_phone());
+					session.setAttribute("member_email", userInfo.getMember_email());
+					session.setAttribute("member_gender", userInfo.getMember_gender());
+					//System.out.println("getGenderAction"+userInfo.getMember_gender());
+					System.out.println("getBirthAction"+userInfo.getMember_birth());
+				} catch (Exception e) {
+					System.out.println("[UserLoginAction] session set1 에러 : "+e);
+				}
+				
+				try {
+					session.setAttribute("address1", da.getAddress1());
+					session.setAttribute("address2", da.getAddress2());
+					session.setAttribute("address3", da.getAddress3());
+				} catch (Exception e) {
+					System.out.println("[UserLoginAction] session set2 에러 : "+e);
+				}
 			
 				//web.xml에서 설정가능함
 				session.setMaxInactiveInterval(1*60*60);//세션 수명시간을 1시간으로 설정(3600초=1시간)
 			
 				//★★주의 : 필요한 정보들을 session에 저장했으므로 리다이렉트(true) 방식으로 포워딩해도 무방하다.
-				forward = new ActionForward("userHome.jsp", true);//(※false : 리다이렉트 방식으로 포워딩해도 됨)			
+				request.setAttribute("showPage", null);
+				forward = new ActionForward("mainTemplate.jsp", true);		
 			}		
 			
 		}
