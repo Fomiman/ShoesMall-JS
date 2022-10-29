@@ -43,12 +43,12 @@ public class UserDAO {
 		return userDAO;// 기존 UserDAO객체의 주소 리턴
 	}
 
-	/************************************************************/
+/************************************************************************************************************/
 
 	public void setConnection(Connection con) {// Connection객체를 받아 DB 연결
 		this.con = con;
 	}
-
+/************************************************************************************************************/
 	/*
 	 * 로그인 폼에서 입력한 id와 pw가 담긴 UserBean객체로 회원인지 조회 후 그 id를 반환 (단, '비밀번호를 암호화'하였다면
 	 * 암호화된 비밀번호가 담긴 UserBean객체)
@@ -84,7 +84,7 @@ public class UserDAO {
 		return loginId;// 회원가입이 되어있으면 id를 리턴, 그렇지 않으면 null
 
 	}// selectLoginId()
-
+/************************************************************************************************************/
 	// user_table안의 회원정보를 u_id로 조회하여 반환
 	public MemberTBL selectUserInfo(String member_id) {
 		MemberTBL userInfo = null;
@@ -117,7 +117,7 @@ public class UserDAO {
 
 		return userInfo;
 	}
-	
+/************************************************************************************************************/
 	public Deliver_address selectUserAdrInfo(String member_id) {
 		Deliver_address da = null;
 		// 사용자가 입력한 id 회원정보를 조회
@@ -144,7 +144,7 @@ public class UserDAO {
 
 		return da;
 	}
-
+/************************************************************************************************************/
 	public int insertUser(MemberTBL member) {
 		int insertUserCount = 0;
 
@@ -193,7 +193,7 @@ public class UserDAO {
 		}
 		return insertUserCount;
 	}
-
+/****************************************************************************************************************/
 	public int insertAdr(Deliver_address da) {
 		int insertAdrCount = 0;
 
@@ -216,5 +216,58 @@ public class UserDAO {
 		}
 		return insertAdrCount;
 	}
+/****************************************************************************************************************/
+	public int updateUser(MemberTBL member) {
+		int insertUserCount = 0;
 
+		String sql2 = "select ifnull(max(member_code),0)+1 as member_code from memberTBL";
+		// member_code 세팅
+		try {
+			pstmt = con.prepareStatement(sql2);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				member.setMember_code(rs.getInt(1));
+			}
+
+		} catch (Exception e) {
+			System.out.println("[UserDAO] member_code 불러오기 에러:" + e);
+		} finally {
+			System.out.println("member.getMember_code() : " + member.getMember_code());
+			close(rs);
+			close(pstmt);
+		}
+
+		// ----------회원 가입시 멤버테이블에 회원 정보를 insert하면서 주소 테이블에 멤버 코드를 제외한 값을 null로 하여 미리 값을 생성한다.
+		//이후 주소 등록 페이지에서는 update를 사용하여 주소 등록시 같은 member_code로 새로운 주소가 등록되는 것이 아니고 기존의 row에 column값만 변경한다.
+		String sql = "insert into memberTBL(member_code, member_id,member_pwd,member_name,member_birth,member_phone,member_email,member_gender) values(?,?,?,?,?,?,?,?);"
+				+ "insert into deliver_address values(?, '', '', '')";
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, member.getMember_code());
+			pstmt.setString(2, member.getMember_id());
+			pstmt.setString(3, member.getMember_pwd());
+			pstmt.setString(4, member.getMember_name());
+			pstmt.setString(5, member.getMember_birth());
+			pstmt.setString(6, member.getMember_phone());
+			pstmt.setString(7, member.getMember_email());
+			pstmt.setString(8, member.getMember_gender());
+			pstmt.setInt(9, member.getMember_code());
+
+			insertUserCount = pstmt.executeUpdate();// 업데이트를 성공하면 1을 리턴받음
+
+		} catch (Exception e) {
+			System.out.println("[UserDAO] insertUser 에러:" + e);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return insertUserCount;
+	}
+/************************************************************************************************************/
+
+/************************************************************************************************************/
+	
+	
 }// class
