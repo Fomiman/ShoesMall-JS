@@ -17,20 +17,22 @@
 			<form method="post" action="userJoinAction.usr">
 				<h3 style="text-align : center;"> 회원가입</h3>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="아이디" name="member_id" maxlength="12">
+					<input type="text" class="form-control" placeholder="아이디를 입력해주세요.(영문,숫자 혼합 최대 12자리)" name="member_id" id="member_id" maxlength="12">
+					<input type="button" name="u_idck" id="u_idck" value="아이디 중복 확인"  class="btn btn-primary form-control"
+					onclick="window.open('idCheck/idCheck.jsp?openInit=true','아이디중복확인','top=10, left=10, width=500, height=300')"/>
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="비밀번호" name="member_pwd" maxlength="12">
+					<input type="password" class="form-control" placeholder="비밀번호(영문, 숫자 혼합 최대 12자리)" name="member_pwd" maxlength="12">
 				</div>
 					<div class="form-group">
 					<input type="text" class="form-control" placeholder="이름" name="member_name" maxlength="12">
 				</div>
 				
 				<div class="form-group">
-					<input type="date" class="form-control" placeholder="생일" name="member_birth" >
+					<input type="date" class="form-control" placeholder="생일(0000-00-00)" name="member_birth" >
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="번호" name="member_phone" maxlength="13">
+					<input type="text" class="form-control" placeholder="번호(-를 포함하여 입력해주세요)" name="member_phone" maxlength="13">
 				</div>
 				<div class="form-group">
 						<input type="email" class="form-control" placeholder="이메일" name="member_email" maxlength="45">

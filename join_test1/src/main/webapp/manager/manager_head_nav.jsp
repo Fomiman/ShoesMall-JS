@@ -28,7 +28,7 @@
             <a class ="navbar-brand" href="managerHome.mgr">ShoesMall</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        	<%-- <%
+        	<%
             	if (manager_id == null){
             %>
             <ul class="nav navbar-nav">
@@ -37,7 +37,7 @@
             </ul>
             <%
             	}else{
-            %>  --%>
+            %> 
             <ul class="nav navbar-nav">
             <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
@@ -45,7 +45,7 @@
                     aria-haspopup="true"
                     aria-expanded="false">실시간 주문/매출관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="active"><a href="oderManagement.mgr">실시간 주문관리</a></li>
+                        <li class="active"><a href="orderManagement.mgr">실시간 주문관리</a></li>
                         <li><a href="join.mgr">매출관리</a></li>                    
                     </ul>
                 </li>
@@ -60,11 +60,11 @@
                     </ul>
                 </li>
                 <li><a href="userBoard.mgr">게시판관리</a></li>
-                <li><a href="product2.jsp">회원관리</a></li>
+                <li><a href="userManagement.mgr">회원관리</a></li>
                 <li><a href="serviceCenter.mgr">고객센터</a></li>
             </ul>
              <%
-            	//}
+            	}
             	if (manager_id == null){
             %>
             <ul class="nav navbar-nav navbar-right">

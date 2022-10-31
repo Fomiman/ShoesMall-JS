@@ -57,21 +57,30 @@
 				</tbody>
 			</table>
 
-			<a href="userBoard.jsp" class="btn btn-success btn-arraw-left">이전</a>
+			<a href="userBoard.usr" class="btn btn-success btn-arraw-left">이전</a>
 
-			<a href="userBoard.jsp" class="btn btn-success btn-arraw-left">다음</a>
+			<a href="userBoard.usr" class="btn btn-success btn-arraw-left">다음</a>
 			<%
 			String member_id = null;
+			String manager_id = null;
+			
 			if (session.getAttribute("member_id") != null) {
 				member_id = (String) session.getAttribute("member_id");
 			}
-			if (member_id == null) {
+			if (session.getAttribute("manager_id") != null) {
+				manager_id = (String) session.getAttribute("manager_id");
+			}
+			if (member_id == null && manager_id ==null) {
 			%>
-			<a href="userLogin.usr" class="btn btn-primary pull-right">로그인 후 글쓰기</a>
+				<a href="userLogin.usr" class="btn btn-primary pull-right">로그인 후 글쓰기</a>
 			<%
-			} else {
+			} else if(member_id != null && manager_id ==null){
 			%>
-			<a href="userBoardWrite.usr" class="btn btn-primary pull-right">글쓰기</a>
+				<a href="userBoardWrite.usr" class="btn btn-primary pull-right">글쓰기</a>
+			<%
+			}else if(member_id == null && manager_id !=null){
+			%>
+				<a href="managerBoardWrite.mgr" class="btn btn-primary pull-right">관리자 글쓰기</a>
 			<%
 			}
 			%>

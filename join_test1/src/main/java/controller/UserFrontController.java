@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.InsertAddressAction;
 import action.PostShowAcrion;
+import action.ServiceCenterAcrion;
+import action.ShowNoticeAcrion;
 import action.UserBoardWriteAction;
 import action.UserJoinAction;
 import action.UserLoginAction;
@@ -134,7 +136,7 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+		/************************ 유저 게시판 *********************************/
 		else if(command.equals("/userBoard.usr")) {//'게시판 보기' 요청이면
 			action = new UserboardShowAcrion();//게시판 글 목록 불러오는 Action
 			try {
@@ -175,20 +177,31 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}	
 		}
-		
+		/************************ 고객센터 *********************************/
 		
 		else if(command.equals("/serviceCenter.usr")) {//'고객센터 보기' 요청이면
-			request.setAttribute("showPage", "serviceCenter.jsp");
-			forward = new ActionForward("mainTemplate.jsp", false);
-			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
+			action = new ServiceCenterAcrion();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
 		}
-		
+		else if(command.equals("/viewNotice.usr")) {//'공지사항 보기' 요청이면
+			action = new ShowNoticeAcrion();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}	
+		}
+		/************************ 마이페이지 *********************************/
 		else if(command.equals("/userMyPage.usr")) {//'마이페이지 보기' 요청이면
 			request.setAttribute("showPage", "userMyPage.jsp");
 			forward = new ActionForward("mainTemplate.jsp", false);
 			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
 		}
-		else if(command.equals("/userMyPageAction.usr")) {//'주소등록 처리' 요청이면
+		else if(command.equals("/userMyPageAction.usr")) {//'회원정보수정 처리' 요청이면
 			action = new UserUpdateAction();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
@@ -207,7 +220,7 @@ public class UserFrontController extends HttpServlet {
 		
 		
 		
-		else if(command.equals("/managerHome.usr")) {//'로그인 폼 보기' 요청이면
+		else if(command.equals("/managerHome.usr")) {//'관리자 메인페이지 보기' 요청이면
 			request.setAttribute("showPage", null);
 			forward = new ActionForward("./manager/managerTemplate.jsp", true);	//반드시 디스패치 방식으로 포워딩					
 		}

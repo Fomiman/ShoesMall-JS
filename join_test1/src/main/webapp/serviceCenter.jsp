@@ -36,7 +36,12 @@
 							<!-- 행 시작  -->
 							<tr>
 								<td>${notice.notice_no}</td>
-								<td><a href="showNotice.mgr?notice_no=${notice.notice_no}">${notice.notice_title }</a></td>
+								<td>
+									<a href="
+									<%if (manager_id == null) {%>viewNotice.usr
+									<%}else{ %>viewNotice.mgr<%} %>
+									?notice_no=${notice.notice_no}">${notice.notice_subject }</a>
+								</td>
 								<td>${notice.notice_date }</td>
 							</tr>
 							<!-- 행 끝 -->
@@ -48,17 +53,13 @@
 							<td colspan="4">등록된 게시글이 없습니다.</td>
 						</tr>
 					</c:if>
-					<%
-					if (manager_id != null) {
-					%>
+					<% if (manager_id != null) { %>
 					<tr>
 						<td>
-						<a href="writeNotice.mgr"><input type="button" name="submitNotice" value="공지등록"></a>
+							<a href="writeNotice.mgr"><input type="button" name="submitNotice" value="공지등록"></a>
 						</td>
 					</tr>
-					<%
-					}
-					%>
+					<% } %>
 				</tbody>
 			</table>
 		</div>

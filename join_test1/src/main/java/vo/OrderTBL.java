@@ -5,14 +5,14 @@ import java.sql.Date;
 public class OrderTBL {
 	private int order_id;
 	private int member_code;
-	private Date order_date;
+	private String order_date;
 	private String order_status;
 	
 	public OrderTBL() {
 		super();
 	}
 
-	public OrderTBL(int order_id, int member_code, Date order_date, String order_status) {
+	public OrderTBL(int order_id, int member_code, String order_date, String order_status) {
 		super();
 		this.order_id = order_id;
 		this.member_code = member_code;
@@ -36,11 +36,11 @@ public class OrderTBL {
 		this.member_code = member_code;
 	}
 
-	public Date getOrder_date() {
+	public String getOrder_date() {
 		return order_date;
 	}
 
-	public void setOrder_date(Date order_date) {
+	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
 	}
 

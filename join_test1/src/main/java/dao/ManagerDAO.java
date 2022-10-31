@@ -5,8 +5,13 @@ import static db.JdbcUtil.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import vo.ManagerTBL;
+import vo.OrderTBL;
+import vo.Order_detail;
+import vo.User_board;
 import vo.ManagerTBL;
 
 public class ManagerDAO {
@@ -150,4 +155,71 @@ public class ManagerDAO {
 		}
 		return insertManagerCount;
 	}
+
+	
+	
+	/********** 실시간 주문관리용 메서드 **********************************/
+	public ArrayList<OrderTBL> showList() {
+		// 실시간 주문 목록보기
+		String sql = "select order_id, member_code ,order_date, order_status from OrderTBL";
+		ArrayList<OrderTBL> orderList = new ArrayList<OrderTBL>();
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				OrderTBL ub = new OrderTBL(
+							rs.getInt(1),
+							rs.getInt(2),
+							rs.getString(3),
+							rs.getString(4) );
+				orderList.add(ub); 
+			}
+			
+		}catch (SQLException e) {
+			System.out.println("[ManagerDAO] showList() 에러 : "+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return orderList;
+	}
+	
+	//주문 목록 상세보기
+	public ArrayList<Order_detail> showDetail(int order_id) {
+		// 실시간 주문 목록보기
+		String sql = "select order_id, member_id,"
+				+ "concat(address1, ' ', address2, ' ', address3) as address, "
+				+ "member_phone, member_email, product_no, order_amount, order_price "
+				+ "from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  "
+				+ "where order_id = ? ";
+		ArrayList<Order_detail> detailList = new ArrayList<Order_detail>();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, order_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Order_detail od = new Order_detail(
+							rs.getInt("order_id"),
+							rs.getString("member_id"),
+							rs.getString("address"),
+							rs.getString("member_phone"),
+							rs.getString("member_email"),
+							rs.getInt("product_no"),
+							rs.getInt("order_amount"),
+							rs.getInt("order_price") );
+				detailList.add(od); 
+			}
+			
+		}catch (SQLException e) {
+			System.out.println("[ManagerDAO] showDetail() 에러 : "+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return detailList;
+		
+	}
+/********** 실시간 주문관리용 메서드 끝 **********************************/
+		
+		
 }

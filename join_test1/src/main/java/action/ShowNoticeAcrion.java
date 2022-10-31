@@ -17,12 +17,12 @@ public class ShowNoticeAcrion implements Action {
 		
 		ShowNoticeService showNoticeService = new ShowNoticeService();
 		
-		NoticeTBL notice = ShowNoticeService.getNotice(notice_no);
+		NoticeTBL notice = showNoticeService.getNotice(notice_no);
 		
 		request.setAttribute("notice", notice);
-		request.setAttribute("showPage", "viewNotice.jsp");
+		request.setAttribute("showPage", "./manager/viewNotice.jsp");
 		
-		forward = new ActionForward("menuTemplate.jsp", false);
+		forward = new ActionForward("mainTemplate.jsp", false);
 		
 		return forward;
 

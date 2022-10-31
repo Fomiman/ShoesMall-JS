@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.PostShowAcrion;
+import action.ServiceCenterAcrion;
 import action.ShowNoticeAcrion;
-import action.postShowAcrion;
+import action.UserboardShowAcrion;
 import action.manager.ManagerBoardWriteAction;
 import action.manager.ManagerJoinAction;
 import action.manager.ManagerLoginAction;
 import action.manager.ManagerboardShowAcrion;
+import action.manager.OrderDetailAction;
+import action.manager.OrderManagementAction;
+import action.manager.ServiceCenterAcrionMGR;
 import action.manager.WriteNoticeAction;
 import vo.ActionForward;
 
@@ -74,6 +79,7 @@ public class ManagerFrontController extends HttpServlet {
 			forward = new ActionForward("../mainTemplate.jsp", true);	//반드시 디스패치 방식으로 포워딩					
 		}
 		
+		/**** 로그인 / 로그아웃 *****************************************************************************/
 		else if(command.equals("/manager/managerLogin.mgr")) {//'로그인 폼 보기' 요청이면
 			request.setAttribute("showPage", "managerLogin.jsp");
 			forward = new ActionForward("managerTemplate.jsp", false);	//반드시 디스패치 방식으로 포워딩					
@@ -99,6 +105,7 @@ public class ManagerFrontController extends HttpServlet {
 			forward = new ActionForward("managerTemplate.jsp", true);//리다이렉트 방식으로 포워딩	
 		}
 		
+		/***** 관리자 추가 ******************************************/
 		else if(command.equals("/manager/managerJoin.mgr")) {//'회원가입 폼 보기' 요청이면
 			request.setAttribute("showPage", "managerJoin.jsp");
 			forward = new ActionForward("managerTemplate.jsp", false);
@@ -112,8 +119,8 @@ public class ManagerFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		else if(command.equals("/manager/managerBoard.mgr")) {//'게시판 보기' 요청이면
+		/*********************** 게시판 관리 **********************************************/
+		else if(command.equals("/manager/userBoard.mgr")) {//'게시판 보기' 요청이면
 			action = new ManagerboardShowAcrion();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
@@ -123,7 +130,7 @@ public class ManagerFrontController extends HttpServlet {
 		}
 		
 		else if(command.equals("/manager/managerBoardWrite.mgr")) {//'글쓰기 폼 보기' 요청이면
-			request.setAttribute("showPage", "write.jsp");
+			request.setAttribute("showPage", "../write.jsp");
 			forward = new ActionForward("managerTemplate.jsp", false);
 			//forward = new ActionForward("managerBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
 		}
@@ -146,7 +153,7 @@ public class ManagerFrontController extends HttpServlet {
 		}
 
 		else if(command.equals("/manager/showPost.mgr")) {//'게시글 보기' 요청이면
-			action = new postShowAcrion();//게시판 글 목록 불러오는 Action
+			action = new PostShowAcrion();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {				
@@ -154,11 +161,14 @@ public class ManagerFrontController extends HttpServlet {
 			}	
 		}
 		
-		
+		/** 서비스 센터 관리 **********************************************************************************/
 		else if(command.equals("/manager/serviceCenter.mgr")) {//'고객센터 보기' 요청이면
-			request.setAttribute("showPage", "../serviceCenter.jsp");
-			forward = new ActionForward("managerTemplate.jsp", false);
-			//forward = new ActionForward("managerBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
+			action = new ServiceCenterAcrionMGR();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				e.printStackTrace();
+			}		//반드시 디스패치 방식으로 포워딩					
 		}
 		
 		else if(command.equals("/manager/writeNotice.mgr")) {//'공지등록 폼 보기' 요청이면
@@ -166,7 +176,7 @@ public class ManagerFrontController extends HttpServlet {
 			forward = new ActionForward("managerTemplate.jsp", false);
 		}
 		
-		else if(command.equals("/manager/showNotice.mgr")) {//'게시글 보기' 요청이면
+		else if(command.equals("/manager/showNotice.mgr")) {//'공지사항 보기' 요청이면
 			action = new ShowNoticeAcrion();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
@@ -175,7 +185,7 @@ public class ManagerFrontController extends HttpServlet {
 			}	
 		}
 		
-		else if(command.equals("/manager/writeNoticeAction.mgr")) {//'글쓰기 처리' 요청이면
+		else if(command.equals("/manager/writeNoticeAction.mgr")) {//'공지쓰기 처리' 요청이면
 			action  = new WriteNoticeAction();			
 			try {
 				forward = action.execute(request, response);
@@ -190,6 +200,24 @@ public class ManagerFrontController extends HttpServlet {
 				out.println("</script>");
 
 			}
+		}
+		/******** 주문/매출 관리*********************************************************/
+		else if(command.equals("/manager/orderManagement.mgr")) {//'실시간 주문관리 보기' 요청이면
+			action = new OrderManagementAction();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				System.out.println("OderManagementAction 에러 : "+e);
+			}					
+		}
+		
+		else if(command.equals("/manager/orderDetail.mgr")) {//'실시간 주문관리 보기' 요청이면
+			action = new OrderDetailAction();//게시판 글 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				System.out.println("OderManagementAction 에러 : "+e);
+			}					
 		}
 		//
 		/***************************************************************

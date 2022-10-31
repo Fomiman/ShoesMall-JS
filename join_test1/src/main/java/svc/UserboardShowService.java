@@ -17,7 +17,7 @@ public class UserboardShowService {
 		ubDAO.setConnection(con);
 		
 		/*----DAO의 해당 메서드를 호출하여 처리-------------------*/		
-		ArrayList<User_board> burgerList = ubDAO.showList();
+		ArrayList<User_board> boardList = ubDAO.showList();
 		
 		/*-(update,delete,insert)성공하면 commit 실패하면 rollback
 		 * (select제외)----*/	
@@ -25,6 +25,6 @@ public class UserboardShowService {
 		//4.해제
 		close(con);//Connection객체 해제		
 		
-		return burgerList;
+		return boardList;
 	}
 }

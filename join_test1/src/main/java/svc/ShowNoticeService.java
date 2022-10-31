@@ -12,7 +12,7 @@ import vo.User_board;
 
 public class ShowNoticeService {
 
-	public static NoticeTBL getNotice(int notice_no) {
+	public NoticeTBL getNotice(int notice_no) {
 		//1.커넥션 풀에서 Connection객체 얻어와
 				Connection con = getConnection();
 				//2.싱글톤 패턴:MenuDAO객체 생성

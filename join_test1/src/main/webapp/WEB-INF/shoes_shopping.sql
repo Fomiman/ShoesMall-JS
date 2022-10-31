@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS `shoes_shoppingMall`.`deliver_address` (
   `address3` VARCHAR(20) NOT NULL)
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `shoes_shoppingMall`.`memberTBL`
 -- -----------------------------------------------------
@@ -40,10 +39,6 @@ CREATE TABLE IF NOT EXISTS `shoes_shoppingMall`.`memberTBL` (
   PRIMARY KEY (`member_code`, `member_id`))
 ENGINE = InnoDB;
 
-select ifnull(max(member_code),0)+1 as member_code from memberTBL;
-select max(member_code) from memberTBL;
-select * from memberTBL;
-delete from memberTBL where member_code in(0,1);
 -- -----------------------------------------------------
 -- Table `shoes_shoppingMall`.`product_category`
 -- -----------------------------------------------------
@@ -177,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `shoes_shoppingMall`.`order_detail` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 -- -----------------------------------------------------
--- Table `shoes_shoppingMall`.`noticeBoardTBL`
+-- Table `shoes_shoppingMall`.`noticeTBL`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `shoes_shoppingMall`.`noticeTBL` (
   `notice_no` INT NOT NULL,
