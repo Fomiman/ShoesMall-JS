@@ -19,7 +19,7 @@
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th colspan="3"
+						<th colspan="4"
 							style="background-color: #eeeeee; text-align: center;">공지사항
 							보기</th>
 					</tr>
@@ -27,32 +27,33 @@
 				<tbody>
 					<c:if test="${notice != null}">
 						<tr>
-							<td style="width: 20%;">공지 번호</td>
-							<td colspan="2">${notice.notice_no}</td>
+							<td style="width: 25%; background-color: #f0f0f0;">공지 번호</td>
+							<td style="width: 25%;">${notice.notice_no}</td>
+							<td style="width: 25%; background-color: #f0f0f0;">작성일자</td>
+							<td style="width: 25%;">${notice.notice_date }</td>
 						</tr>
 						<tr>
-							<td style="width: 20%;">공지 제목</td>
-							<td colspan="2">${notice.notice_subject}</td>
+							<td style="width: 20%; background-color: #f0f0f0;">공지 제목</td>
+							<td colspan="3">[&nbsp;&nbsp;${notice.notice_subject}&nbsp;&nbsp;]</td>
 						</tr>
 						<tr>
-							<td>내용</td>
-							<td colspan="2" style="min-height: 200px; text-align: left;">
+							<td colspan="4">내용</td>
+						</tr>
+						<tr>
+							<td colspan="4" style="min-height: 200px; text-align: left; padding-left: 30px; padding-right: 30px;">
 								<!-- 특수문자를 제대로 출력하기위해 & 악성스크립트를 방지하기위해 -->
 								${notice.notice_text  }
 							</td>
 						</tr>
-						<tr>
-							<td>작성일자</td>
-							<td colspan="2">${notice.notice_date }</td>
-						</tr>
+						
 						
 					</c:if>
 					<c:if test="${notice == null}">
-						<td colspan="3">post 정보를 불러오지 못했습니다.</td>
+						<td colspan="4">공지내용을 불러오지 못했습니다.</td>
 					</c:if>
 				</tbody>
 			</table>
-			<a href="userBoard.usr" class="btn btn-primary">목록</a>
+			<a href="serviceCenter.mgr" class="btn btn-primary">목록</a>
 			
 			<%
 				String manager_id = null;

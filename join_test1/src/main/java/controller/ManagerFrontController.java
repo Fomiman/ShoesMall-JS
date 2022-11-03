@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,10 @@ import action.manager.ManagerboardShowAcrion;
 import action.manager.OrderDetailAction;
 import action.manager.OrderManagementAction;
 import action.manager.ServiceCenterAcrionMGR;
+import action.manager.UserDataUpadate1Action;
+import action.manager.UserDataUpadate2Action;
+import action.manager.UserManagementDetailAction;
+import action.manager.UserMangementAction;
 import action.manager.WriteNoticeAction;
 import vo.ActionForward;
 
@@ -176,12 +181,12 @@ public class ManagerFrontController extends HttpServlet {
 			forward = new ActionForward("managerTemplate.jsp", false);
 		}
 		
-		else if(command.equals("/manager/showNotice.mgr")) {//'공지사항 보기' 요청이면
+		else if(command.equals("/manager/viewNotice.mgr")) {//'공지사항 보기' 요청이면
 			action = new ShowNoticeAcrion();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {				
-				e.printStackTrace();
+				System.out.println("게시판 글 불러오기 showNotice액션 오류"+e);
 			}	
 		}
 		
@@ -219,6 +224,55 @@ public class ManagerFrontController extends HttpServlet {
 				System.out.println("OderManagementAction 에러 : "+e);
 			}					
 		}
+		
+		/******** 회원 관리*********************************************************/
+		else if(command.equals("/manager/userManagement.mgr")) {//'회원관리 페이지 보기' 요청이면
+			action = new UserMangementAction();//회원 목록 불러오는 Action
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				System.out.println("회원관리 페이지 이동 액션 오류"+e);
+			}					
+		}
+		
+		//userManageDetail.mgr
+		else if(command.equals("/manager/userManageDetail.mgr")) { 
+			// 회원관리 페이지에서 회원 번호 누르면 회원정보 수정 페이지로 이동
+			action = new UserManagementDetailAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("회원정보 수정 페이지 진입 액션 오류"+e);
+			}
+			
+		}
+		
+		else if(command.equals("/manager/userDataUpdate1.mgr")) { 
+			// 회원정보 페이지 상단 회원정보 수정
+			action = new UserDataUpadate1Action();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("회원정보 수정 액션 오류"+e);
+			}
+			
+		}
+		
+		else if(command.equals("/manager/userDataUpdate2.mgr")) { 
+			// 회원관리 페이지 하단 회원 주소 수정
+			action = new UserDataUpadate2Action();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("회원주소 수정 액션 오류"+e);
+			}
+			
+		}
+		
+		
 		//
 		/***************************************************************
 		 * 3.포워딩

@@ -17,7 +17,7 @@
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
-<title>실시간 주문관리</title>
+<title>회원관리</title>
 </head>
 
 <body>
@@ -28,36 +28,36 @@
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">제품번호</th>
-						<th style="background-color: #eeeeee; text-align: center;">구매자</th>
-						<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
+						<th style="background-color: #eeeeee; text-align: center;">회원코드</th>
+						<th style="background-color: #eeeeee; text-align: center;">회원아이디</th>
+						<th style="background-color: #eeeeee; text-align: center;">회원이름</th>
+						<th style="background-color: #eeeeee; text-align: center;">회원전화번호</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${orderList != null && orderList.size() > 0}">
+					<c:if test="${userList != null && userList.size() > 0}">
 						<!-- 1.order 메뉴목록이 있으면 -->
-						<c:forEach var="order" items="${orderList}" varStatus="status">
+						<c:forEach var="userL" items="${userList}" varStatus="status">
 							<!-- 행 시작  -->
 							<tr>
-								<td><a href="orderDetail.mgr?order_id=${order.order_id}">${order.order_id }</a></td>
-								<td>${order.member_code}</td>
-								<td>${order.order_date }</td>
-								<td>${order.order_status }</td>
+								<td><a href="userManageDetail.mgr?member_code=${userL.member_code}">${userL.member_code }</a></td>
+								<td>${userL.member_id}</td>
+								<td>${userL.member_name }</td>
+								<td>${userL.member_phone }</td>
 							</tr>
 							<!-- 행 끝 -->
 						</c:forEach>
 					</c:if>
-					<c:if test="${orderList == null}">
+					<c:if test="${userList == null}">
 						<!-- 2.order 메뉴목록이 없으면 -->
 						<td colspan="4">등록된 게시글이 없습니다.</td>
 					</c:if>
 				</tbody>
 			</table>
 
-			<a href="orderManagement.mgr" class="btn btn-success btn-arraw-left">이전</a>
+			<a href="userManagement.mgr" class="btn btn-success btn-arraw-left">이전</a>
 
-			<a href="orderManagement.mgr" class="btn btn-success btn-arraw-left">다음</a>
+			<a href="userManagement.mgr" class="btn btn-success btn-arraw-left">다음</a>
 			
 		</div>
 

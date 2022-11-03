@@ -95,7 +95,7 @@ public class User_boardDAO {
 	
 	//조회 (R)
 	public ArrayList<User_board> showList(){
-		String sql = "select post_no, post_subject ,member_id, post_date from membertbl natural join user_board ";
+		String sql = "select post_no, post_subject ,member_id, post_date from membertbl natural join user_board order by post_no desc ";
 		ArrayList<User_board> list = new ArrayList<User_board>();
 		try {
 			pstmt = con.prepareStatement(sql);

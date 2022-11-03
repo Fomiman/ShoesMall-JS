@@ -47,10 +47,10 @@ public class NoticeDAO {
 	//삽입 (C)
 	public int insertPost(NoticeTBL notice) {
 		int writeCount = 0;
-		
-		String sql2 = "select ifnull(max(post_no),0)+1 as notice_no from NoticeTBL";
-		//post_no 세팅
 		int notice_no = 0 ;
+		
+		String sql2 = "select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL";
+		//post_no 세팅
 		try {
 			pstmt = con.prepareStatement(sql2);
 			rs = pstmt.executeQuery();
@@ -90,7 +90,7 @@ public class NoticeDAO {
 	
 	//조회1 (R)
 	public ArrayList<NoticeTBL> showList(){
-		String sql = "select * from noticeTBL ";
+		String sql = "select * from noticeTBL order by notice_no desc ";
 		ArrayList<NoticeTBL> list = new ArrayList<NoticeTBL>();
 		try {
 			pstmt = con.prepareStatement(sql);

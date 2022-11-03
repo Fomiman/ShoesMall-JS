@@ -19,8 +19,8 @@ public class WriteNoticeAction implements Action {
 		ActionForward forward = null ;
 		
 		//int notice_no ; 자동입력
-		String notice_subject = request.getParameter("");
-		String notice_text = request.getParameter("");
+		String notice_subject = request.getParameter("notice_subject");
+		String notice_text = request.getParameter("notice_text");
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String notice_date = simpleDateFormat.format(new Date());
 		

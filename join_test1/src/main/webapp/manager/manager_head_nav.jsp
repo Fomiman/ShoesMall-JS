@@ -45,8 +45,12 @@
                     aria-haspopup="true"
                     aria-expanded="false">실시간 주문/매출관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="active"><a href="orderManagement.mgr">실시간 주문관리</a></li>
-                        <li><a href="join.mgr">매출관리</a></li>                    
+                        <li class="active">
+                       		<a href="orderManagement.mgr">실시간 주문관리</a>
+                        </li>
+                        <li>
+                        	<a href="join.mgr">매출관리</a>
+                        </li>                    
                     </ul>
                 </li>
                   <li class="dropdown">
@@ -55,8 +59,12 @@
                     aria-haspopup="true"
                     aria-expanded="false">상품관리<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="active"><a href="oderManagement.mgr">상품목록</a></li>
-                        <li><a href="join.mgr">상품등록</a></li>                    
+                        <li class="active">
+                        	<a href="showProductList.mgr">상품목록</a>
+                        </li>
+                        <li>
+                        	<a href="insertProduct.mgr">상품등록</a>
+                        </li>                    
                     </ul>
                 </li>
                 <li><a href="userBoard.mgr">게시판관리</a></li>

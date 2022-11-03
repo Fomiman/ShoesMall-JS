@@ -27,6 +27,11 @@
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;" colspan="3">공지사항</th>
 					</tr>
+					<tr>
+						<th style="background-color: #eeeeee; text-align: center;" >공지번호</th>
+						<th style="background-color: #eeeeee; text-align: center;" >제목</th>
+						<th style="background-color: #eeeeee; text-align: center;" >등록일</th>
+					</tr>
 				</thead>
 				<tbody>
 					<!-- 게시판 목록 불러오기랑 같은거 써서 불러오기 -->
@@ -55,8 +60,8 @@
 					</c:if>
 					<% if (manager_id != null) { %>
 					<tr>
-						<td>
-							<a href="writeNotice.mgr"><input type="button" name="submitNotice" value="공지등록"></a>
+						<td colspan="3" style="background-color: #f3f3f3;">
+							<a href="writeNotice.mgr"><input type="button" class="btn form-control" name="submitNotice" value="공지등록"></a>
 						</td>
 					</tr>
 					<% } %>

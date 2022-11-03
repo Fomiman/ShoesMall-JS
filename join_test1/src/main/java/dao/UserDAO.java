@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 
@@ -249,6 +250,66 @@ public class UserDAO {
 		return updateUserCount;
 	}
 /************************************************************************************************************/
+	//관리자의 회원관리 페이지 회원정보 불러오기 메서드
+public ArrayList<MemberTBL> showUserList() {
+	String sql = "select member_code, member_id, member_name, member_phone from memberTBL order by 1 desc";
+	ArrayList<MemberTBL> showUserList = new ArrayList<MemberTBL>() ;
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+			MemberTBL m_tbl = new MemberTBL();
+			m_tbl.setMember_code(rs.getInt(1));
+			m_tbl.setMember_id(rs.getString(2));
+			m_tbl.setMember_name(rs.getString(3));
+			m_tbl.setMember_phone(rs.getString(4));
+			
+			showUserList.add(m_tbl);
+		}
+
+	} catch (Exception e) {
+		System.out.println("[UserDAO] showUserList 에러:" + e);
+	} finally {
+		close(rs);
+		close(pstmt);
+	}
+	return showUserList;
+}
+
+public MemberTBL showUserDetail(int member_code) {
+	String sql = "select member_code, member_id, member_pwd, member_name, member_birth, "
+			+ "member_phone, member_email, member_gender, "
+			+ "address1, address2, address3 "
+			+ "from memberTBL natural join deliver_address where member_code = ? ";
+	MemberTBL memberInfo = null;
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, member_code);
+		rs = pstmt.executeQuery();
+		if(rs.next()) {
+			memberInfo = new MemberTBL(
+					rs.getInt(1),
+					rs.getString(2),
+					rs.getString(3),
+					rs.getString(4),
+					rs.getString(5),
+					rs.getString(6),
+					rs.getString(7),
+					rs.getString(8),
+					rs.getString(9),
+					rs.getString(10),
+					rs.getString(11)
+					);
+		}
+	}catch (Exception e) {
+		// TODO: handle exception
+	}
+	return memberInfo;
+}
+
 
 /************************************************************************************************************/
 	

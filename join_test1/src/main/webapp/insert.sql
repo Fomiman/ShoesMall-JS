@@ -56,3 +56,15 @@ select  * from Order_detail natural join ordertbl natural join membertbl natural
 select order_id, member_id,concat(address1, " ", address2, " ", address3) as address, member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
 
 select order_id, member_id,concat(address1, " ", address2, " ", address3) as address,  member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
+
+
+select member_code, member_id, member_name, member_phone from memberTBL order by 1 desc;
+
+select member_code, member_id, member_pwd, member_name, member_birth, member_phone, member_email, member_gender, address1, address2, address3 from memberTBL natural join deliver_address;
+
+select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL;
+
+
+update noticetbl set notice_text='여기에 공지사항 내용을 입력해주세요.' where notice_no=2;
+
+
