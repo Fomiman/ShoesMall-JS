@@ -67,4 +67,7 @@ select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL;
 
 update noticetbl set notice_text='여기에 공지사항 내용을 입력해주세요.' where notice_no=2;
 
+select * from producttbl;
 
+insert into producttbl values(1010280, '나이키', '나이키신발10번', 280, 45000, 10, 'asdasd', '2022-11-03', 0, 'KakaoTalk_20221030_191240594.png');
+delete from producttbl where product_no = 1010280;

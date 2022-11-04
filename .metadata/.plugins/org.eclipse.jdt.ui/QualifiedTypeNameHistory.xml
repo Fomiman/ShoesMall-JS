@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.security.MessageDigest"/>
-    <fullyQualifiedTypeName name="java.security.SecureRandom"/>
-    <fullyQualifiedTypeName name="util.SHA256"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
-    <fullyQualifiedTypeName name="com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
-    <fullyQualifiedTypeName name="member.Member"/>
-    <fullyQualifiedTypeName name="javax.websocket.Session"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-    <fullyQualifiedTypeName name="java.sql.Date"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="db.JdbcUtil"/>
     <fullyQualifiedTypeName name="dao.User_boardDAO"/>
     <fullyQualifiedTypeName name="action.postShowAcrion"/>
     <fullyQualifiedTypeName name="svc.PostShowService"/>
@@ -39,9 +26,6 @@
     <fullyQualifiedTypeName name="action.UserUpdateAction"/>
     <fullyQualifiedTypeName name="action.PostShowAcrion"/>
     <fullyQualifiedTypeName name="action.manager.OderManagementAction"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="dao.ManagerDAO"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="vo.OrderTBL"/>
     <fullyQualifiedTypeName name="svc.manager.OrderManagementService"/>
     <fullyQualifiedTypeName name="action.UserboardShowAcrion"/>
@@ -55,9 +39,25 @@
     <fullyQualifiedTypeName name="action.product.ProductCartQtyUpAction"/>
     <fullyQualifiedTypeName name="action.product.ProductCartQtyDownAction"/>
     <fullyQualifiedTypeName name="com.mysql.cj.jdbc.ha.BestResponseTimeBalanceStrategy"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="com.mysql.cj.conf.MemorySizePropertyDefinition"/>
     <fullyQualifiedTypeName name="dao.UserDAO"/>
     <fullyQualifiedTypeName name="vo.MemberTBL"/>
+    <fullyQualifiedTypeName name="util.SHA256"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="action.manager.ShowProductDetailAction"/>
+    <fullyQualifiedTypeName name="java.util.Stack"/>
+    <fullyQualifiedTypeName name="org.apache.bcel.verifier.exc.StaticCodeConstraintException"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.ConcurrentMap"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="db.JdbcUtil"/>
     <fullyQualifiedTypeName name="vo.ActionForward"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="vo.ProductTBL"/>
+    <fullyQualifiedTypeName name="dao.ManagerDAO"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
+    <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
+    <fullyQualifiedTypeName name="java.util.Enumeration"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
 </qualifiedTypeNameHistroy>

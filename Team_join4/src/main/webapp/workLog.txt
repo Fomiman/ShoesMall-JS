@@ -1,0 +1,40 @@
+작업 로그
+
+2022-10-23
+-인덱스 페이지에서 사용자/관리자 페이지 이동 구분 및 서블릿으로 이동 처리
+-sql파일 추가 현재 9개 테이블 생성
+| carttbl                      |
+| deliver_address              |
+| managertbl                   |
+| membertbl                    |
+| order_detail                 |
+| ordertbl                     |
+| product_category             |
+| producttbl                   |
+| user_board				   |
+-userRightTopDiv.jsp에 로그인 상태에 따라 로그인/로그아웃 버튼 전환되도록 jstl로 처리함
+-로그인 버튼 누르면 loginForm.jsp로 이동
+-DTO추가(vo폴더내 actionforward 제외한것들)
+
+
+--★★로그인 기능 구현 성공 (context.xml에 서버 연동하는거 바꿔주기 + 테이블 이름 제대로 되어있나 잘 확인할것!)
+-- 로그아웃 구현 완료
+
+///////////////////////////////////////////////////////////2022-10-24
+
+-- 프로젝트 합치기
+-- 각 페이지 별로 동일하게 들어가있는 네비게이션 파트 따로 분리(완료)
+		<%
+			String member_id = null;
+			if(session.getAttribute("member_id")!= null){
+				member_id = (String) session.getAttribute("member_id");
+			}
+		
+		%>
+		--이 부분(이후 'member_id세팅'이라고 칭함) 을 네비게이션 파트에 넣어두기 때문에 기존 페이지에 있던 동일한 부분은 제거함 
+		--( include가 <% %> 구문 보다 위에 있다면 'member_id세팅' 구문이 아래에서 필요한 페이지)
+
+-- 페이지명 필요에 의해 수정 (파일명 변경보단 새로 include용 페이지 만드는 것이 더 나아보임
+-- jsp파일 내 input name 테이블(DTO)에 맞게 수정
+
+ 
