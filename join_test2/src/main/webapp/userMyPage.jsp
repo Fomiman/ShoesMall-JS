@@ -62,6 +62,7 @@
 				</div>
 
 				<input type="submit" class="btn btn-primary form-control" value="정보수정">
+				<input type="submit" class="btn btn-primary form-control" value="계정삭제" formaction="deleteAccount.usr">
 			</form>
 			<form method="post" action="updateAddressAction.usr">
 				<h3 style="text-align : center;"> 주소 입력</h3>

@@ -315,9 +315,24 @@ public MemberTBL showUserDetail(int member_code) {
 					);
 		}
 	}catch (Exception e) {
-		// TODO: handle exception
+		System.out.println("[UserDAO] showUserDetail 오류"+e);
 	}
 	return memberInfo;
+}
+
+public int deleteAccount(int member_code) {
+	int deleteResult = 0 ;
+	
+	String sql = "delete from memberTBL where member_code ="+member_code;
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		deleteResult = pstmt.executeUpdate();
+		
+	} catch (Exception e) {
+		System.out.println(e);
+	}
+	return deleteResult;
 }
 
 

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.DeleteAccountAction;
 import action.DeleteUserPostAction;
 import action.InsertAddressAction;
 import action.PostShowAcrion;
@@ -137,6 +138,8 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
 		/************************ 유저 게시판 *********************************/
 		else if(command.equals("/userBoard.usr")) {//'게시판 보기' 요청이면
 			action = new UserboardShowAcrion();//게시판 글 목록 불러오는 Action
@@ -229,8 +232,17 @@ public class UserFrontController extends HttpServlet {
 			}	
 		}
 		
+		else if(command.equals("/deleteAccount.usr")) {//'회원탈퇴 처리' 요청이면
+			action  = new DeleteAccountAction();			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {				
+				System.out.println("deleteAccountAction 예외 : "+e);
+			}
+		}
 		
 		
+		/**********************************************************************/
 		else if(command.equals("/managerHome.usr")) {//'관리자 메인페이지 보기' 요청이면
 			request.setAttribute("showPage", null);
 			forward = new ActionForward("./manager/managerTemplate.jsp", true);	//반드시 디스패치 방식으로 포워딩					
