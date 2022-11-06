@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.DeleteUserPostAction;
 import action.InsertAddressAction;
 import action.PostShowAcrion;
 import action.ServiceCenterAcrion;
@@ -163,7 +164,6 @@ public class UserFrontController extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('게시글이 성공적으로 등록되었습니다.');");
-				out.println("history.back();");
 				out.println("</script>");
 
 			}
@@ -176,6 +176,17 @@ public class UserFrontController extends HttpServlet {
 			} catch (Exception e) {				
 				e.printStackTrace();
 			}	
+		}
+		
+		else if(command.equals("/deleteUserPost.usr")) { //'게시글 삭제' 요청
+			action = new DeleteUserPostAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("DeleteUserPostAction 에러 : "+e);
+			}
+			
 		}
 		/************************ 고객센터 *********************************/
 		
@@ -201,7 +212,7 @@ public class UserFrontController extends HttpServlet {
 			forward = new ActionForward("mainTemplate.jsp", false);
 			//forward = new ActionForward("userBoard.jsp", false);	//반드시 디스패치 방식으로 포워딩					
 		}
-		else if(command.equals("/userMyPageAction.usr")) {//'회원정보수정 처리' 요청이면
+		else if(command.equals("/userUpdateAction.usr")) {//'회원정보수정 처리' 요청이면
 			action = new UserUpdateAction();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
@@ -209,7 +220,7 @@ public class UserFrontController extends HttpServlet {
 				e.printStackTrace();
 			}	
 		}
-		else if(command.equals("/updateAddressAction.usr")) {//'주소등록 처리' 요청이면
+		else if(command.equals("/updateAddressAction.usr")) {//'주소등록/변경 처리' 요청이면
 			action = new InsertAddressAction();//게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);

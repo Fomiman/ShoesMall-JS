@@ -23,10 +23,12 @@ select * from order_detail;
 select * from noticeTBL;
 
 
-insert into deliver_address values(1, '123','123','123');
-update deliver_address set address1='대구광역시', address2='달서구',address3='상인동' where member_code=0;
+insert into deliver_address values(0, '123','123','123');
+insert into deliver_address values(1, '','','');
+delete from deliver_address where member_code = 1;
+--update deliver_address set address1='대구광역시', address2='달서구',address3='상인동' where member_code=0;
 
---delete from memberTBL where member_code in(0,1);
+--delete from memberTBL where member_code =1;
 insert into memberTBL values ('000000', 'user123' ,'user123' , 'user','1993-05-03','010-1111-2222','metalwing53@gmail.com','M');
 
 insert into product_category values('나이키','나이키');
@@ -91,16 +93,7 @@ select member_code, member_id, member_pwd, member_name, member_birth, member_pho
 select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL;
 
 
-update noticetbl set notice_text='여기에 공지사항 내용을 입력해주세요.' where notice_no=2;
-
 select * from producttbl;
-
-insert into producttbl values(1010280, '나이키', '나이키신발10번', 280, 45000, 10, 'asdasd', '2022-11-03', 0, 'KakaoTalk_20221030_191240594.png');
-delete from producttbl where product_no = 1001280;
-delete from producttbl where product_no = 1001270;
-
-update producttbl set product_image ='nikeshoes1.jpg' where product_no = 1001270;
-update producttbl set product_image ='nikeshoes1.jpg' where product_no = 1001280;
 
 select * from ordertbl natural join order_detail;
 select order_id, product_no, order_amount, order_price, order_date from ordertbl natural join order_detail;

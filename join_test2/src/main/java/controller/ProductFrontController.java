@@ -73,6 +73,12 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		else if (command.equals("/productList2.shoes")) { // '아디다스 상품 페이지' 이동(준비중 메세지)
+
+			request.setAttribute("showPage", "product/product2.jsp");
+			forward = new ActionForward("mainTemplate.jsp",false);
+		}
 
 		else if (command.equals("/productView.shoes")) { // '상품 상세보기' 요청하면
 			action = new ProductViewAction();

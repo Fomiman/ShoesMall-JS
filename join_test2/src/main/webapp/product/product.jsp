@@ -8,26 +8,31 @@
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
+<link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
 <title>상품 리스트 </title>
 <style type="text/css">
 	#listForm{
-		width:700px;
-		height:500px;
-		margin:auto;
+		max-width:700px;
+		max-height:500px;
+		margin: 0px auto;
 	}
 	h2{
 		text-align:center;
 	}
 	
-	table{
-		margin:auto;
-		width:550px;
+	.productListTBL{
+		margin: 0px auto;
+		max-width:550px;
+	}
+	
+	.productListTD {
+		padding: 40px;
 	}
 
 	.div_empty{
 		background-color:red;
-		width: 100%;
-		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
 		text-align: center;
 	}
 
@@ -35,8 +40,8 @@
 		text-align: center;
 	}
 	#productImage{
-		width: 150px;
-		height: 150px;
+		max-width: 150px;
+		max-height: 150px;
 		border: none;
 	}
 	#todayImage{
@@ -44,50 +49,42 @@
 		height: 100px;
 		border: none;
 	}
+	@media (max-width: 768px) {
+		.productListTD {
+			padding: 0px;
+		}
+		
+		.container {
+		height:auto;
+		}
+	}
 </style>
+<script src="../js/jquery.js"></script>
+<script>
+if(matchMedia("screen and (max-width: 767px)").matches){ 
+	  //화면 크기가 767px이하일때
+	  console.log("mobile");
+	}
+</script>
 </head>
 <body>
-<%-- <section id="listForm">
-	<c:if test ="${productList != null }">
-		<table>
-			<tr>
-				<c:forEach var="productTBL" items="${productList }" varStatus="i">
-					<td>
-						<a href="productView.product?id=${productTBL.product_no}"><img src="images/${productTBL.product_image }" id="productImage" ></a>
-						${productTBL.product_name}<br/>
-						${productTBL.product_price}<br/>
-					</td>
-						<c:if test="${((i.index+1) mod 4)==0}">
-						</tr>
-						<tr>
-					</c:if>	
-					</c:forEach>
-			</tr>
-		</table>
-	</c:if>
-
-<c:if test="${productList == null }"> 
-		<div class="div_empty">신발이 없습니다.</div>
-	</c:if>
-
-
-</section> --%>
+<div class="container" style="height: auto; max-width: 100%;">
  <section id="listForm">
 	<c:if test ="${productList != null }">
-		<table>
+		<table class="productListTBL">
 			<tr>
 				<c:forEach var="productTBL" items="${productList }" varStatus="i">
-					<td>
+					<td class="productListTD">
 						<%--  <c:if test="${fn:substring(productTBL.product_no, 0, 3+1) eq '1001' }">
 							<% System.out.println("[DEBUG] if문 실행됨--check"); %>
 							${productTBL.product_name}
 						</c:if>  --%>
-						<a href="productView.shoes?product_no=${productTBL.product_no}"><img src="images/${productTBL.product_image }" id="productImage" ></a>
+						<a href="productView.shoes?product_no=${productTBL.product_no}"><img src="images/${productTBL.product_image }" id="productImage" ></a><br>
 						${productTBL.product_name}<br/>
 						${productTBL.product_price}원<br/>
 					</td>
 					
-					<c:if test="${((i.index+1) mod 4)==0}">
+					<c:if test="${((i.index+1) mod 3)==0}">
 						</tr>
 						<tr>
 					</c:if>	
@@ -103,5 +100,6 @@
 
 
 </section> 
+</div>
 </body>
 </html>

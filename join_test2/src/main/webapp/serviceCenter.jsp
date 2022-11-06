@@ -18,7 +18,6 @@
 		manager_id = (String) session.getAttribute("manager_id");
 	}
 	%>
-	<div class="container">
 		<div class="row">
 			<!-- 공지사항 -->
 			<table class="table table-striped"
@@ -68,7 +67,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
 
 	<h1>1:1문의 서비스 준비 중</h1>
 </body>

@@ -9,9 +9,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
-<link rel="stylesheet" href="css/custom.css">
 <link rel="stylesheet" href="css/footer.css">
 <title>메인템플릿</title>
+<style type="text/css">
+	@media (max-width: 768px) {
+		.container {
+		height: 1000px;
+		}
+		.container > #section{
+		height: 1000px;
+		}
+	}
+
+</style>
 </head>
 <body>
 	 <%@ include file="head_nav.jsp" %>
@@ -20,7 +30,7 @@
     
 	    <c:if test="${showPage ne null }">
 		
-		<section id="section">	
+		<section id="section" style="margin-top: 20px;">	
 			<div>
 				<jsp:include page="${showPage}" />
 			</div>	

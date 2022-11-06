@@ -5,12 +5,15 @@ package dao;
 
 import static db.JdbcUtil.*;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import vo.User_board;
 
@@ -143,10 +146,38 @@ public class User_boardDAO {
 			}
 			return ub;
 		}
+		
 	
 	//수정 (U)
 	
 	
 	//삭제 (D)
+		
+		// 게시물 삭제
+		public boolean deletePost(int post_no) {
+			String sql = "delete from user_board where post_no ="+post_no+"";
+			boolean deleteSuccess = false;
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				int deleteResult = pstmt.executeUpdate();
+				
+				if(deleteResult>0) {
+					deleteSuccess = true;
+					commit(con);
+				}else {
+					System.out.println("post 삭제 실패");
+					rollback(con);
+				}
+				
+			}catch (SQLException e) {
+				System.out.println("[User_boardDAO] deletePost() 에러 : "+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return deleteSuccess;
+		}
 
 }

@@ -18,6 +18,7 @@ public class UserJoinService {
 		
 		/*----DAO의 해당 메서드를 호출하여 처리-------------------*/		
 		int insertUserCount = userDAO.insertUser(member);
+		//int insertUserAdrCount = userDAO.insertUserAdr(member);
 		
 		boolean isUserJoinResult = false;
 		/*-(update,delete,insert)성공하면 commit 실패하면 rollback

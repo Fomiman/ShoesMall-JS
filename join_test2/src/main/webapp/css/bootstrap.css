@@ -4166,7 +4166,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   min-height: 50px;
-  margin-bottom: 20px;
+/*  margin-bottom: 20px;*/
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
@@ -6756,4 +6756,11 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+/* 2022-11-05 mainSlide.jsp 이미지 파일 크기 조정용 height="600" width="1200"  style="max-height: 600px;"
+*/
+
+.slideImg {
+	width: 1200px;
+	max-height: 600px;
+}
 

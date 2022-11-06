@@ -17,16 +17,37 @@
 <head>
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
-<title>실시간 주문관리</title>
+<title>매출조회</title>
 </head>
 
 <body>
 
 	<div class="container">
 		<div class="row">
+			<form action="#" method="post" name="tof">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
+					<tr> <!-- 년/월 선택하여 월별 매출 조회 -->
+						<td colspan="2">
+							<select name="selectedYear">
+								<option value="0000">전체조회</option>
+								<c:forEach var="year" begin="2020" end="2023" step="1" varStatus="loop">
+									<option value="${year }" >${year }년</option>
+								</c:forEach>
+							</select>
+						</td>
+						<td colspan="2">
+							<select name="selectedMonth">
+								<c:forEach var="month" begin="1" end="12" step="1" varStatus="loop">
+									<option value="${month }" >${month }월</option>
+								</c:forEach>
+							</select>
+						</td>
+						<td>
+							<input type="submit" name="YMselect" value="선택" formaction="selectedSales.mgr"/>
+						</td>
+					</tr>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">제품번호</th>
@@ -56,7 +77,7 @@
 					</c:if>
 				</tbody>
 			</table>
-
+			</form>
 		</div>
 
 	</div>

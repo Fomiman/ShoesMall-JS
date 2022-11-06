@@ -12,7 +12,7 @@ public class ProductCartSearchService {
 	public ArrayList<CartTBL> getCartTBLSearchList(int startMoney, int endMoney, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
-	ArrayList<CartTBL> oldCartList = (ArrayList<CartTBL>)session.getAttribute("cartList");
+		ArrayList<CartTBL> oldCartList = (ArrayList<CartTBL>)session.getAttribute("cartList");
 		
 		//cartList : 검색 후 (기본값으로 채워짐 -> 
 		ArrayList<CartTBL> cartList = new ArrayList<CartTBL>();//가격범위검색해서 CARTLIST에 넣어준다
@@ -27,7 +27,7 @@ public class ProductCartSearchService {
 		}
 		
 		
-		return null;
+		return cartList;
 	}
 
 }

@@ -15,10 +15,10 @@ public class ProductCartSearchAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=null;
 		
-		ProductCartSearchService productCartSearchService = new ProductCartSearchService(); 
-		
 		int startMoney = Integer.parseInt(request.getParameter("startMoney"));
 		int endMoney = Integer.parseInt(request.getParameter("endMoney"));
+		
+		ProductCartSearchService productCartSearchService = new ProductCartSearchService(); 
 		
 		ArrayList<CartTBL> cartList = productCartSearchService.getCartTBLSearchList(startMoney,endMoney,request);//request매개값으로 던지는이유? session넣어두기위해서
 		

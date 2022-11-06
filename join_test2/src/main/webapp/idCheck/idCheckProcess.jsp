@@ -20,7 +20,7 @@ if(idCheck != null && !idCheck.trim().equals("")){//항상 먼저, null여부 �
 		Context envCtx=(Context)initCtx.lookup("java:comp/env");
 				
 		//이름으로 커넥션 풀인 DataSource객체를 얻어와 
-		DataSource ds=(DataSource)envCtx.lookup("jdbc/shoes_shoppingmall");
+		DataSource ds=(DataSource)envCtx.lookup("jdbc/ipc22jsk");
 				
 		con=ds.getConnection();//커넥션 풀(=DataSource)에서 Connection객체를 얻어와 
 	//--2. sql문 실행 후 결과 ---------------------------------------

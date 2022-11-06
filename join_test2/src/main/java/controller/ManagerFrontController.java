@@ -21,6 +21,7 @@ import action.manager.ManagerboardShowAcrion;
 import action.manager.OrderDetailAction;
 import action.manager.OrderManagementAction;
 import action.manager.SalesManagementAction;
+import action.manager.SelectedSalesAction;
 import action.manager.ServiceCenterAcrionMGR;
 import action.manager.ShowProductDetailAction;
 import action.manager.ShowProductListAction;
@@ -245,6 +246,15 @@ public class ManagerFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("SalesManagementAction 에러 : " + e);
+			}
+		}
+		
+		else if (command.equals("/manager/selectedSales.mgr")) {// '매출 월별 조회' 요청이면
+			action = new SelectedSalesAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("SelectedSalesAction 에러 : " + e);
 			}
 		}
 

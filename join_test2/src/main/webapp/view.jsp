@@ -1,3 +1,4 @@
+<%@page import="vo.User_board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -64,11 +65,22 @@ if (session.getAttribute("manager_id") != null) {
 					</c:if>
 				</tbody>
 			</table>
+			
 			<%
-				if(member_id == null && manager_id !=null){ //관리자 로그인 시 .mgr로 변경
-			%><a href="userBoard.mgr" class="btn btn-primary">목록</a>
+			User_board showPost = (User_board)request.getAttribute("showPost");
+			String post_member_id = showPost.getMember_id();
+			
+			if(member_id == null && manager_id !=null){ //관리자 로그인 시 .mgr로 변경 %>
+			
+			<a href="userBoard.mgr" class="btn btn-primary">목록</a>
 			<a href="deleteUserPost.mgr?post_no=${showPost.post_no}" class="btn btn-primary">삭제</a>
-			<%}else{ %>
+			
+			<%}else if(member_id != null && member_id.equals(post_member_id)) { %>
+			
+			<a href="deleteUserPost.usr?post_no=${showPost.post_no}" class="btn btn-primary">삭제</a>
+			<a href="userBoard.usr" class="btn btn-primary">목록</a>
+			
+			<%}else {%>
 			<a href="userBoard.usr" class="btn btn-primary">목록</a>
 			<%} %>
 			

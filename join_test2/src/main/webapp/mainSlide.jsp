@@ -15,13 +15,13 @@
     		</ol>
     		<div class="carousel-inner">
 	    		<div class="item active">
-	    			<img src="images/1111.jpg" height="600" width="1200"  style="max-height: 600px;">
+	    			<img src="images/1111.jpg" class="slideImg" style="width: 1200px; max-height: 600px;">
 	    		</div>
 	    		<div class="item">
-	    			<img src="images/2222.jpg" height="600" width="1200" style="max-height: 600px;">
+	    			<a href="productList.shoes"><img src="images/2222.jpg" class="slideImg" style="width: 1200px; max-height: 600px;"></a>
 	    		</div>
 	    		<div class="item">
-	    			<img src="images/3333.jpg" height="600" width="1200" style="max-height: 600px;">
+	    			<a href="productList.shoes"><img src="images/3333.jpg" class="slideImg" style="width: 1200px; max-height: 600px;"></a>
 	    		</div>
     		</div>
     		<a class="left carousel-control" href="#myCarousel" data-slide="prev">

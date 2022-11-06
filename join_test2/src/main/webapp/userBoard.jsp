@@ -36,8 +36,7 @@ if (session.getAttribute("manager_id") != null) {
 }
 
  %>
-	<div class="container">
-		<div class="row">
+		<div class="row" style="margin-bottom: 20px">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -95,7 +94,6 @@ if (session.getAttribute("manager_id") != null) {
 			%>
 		</div>
 
-	</div>
 
 </body>
 </html>

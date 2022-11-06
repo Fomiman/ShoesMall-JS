@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="userHome.usr">메인</a></li> <!-- 메인 페이지 -->
                 <li><a href="productList.shoes">나이키</a></li>
-                <li><a href="product2.jsp">아디다스</a></li>
+                <li><a href="productList2.shoes">아디다스</a></li>
                 <li><a href="userBoard.usr">게시판</a></li>
                 <li><a href="serviceCenter.usr">고객센터</a></li>
             </ul>

@@ -1,11 +1,11 @@
 <Context> 
 <!-- MySQL용 -->
 <Resource 
-   name="jdbc/shoes_shoppingmall" 
+   name="jdbc/ipc22jsk" 
    auth="Container"
    type="javax.sql.DataSource"
     
-   url="jdbc:mysql://localhost:3306/shoes_shoppingmall" 
+   url="jdbc:mysql://localhost:3306/ipc22jsk" 
    username="java" 
    password="java"
    driverClassName="com.mysql.cj.jdbc.Driver"

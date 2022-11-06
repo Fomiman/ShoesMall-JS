@@ -74,8 +74,6 @@ public class UserLoginAction implements Action {
 					session.setAttribute("member_phone", userInfo.getMember_phone());
 					session.setAttribute("member_email", userInfo.getMember_email());
 					session.setAttribute("member_gender", userInfo.getMember_gender());
-					//System.out.println("getGenderAction"+userInfo.getMember_gender());
-					System.out.println("getBirthAction"+userInfo.getMember_birth());
 				} catch (Exception e) {
 					System.out.println("[UserLoginAction] session set1 에러 : "+e);
 				}

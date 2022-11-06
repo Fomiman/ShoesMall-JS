@@ -27,7 +27,7 @@
 
 	<div class="container">
 		<div class="row">
-			<form method="post" action="userMyPageAction.usr">
+			<form method="post" action="userUpdateAction.usr">
 				<input type="hidden" name="member_code" value="<%=member_code %>">
 				<h3 style="text-align: center;">등록된 정보</h3>
 				<div class="form-group">

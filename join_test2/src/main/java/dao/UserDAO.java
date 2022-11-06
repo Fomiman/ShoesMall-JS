@@ -107,7 +107,6 @@ public class UserDAO {
 				userInfo.setMember_phone((rs.getString("member_phone")));
 				userInfo.setMember_email((rs.getString("member_email")));
 				userInfo.setMember_gender((rs.getString("member_gender")));
-				System.out.println("member_birth"+rs.getString("member_birth"));
 			}
 		} catch (Exception e) {
 			System.out.println("[UserDAO] selectUserInfo 에러:" + e);// e:예외종류+예외메세지
@@ -120,7 +119,7 @@ public class UserDAO {
 	}
 /************************************************************************************************************/
 	public Deliver_address selectUserAdrInfo(String member_id) {
-		Deliver_address da = null;
+		Deliver_address da = new Deliver_address();
 		// 사용자가 입력한 id 회원정보를 조회
 		String sql = "select * from memberTBL natural join deliver_address where member_id=?";
 
@@ -131,7 +130,6 @@ public class UserDAO {
 
 			if (rs.next()) {// 해당 id에 대한 정보가 있으면
 				// 기본값으로 채워진 UserBean객체에 조회한 회원정보값으로 셋팅
-				da = new Deliver_address();
 				da.setAddress1(rs.getString("address1"));
 				da.setAddress2(rs.getString("address2"));
 				da.setAddress3(rs.getString("address3"));
@@ -148,6 +146,7 @@ public class UserDAO {
 /************************************************************************************************************/
 	public int insertUser(MemberTBL member) {
 		int insertUserCount = 0;
+		int insertUserAdrCount = 0;
 
 		String sql2 = "select ifnull(max(member_code),0)+1 as member_code from memberTBL";
 		// member_code 세팅
@@ -162,15 +161,15 @@ public class UserDAO {
 		} catch (Exception e) {
 			System.out.println("[UserDAO] member_code 불러오기 에러:" + e);
 		} finally {
-			System.out.println("member.getMember_code() : " + member.getMember_code());
 			close(rs);
 			close(pstmt);
 		}
 
 		// ----------회원 가입시 멤버테이블에 회원 정보를 insert하면서 주소 테이블에 멤버 코드를 제외한 값을 null로 하여 미리 값을 생성한다.
 		//이후 주소 등록 페이지에서는 update를 사용하여 주소 등록시 같은 member_code로 새로운 주소가 등록되는 것이 아니고 기존의 row에 column값만 변경한다.
-		String sql = "insert into memberTBL(member_code, member_id,member_pwd,member_name,member_birth,member_phone,member_email,member_gender) values(?,?,?,?,?,?,?,?);"
-				+ "insert into deliver_address values(?, '', '', '')";
+		String sql = "insert into memberTBL(member_code, member_id,member_pwd,member_name,member_birth,member_phone,member_email,member_gender) values(?,?,?,?,?,?,?,?)";
+		//아래는 주소테이블에 null값으로 미리 만들어 두는 쿼리문
+		String sql3 = "insert into deliver_address values(?, '','','')";
 		try {
 			pstmt = con.prepareStatement(sql);
 
@@ -182,10 +181,20 @@ public class UserDAO {
 			pstmt.setString(6, member.getMember_phone());
 			pstmt.setString(7, member.getMember_email());
 			pstmt.setString(8, member.getMember_gender());
-			pstmt.setInt(9, member.getMember_code());
+			//pstmt.setInt(9, member.getMember_code());
 
 			insertUserCount = pstmt.executeUpdate();// 업데이트를 성공하면 1을 리턴받음
+			
+			if(insertUserCount>0) { // 먼저 회원가입을 성공한 뒤에 주소 등록실시한다.
+			pstmt = con.prepareStatement(sql3);
+			
+			pstmt.setInt(1, member.getMember_code());
 
+			insertUserAdrCount = pstmt.executeUpdate();
+			}else {
+				System.out.println("회원가입 실패");
+			}
+			
 		} catch (Exception e) {
 			System.out.println("[UserDAO] insertUser 에러:" + e);
 		} finally {
@@ -194,6 +203,7 @@ public class UserDAO {
 		}
 		return insertUserCount;
 	}
+	
 /****************************************************************************************************************/
 	public int insertAdr(Deliver_address da) {
 		//회원 가입시 멤버코드를 제외한 컬럼은 null로 채워져있고 본 메서드 실행시 업데이트 구문을 통해 주소값 입력함
