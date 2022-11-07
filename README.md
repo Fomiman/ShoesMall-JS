@@ -5,6 +5,15 @@
 -
 # 작업 로그
 
+## ver0.0.7 (2022-11-07)
+
+조회수 증가 메서드 추가 필요
+
+ProductFrontController 내 action내 orderTBL에 연결 되는 값들 중 member_id로 연결되는 값들 member_code로 변경함
+
+장바구니 담기 ~ 구매하기 액션까지 추가 완료 (장바구니에서 구매하기 누를때 바로 구매정보 insert)
+
+
 ## ver0.0.6 (2022-11-06~)
  
  회원탈퇴 기능 추가 (member_code로 얽혀있는 데이터들 모두 ON DELETE CASCADE 설정 되어있어서 memberTBL에서만 지워지도록 설정함)
