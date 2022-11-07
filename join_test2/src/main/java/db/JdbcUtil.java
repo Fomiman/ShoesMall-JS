@@ -19,13 +19,14 @@ public class JdbcUtil {//모든 메서드가 static : 객체 생성 없이 바�
 		try {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context)initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource)envCtx.lookup("jdbc/ipc22jsk");
+			DataSource ds = (DataSource)envCtx.lookup("jdbc/ipc22bjsk");
 			con = ds.getConnection();
 			
 			con.setAutoCommit(false);//★ Connection객체의 트랙젝션을 자동 commit되지 않도록 하기 위해 꼭넣어야됨
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("JdbcUtil DB연결 오류");
 		}
 		
 		return con;

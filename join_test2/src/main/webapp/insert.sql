@@ -24,8 +24,8 @@ select * from noticeTBL;
 
 
 insert into deliver_address values(0, '123','123','123');
-insert into deliver_address values(1, '','','');
-delete from deliver_address where member_code = 1;
+--insert into deliver_address values(1, '','','');
+--delete from deliver_address where member_code = 1;
 --update deliver_address set address1='대구광역시', address2='달서구',address3='상인동' where member_code=0;
 
 --delete from memberTBL where member_code =1;
@@ -72,14 +72,14 @@ insert into managerTBL values ('admin123', 'admin123' ,'metalwing53@gmail.com');
 
 --insert into cartTBL;
 
-insert into orderTBL values(0,0,'2022-10-29',0);
+insert into orderTBL values(0,0, 100000 ,'2022-10-29',0);
 
 insert into order_detail values(0,0,1001280,1,50000);
 insert into order_detail values(1,0,1001270,1,50000);
 
 insert into noticeTBL values(1, '123','123','2022-10-30');
 
-
+/*******************************************************************************************************************************/
 select  * from Order_detail natural join ordertbl natural join membertbl natural join deliver_address where order_id = 0;
 select order_id, member_id,concat(address1, " ", address2, " ", address3) as address, member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
 
@@ -97,3 +97,22 @@ select * from producttbl;
 
 select * from ordertbl natural join order_detail;
 select order_id, product_no, order_amount, order_price, order_date from ordertbl natural join order_detail;
+
+--ProductDAO / insertOrderProduct()
+select * from orderTBL;
+select * from order_detail;
+
+--select ifnull(max(order_id),0)+1 from orderTBL;
+--insert into orderTBL(order_id, member_code, order_date,order_status,totalmoney) values(1, 0,now(),'0',100000);
+--select max(order_detail_id)+1 from order_detail;
+--insert into order_detail(order_detail_id, order_id, product_no, order_amount, order_price) values (2,1,1001270,1,50000);
+--insert into order_detail(order_detail_id, order_id, product_no, order_amount, order_price) values (3,1,1001280,1,50000);
+
+--delete from orderTBL where order_id = 1;
+--delete from order_detail where order_id = 1;
+
+
+
+
+
+

@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema ipc22jsk
+-- Schema ipc22bjsk
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema ipc22jsk
+-- Schema ipc22bjsk
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ipc22jsk` DEFAULT CHARACTER SET utf8 ;
-USE `ipc22jsk` ;
+CREATE SCHEMA IF NOT EXISTS `ipc22bjsk` DEFAULT CHARACTER SET utf8 ;
+USE `ipc22bjsk` ;
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`deliver_address`
+-- Table `ipc22bjsk`.`deliver_address`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`deliver_address` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`deliver_address` (
   `member_code` INT NOT NULL COMMENT 'foreign key',
   `address1` VARCHAR(20) NOT NULL,
   `address2` VARCHAR(50) NOT NULL,
@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`deliver_address` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`memberTBL`
+-- Table `ipc22bjsk`.`memberTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`memberTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`memberTBL` (
   `member_code` INT NOT NULL,
   `member_id` NVARCHAR(12) NOT NULL,
   `member_pwd` NVARCHAR(12) NULL,
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`memberTBL` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`product_category`
+-- Table `ipc22bjsk`.`product_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`product_category` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`product_category` (
   `category_code` VARCHAR(30) NOT NULL,
   `category_name` VARCHAR(45) NULL,
   PRIMARY KEY (`category_code`))
@@ -50,9 +50,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`productTBL`
+-- Table `ipc22bjsk`.`productTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`productTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`productTBL` (
   `product_no` INT NOT NULL,
   `category_code` VARCHAR(30) NOT NULL COMMENT '카테고리 나눔 기준은 메이커(나이키, 아디다스, 기타)',
   `product_name` VARCHAR(50) NOT NULL,
@@ -67,16 +67,16 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`productTBL` (
   INDEX `fk_product_product_category1_idx` (`category_code` ASC) VISIBLE,
   CONSTRAINT `fk_product_product_category1`
     FOREIGN KEY (`category_code`)
-    REFERENCES `ipc22jsk`.`product_category` (`category_code`)
+    REFERENCES `ipc22bjsk`.`product_category` (`category_code`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`managerTBL`
+-- Table `ipc22bjsk`.`managerTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`managerTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`managerTBL` (
   `manager_id` NVARCHAR(12) NOT NULL,
   `manager_pwd` NVARCHAR(12) NOT NULL,
   `manager_email` VARCHAR(45) NOT NULL,
@@ -85,9 +85,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`user_board`
+-- Table `ipc22bjsk`.`user_board`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`user_board` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`user_board` (
   `post_no` INT NOT NULL,
   `member_code` INT NULL,
   `post_date` DATE NULL,
@@ -99,16 +99,16 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`user_board` (
   INDEX `fk_user_board_memberTBL1_idx` (`member_code` ASC) VISIBLE,
   CONSTRAINT `fk_user_board_memberTBL1`
     FOREIGN KEY (`member_code`)
-    REFERENCES `ipc22jsk`.`memberTBL` (`member_code`)
+    REFERENCES `ipc22bjsk`.`memberTBL` (`member_code`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`cartTBL`
+-- Table `ipc22bjsk`.`cartTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`cartTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`cartTBL` (
   `cart_id` INT NOT NULL,
   `member_code` INT NOT NULL,
   `product_no` INT NULL,
@@ -118,39 +118,40 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`cartTBL` (
   INDEX `fk_cartTBL_memberTBL1_idx` (`member_code` ASC) VISIBLE,
   CONSTRAINT `fk_cart_product1`
     FOREIGN KEY (`product_no`)
-    REFERENCES `ipc22jsk`.`productTBL` (`product_no`)
+    REFERENCES `ipc22bjsk`.`productTBL` (`product_no`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_cartTBL_memberTBL1`
     FOREIGN KEY (`member_code`)
-    REFERENCES `ipc22jsk`.`memberTBL` (`member_code`)
+    REFERENCES `ipc22bjsk`.`memberTBL` (`member_code`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`orderTBL`
+-- Table `ipc22bjsk`.`orderTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`orderTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`orderTBL` (
   `order_id` INT NOT NULL,
   `member_code` INT NULL,
+  `totalmoney` INT NULL,
   `order_date` DATE NULL,
   `order_status` VARCHAR(3) NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orderTBL_memberTBL1_idx` (`member_code` ASC) VISIBLE,
   CONSTRAINT `fk_orderTBL_memberTBL1`
     FOREIGN KEY (`member_code`)
-    REFERENCES `ipc22jsk`.`memberTBL` (`member_code`)
+    REFERENCES `ipc22bjsk`.`memberTBL` (`member_code`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 COMMENT = '주문 처리상태 0:처리 대기, 1:승인된 주문, 2:취소된 주문';
 
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`order_detail`
+-- Table `ipc22bjsk`.`order_detail`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`order_detail` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`order_detail` (
   `order_detail_id` INT NOT NULL,
   `order_id` INT NULL,
   `product_no` INT NULL,
@@ -161,19 +162,19 @@ CREATE TABLE IF NOT EXISTS `ipc22jsk`.`order_detail` (
   INDEX `fk_order_detail_product1_idx` (`product_no` ASC) VISIBLE,
   CONSTRAINT `fk_order_detail_order1`
     FOREIGN KEY (`order_id`)
-    REFERENCES `ipc22jsk`.`orderTBL` (`order_id`)
+    REFERENCES `ipc22bjsk`.`orderTBL` (`order_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_order_detail_product1`
     FOREIGN KEY (`product_no`)
-    REFERENCES `ipc22jsk`.`productTBL` (`product_no`)
+    REFERENCES `ipc22bjsk`.`productTBL` (`product_no`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 -- -----------------------------------------------------
--- Table `ipc22jsk`.`noticeTBL`
+-- Table `ipc22bjsk`.`noticeTBL`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `ipc22jsk`.`noticeTBL` (
+CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`noticeTBL` (
   `notice_no` INT NOT NULL,
   `notice_subject` NVARCHAR(50) NOT NULL,
   `notice_text` TEXT NOT NULL,

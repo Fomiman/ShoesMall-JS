@@ -41,6 +41,16 @@ public class ProductTBL {
 		this.product_amount = product_amount;
 	}
 
+	public ProductTBL(int product_no, String product_name, String category_code, int product_price, int product_amount, String product_image) {
+		super();
+		this.product_no = product_no;
+		this.product_name = product_name;
+		this.category_code = category_code;
+		this.product_price = product_price;
+		this.product_amount = product_amount;
+		this.product_image = product_image;
+	}
+
 	public int getProduct_no() {
 		return product_no;
 	}

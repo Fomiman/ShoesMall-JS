@@ -24,7 +24,7 @@ public class UserBoardWriteAction implements Action {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String post_date = simpleDateFormat.format(new Date());
 		
-		String post_pwd =request.getParameter("member_pwd");
+		String post_pwd =request.getParameter("post_pwd");
 		String post_subject = request.getParameter("post_subject");
 		String post_text = request.getParameter("post_text");
 		String post_file = request.getParameter("post_file");

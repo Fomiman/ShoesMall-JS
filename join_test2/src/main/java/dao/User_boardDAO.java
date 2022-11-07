@@ -98,7 +98,7 @@ public class User_boardDAO {
 	
 	//조회 (R)
 	public ArrayList<User_board> showList(){
-		String sql = "select post_no, post_subject ,member_id, post_date from membertbl natural join user_board order by post_no desc ";
+		String sql = "select post_no, post_subject ,member_id, post_date from memberTBL natural join user_board order by post_no desc ";
 		ArrayList<User_board> list = new ArrayList<User_board>();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -123,7 +123,7 @@ public class User_boardDAO {
 	
 	//조회 (R)
 		public User_board showPost(int post_no){
-			String sql = "select post_no, post_subject ,member_id, post_date, post_text from membertbl natural join user_board where post_no = ?";
+			String sql = "select post_no, post_subject ,member_id, post_date, post_text from memberTBL natural join user_board where post_no = ?";
 			User_board ub = null;
 			try {
 				pstmt = con.prepareStatement(sql);

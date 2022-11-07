@@ -3,6 +3,7 @@ package vo;
 public class OrderTBL {
 	private int order_id;
 	private int member_code;
+	private int totalmoney;
 	private String order_date;
 	private String order_status;
 	
@@ -11,6 +12,7 @@ public class OrderTBL {
 	private int product_no;
 	private int order_amount;
 	private int order_price;
+	
 	
 	public OrderTBL() {
 		super();
@@ -30,6 +32,15 @@ public class OrderTBL {
 		this.order_amount = order_amount;
 		this.order_price = order_price;
 		this.order_date = order_date;
+	}
+
+	public OrderTBL(int order_id, int member_code, int totalmoney,  String order_date, String order_status) {
+		super();
+		this.order_id = order_id;
+		this.member_code = member_code;
+		this.totalmoney = totalmoney;
+		this.order_date = order_date;
+		this.order_status = order_status;
 	}
 
 	public int getOrder_id() {
@@ -86,6 +97,14 @@ public class OrderTBL {
 
 	public void setOrder_price(int order_price) {
 		this.order_price = order_price;
+	}
+
+	public int getTotalmoney() {
+		return totalmoney;
+	}
+
+	public void setTotalmoney(int totalmoney) {
+		this.totalmoney = totalmoney;
 	}
 	
 	
