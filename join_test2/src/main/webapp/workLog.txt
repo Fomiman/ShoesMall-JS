@@ -1,5 +1,10 @@
 #작업 로그
 
+ver0.0.7
+
+조회수 증가 메서드 추가 필요
+
+ProductFrontController 내 action내 orderTBL에 연결 되는 값들 중 member_id로 연결되는 값들 member_code로 변경함
 
 
  ver0.0.6 (2022-11-06~)

@@ -1,11 +1,12 @@
 package dao;
 
-import static db.JdbcUtil.close;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import vo.OrderTBL;
@@ -15,6 +16,7 @@ public class ProductDAO {
 	
 	private Connection con = null;
 	private PreparedStatement pstmt= null;
+	private Statement stmt = null;
 	private ResultSet rs = null;
 	
 	private ProductDAO() {}
@@ -105,7 +107,7 @@ public class ProductDAO {
 					close(pstmt);
 				}
 				
-		return productView;
+		return productView;// 제품 정보를 반환
 	}
 	
 	public int insertProduct(ProductTBL productTBL) {
@@ -133,7 +135,8 @@ public class ProductDAO {
 		}
 		return insertCount;
 	}
-
+	
+	//조회수 증가 메서드 추가 필요
 	public int updateReadCount(int product_no) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -168,6 +171,96 @@ public class ProductDAO {
 		
 		
 		return totalOrderList;
+	}
+	
+	
+	//ver0.0.7 추가되는 것
+	// 구매하기 버튼 눌렀을때 나오는 창으로 이동하기 위해 orderTBL과 order_detail 테이블두개에 값을 입력해줘야함
+	public int insertOrderProduct(int member_code, ArrayList<ProductTBL> productList, int totalMoney) {
+		int insertCount = 0;
+		int insertCount2 = 0;
+		int newOrder_id = 0; // order_id 자동 세팅용 변수
+
+		// order_id 자동 세팅위해서 sql문 추가 ( 따로 try~catch로 묶어줘야함
+		String orderIdSql= "select ifnull(max(order_id),0)+1 from orderTBL"; //orderTBL 안에서 order_id의 최대값을 구하여 +1을 한 값을 구한다
+		try {
+			pstmt = con.prepareStatement(orderIdSql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				newOrder_id = rs.getInt(1);// 쿼리문 실행하여 나온 값을 order_id 에 세팅하기 위해 변수에 담아둔다.
+			}else {
+				System.out.println("newOrder_id 에러 : "+newOrder_id);
+			}
+		} catch (SQLException e) {
+			System.out.println("orderIdSql 에러");
+		}finally {
+			System.out.println("newOrder_id : "+newOrder_id);
+			close(pstmt);
+			close(rs);
+		}
+		
+		
+		//orderTBL에 insert하는 부분
+		// 새로운 row를 insert하기 위해 sql문 작성
+		String sql = "insert into orderTBL(order_id, member_code, order_date,order_status,totalmoney) values(?, ?, now(),'0',?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			//?에 들어갈 값
+			pstmt.setInt(1, newOrder_id); // order_id에 넣을 값(기존에 있던 값보다 1크게)
+			pstmt.setInt(2, member_code); // 
+			pstmt.setInt(3, totalMoney); // 
+			
+			insertCount = pstmt.executeUpdate();
+		}catch(Exception e){
+			System.out.println("orderTBL에 insert하는 부분 :" + e);
+		} finally {
+			System.out.println("insertOrder : " + insertCount);
+			close(pstmt);
+		}
+		// order_detail에 각 상품별로 insert
+		String sql2 = "insert into order_detail(order_detail_id, order_id, product_no, order_amount, order_price) values (?,?,?,?,?)";
+		String sql3 = "select max(order_detail_id)+1 from order_detail";
+		int newOrderDetailId =0;//order_detail_id를 자동 세팅용 변수
+		try {
+			for(int i=0; i < productList.size(); i++) {//주문한 내역을 하나씩 가져와
+					//주문상세테이블(order_detail)에 insert함					
+					pstmt = con.prepareStatement(sql2);
+					//반복시 마다 order_detail 테이블에서 최대 order_detail_id 값 +1 을 가져와서 newOrderDetailId에 세팅
+					stmt = con.createStatement();
+					rs = stmt.executeQuery(sql3);
+					if(rs.next()) {
+						newOrderDetailId = rs.getInt(1);
+					}
+					
+					ProductTBL product = productList.get(i);
+					pstmt.setInt(1, newOrderDetailId);
+					pstmt.setInt(2, newOrder_id);//★★주의  : 1에서 insert한 가장 최근 주문번호
+					pstmt.setInt(3, product.getProduct_no()); //주문한 제품id
+					pstmt.setInt(4, product.getProduct_amount()); //주문한 제품 수량
+					pstmt.setInt(5, product.getProduct_price()); //주문한 제품 가격
+					
+					int executedNum = pstmt.executeUpdate();
+					if(executedNum > 0) {
+						insertCount2++;
+					}
+				}
+			
+			
+		}catch(Exception e){
+			System.out.println("order_detail에 각 상품별로 insert :" + e);
+		} finally {
+			System.out.println("insertOrder2 : " + insertCount2);
+			close(pstmt);
+			close(stmt);
+			close(rs);
+		}
+		if(insertCount>0 && insertCount2 >0) {
+		return insertCount;
+		}else {
+			return 0;
+		}
 	}
 
 

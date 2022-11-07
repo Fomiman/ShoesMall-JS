@@ -10,6 +10,7 @@ public class User_board {
 	private String post_text;
 	private String post_file;
 	
+	//게시글 보기에서 member_code로 memberTBL과 join하여 member_id 불러올때 사용
 	private String member_id;
 	
 	public User_board() {

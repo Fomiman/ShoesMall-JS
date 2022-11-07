@@ -42,8 +42,7 @@
 								<td>${notice.notice_no}</td>
 								<td>
 									<a href="
-									<%if (manager_id == null) {%>viewNotice.usr
-									<%}else{ %>viewNotice.mgr<%} %>
+									<%if (manager_id == null) {%>viewNotice.usr<%}else{ %>viewNotice.mgr<%}%>
 									?notice_no=${notice.notice_no}">${notice.notice_subject }</a>
 								</td>
 								<td>${notice.notice_date }</td>

@@ -54,12 +54,13 @@ if (session.getAttribute("manager_id") != null) {
 							<!-- 행 시작  -->
 							<tr>
 								<td>${board.post_no}</td>
-							<%
-								if(member_id == null && manager_id !=null){ //관리자 로그인 시 .mgr로 변경
-							%><td><a href="showPost.mgr?post_no=${board.post_no}">${board.post_subject }</a></td>
-							<%}else{ %>
-								<td><a href="showPost.usr?post_no=${board.post_no}">${board.post_subject }</a></td>
+								<td>
+								<% if(member_id == null && manager_id !=null){ //관리자 로그인 시 .mgr로 변경 %>
+									<a href="showPost.mgr?post_no=${board.post_no}">${board.post_subject }</a>
+								<%}else if(manager_id == null){ %>
+									<a href="showPost.usr?post_no=${board.post_no}">${board.post_subject }</a>
 								<%} %>
+								</td>
 								<td>${board.member_id }</td>
 								<td>${board.post_date }</td>
 							</tr>

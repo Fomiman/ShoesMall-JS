@@ -92,7 +92,7 @@ public class ProductFrontController extends HttpServlet {
 
 
 		/*----------------------장바구니---------------------------------------------------*/
-		else if (command.equals("/productCartAdd.shoes")) { // '새로운 장바구니 항목을 추가하는 장바구니 담기'요청이면
+		else if (command.equals("/productCartAdd.shoes")) { // '새로운 장바구니 항목을 추가하는 장바구니 담기'요청이면 -> productCartList.shoes로 바로 이동한다.(장바구니 목록 보기 요청)
 			action = new ProductCartAddAction();
 
 			try {
@@ -142,12 +142,14 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/productCartOrder.shoes")) { // '구매하기' 요청이면
+			/************************* 확인 필요 *****************************/
 			action = new ProductCartOrderAction();
 
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("productCartOrder 에러 : "+e);
 			}
 
 		} else if (command.equals("/OrderResult.shoes")) { // '주문완료'

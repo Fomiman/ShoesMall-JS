@@ -247,7 +247,6 @@ table {
          </tr>
        
         </c:forEach>
-        <br>
         <tr>
               <td colspan="7" style="text-align:right;">
            <h4> 총 금액 : ${totalMoney}원</h4>
@@ -255,6 +254,10 @@ table {
       </tr>
       </table>
      <%--  <button type="submit" class="btn btn-default" formaction="productCartOrder.shoes?totalmoney = ${totalMoney }">구매하기</button> --%>
+	    <nav id="commandList">
+		   	<input type="submit" class="btn btn-default" value="쇼핑 계속하기" formaction="productList.shoes">
+		    <input type="submit" class="btn btn-default" value="구매하기" formaction="productCartOrder.shoes?totalMoney=${totalMoney}">
+		</nav>
 	</form>
 	
  </c:if>
@@ -264,10 +267,10 @@ table {
       <section class="div_empty">장바구니가 비어있습니다</section>
 	</c:if>
 <!------------------------------------------------------------------------------------------------  -->	
-   <nav id="commandList">
+   <%-- <nav id="commandList">
    	<button type="button" class="btn btn-default">	<a href="productList.shoes">쇼핑 계속하기</a></button>
     <button type="button" class="btn btn-default"><a href ="productCartOrder.shoes?totalmoney = ${totalMoney }">구매하기</a></button>
-   </nav>
+   </nav> --%>
 </section>
 <br>
 </body>

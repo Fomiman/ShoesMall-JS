@@ -23,6 +23,7 @@ import action.manager.OrderManagementAction;
 import action.manager.SalesManagementAction;
 import action.manager.SelectedSalesAction;
 import action.manager.ServiceCenterAcrionMGR;
+import action.manager.ShowNoticeAcrionMGR;
 import action.manager.ShowProductDetailAction;
 import action.manager.ShowProductListAction;
 import action.manager.UserDataUpadate1Action;
@@ -197,7 +198,7 @@ public class ManagerFrontController extends HttpServlet {
 		}
 
 		else if (command.equals("/manager/viewNotice.mgr")) {// '공지사항 보기' 요청이면
-			action = new ShowNoticeAcrion();// 게시판 글 목록 불러오는 Action
+			action = new ShowNoticeAcrionMGR();// 게시판 글 목록 불러오는 Action
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

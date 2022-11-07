@@ -1,9 +1,6 @@
 package svc;
 
-import static db.JdbcUtil.close;
-import static db.JdbcUtil.commit;
-import static db.JdbcUtil.getConnection;
-import static db.JdbcUtil.rollback;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -15,12 +12,12 @@ import vo.ProductTBL;
 
 public class ProductCartOrderService {
 
-	public boolean orderShoes(String member_id,ArrayList<ProductTBL> productList) {
+	public boolean orderShoes(int member_code,ArrayList<ProductTBL> productList, int totalMoney) {
 		Connection con = getConnection();
 		ProductDAO productDAO = ProductDAO.getInstance();
 		productDAO.setConnection(con);
-		
-		int insertOrder = productDAO.insertProduct(member_id,productList);
+		// 받아온 member_code,productList , totalMoney를 메서드의 매개변수에 대입
+		int insertOrder = productDAO.insertOrderProduct(member_code,productList,totalMoney);
 		
 		boolean isOrderResult = false;
 		if(insertOrder > 0) {
