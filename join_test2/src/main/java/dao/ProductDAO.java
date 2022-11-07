@@ -146,7 +146,7 @@ public class ProductDAO {
 	// 주문 승인 기능 완성 시 orderTBL 테이블에 order_status의 값이 1인 주문(주문승인상태)만 불러올 수 있도록 만들어야 함
 	public ArrayList<OrderTBL> getTotalOrderList() {
 		
-		String sql = "select order_id, product_no, order_amount, order_price, order_date from ordertbl natural join order_detail";
+		String sql = "select order_id, product_no, order_amount, order_price, order_date from orderTBL natural join order_detail";
 		ArrayList<OrderTBL> totalOrderList = new ArrayList<OrderTBL>();
 		
 		try {

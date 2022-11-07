@@ -49,7 +49,7 @@ public class NoticeDAO {
 		int writeCount = 0;
 		int notice_no = 0 ;
 		
-		String sql2 = "select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL";
+		String sql2 = "select ifnull(max(notice_no),0)+1 as notice_no from noticeTBL";
 		//post_no 세팅
 		try {
 			pstmt = con.prepareStatement(sql2);
@@ -66,7 +66,7 @@ public class NoticeDAO {
 			close(pstmt);
 		}	
 		
-		String sql = "insert into NoticeTBL"
+		String sql = "insert into noticeTBL"
 				+ "(notice_no,notice_subject,notice_text, notice_date) "
 				+ " values(?,?,?,?)";
 		try {

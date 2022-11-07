@@ -162,7 +162,7 @@ public class ManagerDAO {
 	/********** 실시간 주문관리용 메서드 **********************************/
 	public ArrayList<OrderTBL> showList() {
 		// 실시간 주문 목록보기
-		String sql = "select order_id, member_code ,order_date, order_status from OrderTBL";
+		String sql = "select order_id, member_code ,order_date, order_status from orderTBL";
 		ArrayList<OrderTBL> orderList = new ArrayList<OrderTBL>();
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -191,7 +191,7 @@ public class ManagerDAO {
 		String sql = "select order_id, member_id,"
 				+ "concat(address1, ' ', address2, ' ', address3) as address, "
 				+ "member_phone, member_email, product_no, order_amount, order_price "
-				+ "from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  "
+				+ "from order_detail natural join orderTBL natural join memberTBL natural join deliver_address  "
 				+ "where order_id = ? ";
 		ArrayList<Order_detail> detailList = new ArrayList<Order_detail>();
 		try {
@@ -225,7 +225,7 @@ public class ManagerDAO {
 	/*************************** 관리자용 상품관리**********************************/
 	public ArrayList<ProductTBL> allProductList() { //상품목록 불러오기
 		
-		String sql = "select product_image, product_no, category_code, product_amount from producttbl";
+		String sql = "select product_image, product_no, category_code, product_amount from productTBL";
 		ArrayList<ProductTBL> allProductList = new ArrayList<ProductTBL>();
 		
 		try {
@@ -255,7 +255,7 @@ public class ManagerDAO {
 	}
 	// 상품목록 - 제품상세(수정/삭제 페이지)
 	public ProductTBL getProductDetail(int product_no) {
-		String sql = "select * from producttbl where product_no =?";
+		String sql = "select * from productTBL where product_no =?";
 		ProductTBL productTBL = new ProductTBL();
 		
 		try {
@@ -294,7 +294,7 @@ public class ManagerDAO {
 		int insertResult = 0;
 		boolean insertSuccess = false;
 		
-		String sql ="insert into producttbl values(?,?,?,?,?,?,?,?,?,?)";
+		String sql ="insert into productTBL values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, protbl.getProduct_no());
