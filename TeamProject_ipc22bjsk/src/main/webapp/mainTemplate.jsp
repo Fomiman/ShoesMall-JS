@@ -11,17 +11,6 @@
 <link rel="stylesheet" href="css/bootstrap.css"> <!-- 참조  -->
 <link rel="stylesheet" href="css/footer.css">
 <title>메인템플릿</title>
-<style type="text/css">
-	@media (max-width: 768px) {
-		.container {
-		height: 1000px;
-		}
-		.container > #section{
-		height: 1000px;
-		}
-	}
-
-</style>
 </head>
 <body>
 	 <%@ include file="head_nav.jsp" %>

@@ -10,11 +10,14 @@
 <meta charset="UTF-8" name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <title>상품 리스트 </title>
 <style type="text/css">
+
 	#listForm{
 		max-width:95%;
 		max-height:100%;
 		margin: 0px auto;
+		margin-bottom: 20px;
 	}
+	
 	h2{
 		text-align:center;
 	}
@@ -40,12 +43,31 @@
 		max-height: 150px;
 		border: none;
 	}
+	
 	@media (max-width: 768px) {
 		.productListTD {
 			padding: 0px;
 		}
 		
 	}
+		
+	
+	.pageDIV {
+		display: flex;
+		
+	}
+	
+	.pageUL {
+		list-style-type: none;
+		margin: 0px auto;
+	}
+	
+	.pageUL_LI {
+		float: left; 
+		margin-right: 20px;
+		line-height: 40px;
+	}
+	
 </style>
 </head>
 <body>
@@ -54,7 +76,6 @@ int productPageNum = (int)request.getAttribute("productPageNum");
 int MaxProductPageNum = (int)request.getAttribute("MaxProductPageNum"); 
 %>
 
-<div class="row" style="margin-bottom: 20px">
  <section id="listForm">
 	<c:if test ="${productList != null }">
 		<table class="productListTBL">
@@ -64,8 +85,9 @@ int MaxProductPageNum = (int)request.getAttribute("MaxProductPageNum");
 						<a href="productView.shoes?product_no=${productTBL.product_no}">
 						<img src="images/${productTBL.product_image }" id="productImage" >
 						</a><br>
-						${productTBL.product_name}<br/>
-						${productTBL.product_price}원<br/>
+						상품명 : ${productTBL.product_name}<br/>
+						사이즈 : ${productTBL.product_size}<br/>
+						가격 : ${productTBL.product_price}원<br/>
 					</td>
 					<input type="hidden" id="width-var" value="">
 					<c:if test="${((i.index+1) mod 3)==0}">
@@ -82,13 +104,37 @@ int MaxProductPageNum = (int)request.getAttribute("MaxProductPageNum");
 		<div class="div_empty">신발이 없습니다.</div>
 	</c:if>
 
-	<% if(productPageNum!=1) { %>
-			<a href="productList.shoes?productPageNum=${productPageNum-1 }" class="btn btn-success btn-arraw-left">이전</a>
-			<%} 
-			if(productPageNum<MaxProductPageNum){%>
-			<a href="productList.shoes?productPageNum=${productPageNum+1 }" class="btn btn-success btn-arraw-left">다음</a>
-			<%} %>
+			<div class="pageDIV">
+				<ul class="pageUL" >
+					<%if(productPageNum ==1 ) { %>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="firstPage();">이전</a>
+					</li>
+					<% }else if(productPageNum!=1) { %>
+					<li class="pageUL_LI">
+						<a href="productList.shoes?productPageNum=${productPageNum-1 }" class="btn btn-success">이전</a>
+					</li>
+					<%} %>
+					<c:forEach var="i" begin="1" end="${MaxProductPageNum }" step="1">
+					<li class="pageUL_LI"><a href="productList.shoes?productPageNum=${i}">${i }</a> </li>
+					</c:forEach>
+					<%if(productPageNum<MaxProductPageNum){%>
+					<li class="pageUL_LI">
+						<a href="productList.shoes?productPageNum=${productPageNum+1 }" class="btn btn-success">다음</a>
+					</li>
+					<%}else if(productPageNum == MaxProductPageNum){%>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="lastPage();">다음</a>
+					</li>
+					<%} %>
+				</ul>
+			</div>
 </section> 
-</div>
+
+<script>//첫페이지, 마지막페이지 표시용
+	function firstPage() {alert("첫 페이지입니다.");}
+	function lastPage() {alert("마지막 페이지입니다.");}
+</script>
+
 </body>
 </html>

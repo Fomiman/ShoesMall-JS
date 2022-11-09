@@ -335,6 +335,40 @@ public int deleteAccount(int member_code) {
 	return deleteResult;
 }
 
+//주문자정보?
+	public MemberTBL selectMemberOrder(String member_code) {
+		MemberTBL memberOrder = null;
+		
+		String sql="SELECT member_id,member_name,member_phone,member_email,address1,address2,address3 "
+					+ " from deliver_address natural join memberTBL where member_id=?";		
+
+		try {
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setString(1, member_code);		
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {//해당 id에 대한 정보가 있으면
+				
+				memberOrder = new MemberTBL();
+				
+				memberOrder.setMember_id((rs.getString("member_id")));
+				memberOrder.setMember_name((rs.getString("member_name")));
+				memberOrder.setMember_phone((rs.getString("member_phone")));
+				memberOrder.setAddress1((rs.getString("address1")));
+				memberOrder.setAddress2((rs.getString("address2")));
+				memberOrder.setAddress3((rs.getString("address3")));
+				memberOrder.setMember_email((rs.getString("member_email")));
+			}
+		} catch (Exception e) {			
+			System.out.println("[MemberDAO] selectMemberInfo 에러:"+ e);//e:예외종류+예외메세지
+		} finally {
+			close(rs);
+			close(pstmt);
+		}			
+		
+		return memberOrder;
+	}
+
 
 /************************************************************************************************************/
 	

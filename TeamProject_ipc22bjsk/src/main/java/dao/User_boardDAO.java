@@ -97,10 +97,38 @@ public class User_boardDAO {
 	}//C
 	
 	//조회 (R)
-	public ArrayList<User_board> showList(){
+	//마지막 페이지 관리용 메서드
+		public int maxPage() {
+			int maxPageNum =0 ;
+			String sql = "select CEIL(count(*)/10) from user_board";
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					maxPageNum = rs.getInt(1);
+				}
+				
+			}catch (SQLException e) {
+				System.out.println("[User_boardDAO] maxPage() 에러 : "+e);
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			
+			return maxPageNum;
+		}
+	public ArrayList<User_board> showList(int pageNum){
+		int pageNum2 =0 ;
+		if(1<= pageNum && pageNum <= maxPage()){
+			pageNum2 = (pageNum-1)*10;
+		}
+		
 		String sql = "select post_no, post_subject ,member_id, post_date "
 				+ "from memberTBL natural join user_board "
-				+ "order by post_no desc";
+				+ "order by post_no desc "
+				+ "limit "+pageNum2+",10";
 		ArrayList<User_board> list = new ArrayList<User_board>();
 		try {
 			pstmt = con.prepareStatement(sql);

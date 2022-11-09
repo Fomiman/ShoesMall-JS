@@ -16,10 +16,19 @@ public class ShowProductListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
+
+		int pageNum ;
+		if(request.getParameter("pageNum")==null) {
+			pageNum = 1;
+		}else {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
 		
 		ShowProductListService showProductList = new ShowProductListService();
 		
-		ArrayList<ProductTBL> productList = showProductList.allProductList();
+		ArrayList<ProductTBL> productList = showProductList.allProductList(request, pageNum);
+		
+		request.setAttribute("pageNum", pageNum);
 		
 		request.setAttribute("productList", productList);
 		request.setAttribute("showPage", "showProductList.jsp");

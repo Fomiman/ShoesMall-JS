@@ -21,7 +21,18 @@
 </head>
 
 <body>
+<%
+int selectedYear =  0;
+if(request.getParameter("selectedYear")!= null){
+	selectedYear = Integer.parseInt(request.getParameter("selectedYear"))     ;
+}
 
+int selectedMonth = 0;
+if(request.getParameter("selectedMonth")!= null){
+	selectedMonth = Integer.parseInt(request.getParameter("selectedMonth"))      ; 
+}
+
+%>
 		<div class="row">
 			<form action="#" method="post" name="tof">
 			<table class="table table-striped"
@@ -48,7 +59,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
+						<th style="background-color: #eeeeee; text-align: center;">주문번호-상세주문번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">제품번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">주문수량</th>
 						<th style="background-color: #eeeeee; text-align: center;">주문가격</th>
@@ -58,17 +69,28 @@
 				<tbody>
 					<c:if test="${totalOrderList != null && totalOrderList.size() > 0}">
 						<!-- 1.order 메뉴목록이 있으면 -->
+						<c:set var="tp" value="0"/>
 						<c:forEach var="totalOrder" items="${totalOrderList}" varStatus="status">
 							<!-- 행 시작  -->
 							<tr>
-								<td>${totalOrder.order_id }</td>
+								<td>${totalOrder.order_id }&nbsp;-&nbsp;${totalOrder.order_detail_id }</td>
 								<td>${totalOrder.product_no}</td>
 								<td>${totalOrder.order_amount }</td>
 								<td>${totalOrder.order_price }</td>
 								<td>${totalOrder.order_date }</td>
 							</tr>
+							<c:set var="tp" value="${tp + totalOrder.order_price }"/>
 							<!-- 행 끝 -->
 						</c:forEach>
+						<tr>	
+							<td colspan="5">
+								<%if(selectedYear != 0) {%>
+									<%=selectedYear %>년 <%=selectedMonth %> 월 총 매출 : ${tp } 원
+								<%} else {%>
+									총 매출 : ${tp } 원
+								<%}%>
+							</td>
+						</tr>
 					</c:if>
 					<c:if test="${totalOrderList == null}">
 						<!-- 2.order 메뉴목록이 없으면 -->

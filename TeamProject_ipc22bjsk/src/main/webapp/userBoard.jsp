@@ -7,8 +7,7 @@
 <%@page import="dao.User_boardDAO"%>
 <%@page import="vo.User_board"%>
 <%@page import="java.sql.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 
@@ -17,13 +16,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name="viewport"
-	content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 <title>게시판</title>
+
+<style type="text/css">
+
+	.pageDIV {
+		display: flex;
+		
+	}
+	
+	.pageUL {
+		list-style-type: none;
+		margin: 0px auto;
+	}
+	
+	.pageUL_LI {
+		float: left; 
+		margin-right: 20px;
+		line-height: 40px;
+	}
+
+</style>
+
 </head>
 
 <body>
 <%
+
+int pageNum = (int)request.getAttribute("pageNum"); 
+int maxPage = (int)request.getAttribute("maxPage");
+
 String member_id = null;
 String manager_id = null;
 
@@ -73,10 +96,59 @@ if (session.getAttribute("manager_id") != null) {
 					</c:if>
 				</tbody>
 			</table>
-
-			<a href="userBoard.usr" class="btn btn-success btn-arraw-left">이전</a>
-
-			<a href="userBoard.usr" class="btn btn-success btn-arraw-left">다음</a>
+			<%if(member_id == null && manager_id !=null){%>
+				<div class="pageDIV">
+				<ul class="pageUL" >
+					<%if(pageNum ==1 ) { %>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="firstPage();">이전</a>
+					</li>
+					<% }else if(pageNum!=1) { %>
+					<li class="pageUL_LI">
+						<a href="userBoard.mgr?pageNum=${pageNum-1 }" class="btn btn-success">이전</a>
+					</li>
+					<%} %>
+					<c:forEach var="i" begin="1" end="${maxPage }" step="1">
+					<li class="pageUL_LI"><a href="userBoard.mgr?pageNum=${i}">${i }</a> </li>
+					</c:forEach>
+					<%if(pageNum<maxPage){%>
+					<li class="pageUL_LI">
+						<a href="userBoard.mgr?pageNum=${pageNum+1 }" class="btn btn-success">다음</a>
+					</li>
+					<%}else if(pageNum == maxPage){%>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="lastPage();">다음</a>
+					</li>
+					<%} %>
+				</ul>
+			</div>
+			<%}else {%>
+			<div class="pageDIV">
+				<ul class="pageUL" >
+					<%if(pageNum ==1 ) { %>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="firstPage();">이전</a>
+					</li>
+					<% }else if(pageNum!=1) { %>
+					<li class="pageUL_LI">
+						<a href="userBoard.usr?pageNum=${pageNum-1 }" class="btn btn-success">이전</a>
+					</li>
+					<%} %>
+					<c:forEach var="i" begin="1" end="${maxPage }" step="1">
+					<li class="pageUL_LI"><a href="userBoard.usr?pageNum=${i}">${i }</a> </li>
+					</c:forEach>
+					<%if(pageNum<maxPage){%>
+					<li class="pageUL_LI">
+						<a href="userBoard.usr?pageNum=${pageNum+1 }" class="btn btn-success">다음</a>
+					</li>
+					<%}else if(pageNum == maxPage){%>
+					<li class="pageUL_LI">
+						<a href="#" class="btn btn-success" onclick="lastPage();">다음</a>
+					</li>
+					<%} %>
+				</ul>
+			</div>
+			<%} %>
 			<%
 			if (member_id == null && manager_id ==null) { // 로그인 하지 않았을때 기본적으로 유저 로그인으로 이동시킴
 			%>
@@ -94,7 +166,11 @@ if (session.getAttribute("manager_id") != null) {
 			}
 			%>
 		</div>
-
+		
+<script>//첫페이지, 마지막페이지 표시용
+	function firstPage() {alert("첫 페이지입니다.");}
+	function lastPage() {alert("마지막 페이지입니다.");}
+</script>
 
 </body>
 </html>

@@ -172,7 +172,9 @@ public class ProductDAO {
 	// 주문 승인 기능 완성 시 orderTBL 테이블에 order_status의 값이 1인 주문(주문승인된 row)만 가져옴
 	public ArrayList<OrderTBL> getTotalOrderList() {
 		
-		String sql = "select order_id, product_no, order_amount, order_price, order_date from orderTBL natural join order_detail where order_status = 1";
+		String sql = "select order_id, order_detail_id, product_no, order_amount, order_price, order_date "
+				+ "from orderTBL natural join order_detail "
+				+ "where order_status = 1 order by order_date desc, order_id desc";
 		ArrayList<OrderTBL> totalOrderList = new ArrayList<OrderTBL>();
 		
 		try {
@@ -184,7 +186,8 @@ public class ProductDAO {
 						rs.getInt(2),
 						rs.getInt(3),
 						rs.getInt(4),
-						rs.getString(5)
+						rs.getInt(5),
+						rs.getString(6)
 						);
 				totalOrderList.add(ot);
 			}

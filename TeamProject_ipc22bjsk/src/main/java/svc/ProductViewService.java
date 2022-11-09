@@ -22,6 +22,7 @@ public class ProductViewService {
 		if(updateCount >0 ) {
 			commit(con);
 		}else {
+			System.out.println("조회수 증가 메서드 추가 바람");
 			rollback(con);
 		}
 		
