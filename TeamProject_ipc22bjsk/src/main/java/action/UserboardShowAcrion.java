@@ -14,17 +14,26 @@ public class UserboardShowAcrion implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		ActionForward forward = null;
+		
+		int pageNum ;
+		if(request.getParameter("pageNum")==null) {
+			pageNum = 1;
+		}else {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		
 		UserboardShowService usserboardShowService = new UserboardShowService();
 		
-		ArrayList<User_board> boardList= usserboardShowService.getBoardList();
+		ArrayList<User_board> boardList= usserboardShowService.getBoardList(request, pageNum);
+		
+		request.setAttribute("pageNum", pageNum);
 		
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("showPage", "userBoard.jsp");
+		forward = new ActionForward("mainTemplate.jsp", false);
 		
-		//forward = new ActionForward("menuTemplate.jsp", false);
-		
-		//return forward;
-		return new ActionForward("mainTemplate.jsp", false);
+		return forward;
 		
 	}
 

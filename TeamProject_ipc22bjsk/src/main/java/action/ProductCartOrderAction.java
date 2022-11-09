@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import svc.ProductCartOrderService;
 import vo.ActionForward;
 import vo.CartTBL;
+import vo.MemberTBL;
 import vo.OrderTBL;
 import vo.ProductTBL;
 
@@ -23,9 +24,13 @@ public class ProductCartOrderAction implements Action {
 		
 		//int totalMoney =  (int)session.getAttribute("totalMoney");
 		int totalMoney = Integer.parseInt(request.getParameter("totalMoney"));// 수정사항 : totalMoney가 장바구니 페이지에서 requset값으로 바로 전달되기 때문에 
-		
 		//수정사항 : member_code 추가
-		int member_code = (int)session.getAttribute("member_code");
+		int member_code = 0;
+		String member_id = (String)session.getAttribute("member_id");
+		//수정사항 : member_id는 로그인 확인 시에만 사용하고 메서드에서는 member_code 사용함 (수정된 orderTBL 내 member_id 값 없음)
+		if(member_id!=null) {
+			member_code = (int)session.getAttribute("member_code");
+		}
 		
 		ArrayList<CartTBL> cartList = (ArrayList<CartTBL>)session.getAttribute("cartList"); // 현재 세션에 저장된 장바구니 목록을 불러와서 cartList에 저장
 		
@@ -54,8 +59,7 @@ public class ProductCartOrderAction implements Action {
 						);
 				productList.add(productTBL);//productList에 추가
 			}
-		String member_id = (String)session.getAttribute("member_id");
-			//수정사항 : member_id는 로그인 확인 시에만 사용하고 메서드에서는 member_code 사용함 (수정된 orderTBL 내 member_id 값 없음)
+		
 			// 로그인 확인
 			if(member_id == null) { //로그인 되어있지 않으면
 				response.setContentType("text/html; charset=UTF-8");
@@ -82,8 +86,14 @@ public class ProductCartOrderAction implements Action {
 				out.println("history.back();");//이전 상태로 돌아가고
 				out.println("</script>");
 			}else {
-				//insert 성공 
-		
+			//insert 성공 
+			
+			//로그인한 유저의 회원정보
+			MemberTBL memberOrder = ProductCartOrderService.MemberOrder(member_id);
+			
+			//로그인한 유저의 회원정보를 실은 MemberTBL 객체를 설정
+			request.setAttribute("memberTBL", memberOrder);
+			
 			session.setAttribute("productList", productList);
 			session.setAttribute("totalMoney", totalMoney);
 			

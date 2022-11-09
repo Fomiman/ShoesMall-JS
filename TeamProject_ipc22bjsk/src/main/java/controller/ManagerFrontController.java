@@ -15,6 +15,7 @@ import action.manager.CancelOrderStatusAction;
 import action.manager.ChangeToUserHomeAction;
 import action.manager.DeleteAccountActionMGR;
 import action.manager.DeleteNoticeAction;
+import action.manager.DeleteProductDetailAction;
 import action.manager.InsertProductAction;
 import action.manager.ManagerJoinAction;
 import action.manager.ManagerLoginAction;
@@ -30,6 +31,7 @@ import action.manager.ShowNoticeAcrionMGR;
 import action.manager.ShowProductDetailAction;
 import action.manager.ShowProductListAction;
 import action.manager.UpdateOrderStatusAction;
+import action.manager.UpdateProductDetailAction;
 import action.manager.UserDataUpadate1Action;
 import action.manager.UserDataUpadate2Action;
 import action.manager.UserManagementDetailAction;
@@ -354,6 +356,29 @@ public class ManagerFrontController extends HttpServlet {
 			}
 
 		}
+		
+		else if (command.equals("/manager/updateProduct.mgr")) {
+			action = new UpdateProductDetailAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("제품정보 수정 액션 오류" + e);
+			}
+
+		}
+		
+		else if (command.equals("/manager/deleteProduct.mgr")) {
+			action = new DeleteProductDetailAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("제품 삭제 액션 오류" + e);
+			}
+
+		}
+		
 
 		// insertProductPage.mgr : 상품등록 페이지 이동
 		else if (command.equals("/manager/insertProductPage.mgr")) {

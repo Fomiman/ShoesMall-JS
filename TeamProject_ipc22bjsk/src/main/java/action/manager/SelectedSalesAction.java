@@ -35,6 +35,8 @@ public class SelectedSalesAction implements Action {
 		ArrayList<OrderTBL> selectedOrderList = selectedSalesService.selectedOrderList(selectedYM, request);
 		//합친 년/월과 request를 넘긴다. request를 넘기는 이유는 session에 들어있는 기존의 totalOrderList를 불러와서 메서드에서 사용하기 위해
 		
+		request.setAttribute("selectedYear", year);
+		request.setAttribute("selectedMonth", month);
 		request.setAttribute("totalOrderList", selectedOrderList);
 		request.setAttribute("showPage", "totalOrderList.jsp");
 		forward = new ActionForward("managerTemplate.jsp" , false);

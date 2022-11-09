@@ -1,6 +1,6 @@
 package dao;
 
-import static db.JdbcUtil.close;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,15 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpSession;
-
+import oracle.net.aso.b;
 import vo.ManagerTBL;
 import vo.OrderTBL;
 import vo.Order_detail;
 import vo.ProductTBL;
-import vo.User_board;
-import vo.ManagerTBL;
 
 public class ManagerDAO {
 	// 멤버변수(전역변수 : 전체 메서드에서 사용 가능)
@@ -252,12 +248,37 @@ public class ManagerDAO {
 		return detailList;
 		
 	}
-/********** 실시간 주문관리용 메서드 끝 **********************************/
 
 	/*************************** 관리자용 상품관리**********************************/
-	public ArrayList<ProductTBL> allProductList() { //상품목록 불러오기
+	public int maxPagePM() { // 상품관리 페이지 최대 페이지수
+		int maxPageNum =0 ;
+		String sql = "select CEIL(count(*)/10) from productTBL";
 		
-		String sql = "select product_image, product_no, category_code, product_amount from productTBL";
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				maxPageNum = rs.getInt(1);
+			}
+			
+		}catch (SQLException e) {
+			System.out.println("[ManagerDAO] maxPagePM() 에러 : "+e);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return maxPageNum;
+	}
+	public ArrayList<ProductTBL> allProductList(int pageNum) { //상품목록 불러오기
+		// 실시간 주문 목록보기
+				int pageNum2 =0 ;
+				if(1<= pageNum && pageNum <= maxPage()){
+					pageNum2 = (pageNum-1)*3;
+				}
+		String sql = "select product_image, product_no, category_code, product_amount from productTBL order by product_no desc "
+				+ "limit "+pageNum2+", 3";
 		ArrayList<ProductTBL> allProductList = new ArrayList<ProductTBL>();
 		
 		try {
@@ -356,6 +377,62 @@ public class ManagerDAO {
 		}
 		
 		return insertSuccess;
+	}
+	// 상품 수정
+	public boolean updateProduct(ProductTBL protbl) {
+		int updateResult = 0;
+		boolean updateSuccess = false;
+		
+		String sql ="update productTBL set product_no=?, category_code=?,product_name=?,product_size=?,product_price=?,product_amount=?,product_decs=?,product_date=?,"
+				+ "product_hits=?,product_image=? where product_no="+protbl.getProduct_no();
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, protbl.getProduct_no());
+			pstmt.setString(2, protbl.getCategory_code());
+			pstmt.setString(3, protbl.getProduct_name());
+			pstmt.setInt(4, protbl.getProduct_size());
+			pstmt.setInt(5, protbl.getProduct_price());
+			pstmt.setInt(6, protbl.getProduct_amount());
+			pstmt.setString(7, protbl.getProduct_decs());
+			pstmt.setString(8, protbl.getProduct_date());
+			pstmt.setInt(9, protbl.getProduct_hits());
+			pstmt.setString(10, protbl.getProduct_image());
+			
+			updateResult = pstmt.executeUpdate();
+			
+			if(updateResult > 0) {
+				updateSuccess = true;
+			}else {
+				System.out.println("상품수정 쿼리 오류");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("상품수정 메서드 실행 오류"+e);
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return updateSuccess;
+	}
+
+	public boolean deleteProduct(int product_no) {
+		boolean deleteSuccess = false;
+		String sql = "delete from productTBL where product_no ="+product_no;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			int deletedRow = pstmt.executeUpdate();
+			if(deletedRow > 0) {
+				deleteSuccess = true ;
+			}else {
+				System.out.println("상품 삭제 쿼리 오류");
+			}
+		} catch (SQLException e) {
+			System.out.println("상품 삭제 메서드 오류"+e);
+		}
+		
+		return deleteSuccess;
 	}
 		
 		

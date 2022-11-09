@@ -64,7 +64,7 @@
 						<tr>
 							<td>제품설명</td>
 							<td colspan="2">
-								<textarea rows="10" cols="51" >${productDetail.product_decs }</textarea>
+								<textarea rows="10" cols="51" name="product_decs">${productDetail.product_decs }</textarea>
 							</td>
 						</tr>
 						<tr>
@@ -82,7 +82,11 @@
 						<tr>
 							<td>이미지 파일</td>
 							<td colspan="2">
-								<input type="file" name="product_image" value="${productDetail.product_image }"/>
+								<input type="file" name="product_image"/>
+								<!-- 
+								input type="file"은 default value를 세팅할 수 없기때문에 
+								기존 파일명을 가져와 파일 선택하지 않았을 때 다시 넣어줄 값을 hidden타입에 넣어둔다 -->
+								<input type="hidden" name="orgin_product_image" value="${productDetail.product_image }" />
 								현재 등록된 파일 :  ${productDetail.product_image } <br>
 								<img src="../images/${productDetail.product_image }"/>
 							</td>
@@ -100,7 +104,7 @@
 			
 			<div class="alignCenter">
 				<a href="showProductList.mgr" class="btn btn-primary">전체 상품 목록보기</a>
-				<input type="submit" formaction="deleteProduct.mgr" class="btn btn-primary pull-right" value="제품삭제"/>
+				<input type="submit" formaction="deleteProduct.mgr?product_no=${productDetail.product_no }" class="btn btn-primary pull-right" value="제품삭제"/>
 				<input type="submit" formaction="updateProduct.mgr" class="btn btn-primary pull-right" value="제품수정"/>
 			</div>
 			</form>

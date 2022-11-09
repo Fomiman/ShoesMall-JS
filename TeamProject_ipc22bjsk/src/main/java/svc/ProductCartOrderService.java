@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import dao.OrderDAO;
 import dao.ProductDAO;
+import dao.UserDAO;
+import vo.MemberTBL;
 import vo.OrderTBL;
 import vo.ProductTBL;
 
@@ -43,6 +45,17 @@ public class ProductCartOrderService {
 		close(con);
 		return latestOrder;
 		
+	}
+
+	public static MemberTBL MemberOrder(String member_id) {
+		Connection con = getConnection();
+		UserDAO userDAO = UserDAO.getInstance();
+		userDAO.setConnection(con);
+		
+		MemberTBL memberOrder = userDAO.selectMemberOrder(member_id);
+		close(con);
+		
+		return memberOrder;
 	}
 
 	

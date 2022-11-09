@@ -12,6 +12,7 @@
 	#listForm{
 		width:750px;
 		margin:auto;
+		margin-bottom: 20px;
 	}
 	h2{
 		text-align:center;
@@ -55,14 +56,8 @@
 			<b>상품명 : </b> ${productView.product_name}<br>
 			<b>남은갯수 : </b> ${productView.product_amount}<br>
 			<b>가격 : </b> ${productView.product_price}원<br>
-			<%-- <b>사이즈 : </b> ${productView.product_size}<br> --%>
-			<b>사이즈 : </b>
-			   <select name="amount">
-                 <c:forEach begin="260" end="280" var="product_size">
-                        <option value="${productView.product_size}">${productView.product_size}</option>
-                           </c:forEach>
-                   </select>
-                   <br><br>
+			<b>사이즈 : </b>${productView.product_size}<br><br>
+			
 			<p id="desc">
 			<b>내용 : </b> ${productView.product_decs}<br>
 			</p>

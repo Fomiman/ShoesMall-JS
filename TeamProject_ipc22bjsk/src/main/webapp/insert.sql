@@ -117,3 +117,7 @@ select count(*) from orderTBL;
 select CEIL(count(*)/10),count(*)/10 , count(*)%10 from orderTBL;
 
 select CEIL(1) from dual;
+
+select CEIL(count(*)/10) from productTBL;
+
+select post_no, post_subject ,member_id, post_date from memberTBL natural join user_board order by post_no desc limit  0 ,10;

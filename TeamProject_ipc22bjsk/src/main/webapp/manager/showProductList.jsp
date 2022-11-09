@@ -18,10 +18,34 @@
 <meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1.0">
 <title>관리자용 상품목록</title>
+
+<style type="text/css">
+
+.pageDIV {
+	display: flex;
+	margin-bottom: 15px;
+}
+
+.pageUL {
+	list-style-type: none;
+	margin: 0px auto;
+}
+
+.pageUL_LI {
+	float: left; 
+	margin-right: 20px;
+	line-height: 40px;
+}
+
+</style>
+
+
 </head>
 
 <body>
-
+<% int pageNum = (int)request.getAttribute("pageNum"); 
+	int maxPage = (int)request.getAttribute("maxPage");
+%>
 		<div class="row">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
@@ -57,12 +81,36 @@
 				</tbody>
 			</table>
 
-			<a href="showProductList.mgr" class="btn btn-success btn-arraw-left">이전</a>
-
-			<a href="showProductList.mgr" class="btn btn-success btn-arraw-left">다음</a>
-			
+		<div class="pageDIV">
+			<ul class="pageUL" >
+			<%if(pageNum ==1 ) { %>
+			<li class="pageUL_LI">
+			<a href="#" class="btn btn-success" onclick="firstPage();">이전</a>
+			</li>
+			<% }else if(pageNum!=1) { %>
+			<li class="pageUL_LI">
+			<a href="showProductList.mgr?pageNum=${pageNum-1 }" class="btn btn-success">이전</a>
+			</li>
+			<%} %>
+			<c:forEach var="i" begin="1" end="${maxPage }" step="1">
+			<li class="pageUL_LI"><a href="showProductList.mgr?pageNum=${i}">${i }</a> </li>
+			</c:forEach>
+			<%if(pageNum<maxPage){%>
+			<li class="pageUL_LI">
+			<a href="showProductList.mgr?pageNum=${pageNum+1 }" class="btn btn-success">다음</a>
+			</li>
+			<%}else if(pageNum == maxPage){%>
+			<li class="pageUL_LI">
+			<a href="#" class="btn btn-success" onclick="lastPage();">다음</a>
+			</li>
+			<%} %>
+			</ul>
+			</div>
 		</div>
-
+<script>//첫페이지, 마지막페이지 표시용
+	function firstPage() {alert("첫 페이지입니다.");}
+	function lastPage() {alert("마지막 페이지입니다.");}
+</script>
 
 </body>
 </html>

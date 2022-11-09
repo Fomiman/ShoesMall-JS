@@ -12,6 +12,8 @@ public class OrderTBL {
 	private int product_no;
 	private int order_amount;
 	private int order_price;
+	private int order_detail_id;
+	
 	
 	
 	public OrderTBL() {
@@ -26,8 +28,9 @@ public class OrderTBL {
 		this.order_status = order_status;
 	}
 
-	public OrderTBL(int order_id, int product_no, int order_amount, int order_price, String order_date) {
+	public OrderTBL(int order_id, int order_detail_id, int product_no, int order_amount, int order_price, String order_date) {
 		this.order_id = order_id;
+		this.order_detail_id = order_detail_id;
 		this.product_no = product_no;
 		this.order_amount = order_amount;
 		this.order_price = order_price;
@@ -105,6 +108,14 @@ public class OrderTBL {
 
 	public void setTotalmoney(int totalmoney) {
 		this.totalmoney = totalmoney;
+	}
+
+	public int getOrder_detail_id() {
+		return order_detail_id;
+	}
+
+	public void setOrder_detail_id(int order_detail_id) {
+		this.order_detail_id = order_detail_id;
 	}
 	
 	

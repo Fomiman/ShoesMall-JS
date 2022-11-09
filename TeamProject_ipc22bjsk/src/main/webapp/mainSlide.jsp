@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+
+	 .slideImg {
+		 width: 1200px; max-height: 600px;
+	 }
+	 
+</style>
+
 </head>
 <body>
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -14,14 +23,14 @@
 	    		<li data-target="#myCarousel" data-slide-to="2"></li>
     		</ol>
     		<div class="carousel-inner">
-	    		<div class="item active">
-	    			<img src="images/1111.jpg" class="slideImg" style="width: 1200px; max-height: 600px;">
+	    		<div class="item active mainSlideIMG">
+	    			<img src="images/nikelogo1.jpg" class="slideImg">
 	    		</div>
-	    		<div class="item">
-	    			<a href="productList.shoes"><img src="images/2222.jpg" class="slideImg" style="width: 1200px; max-height: 600px;"></a>
+	    		<div class="item mainSlideIMG">
+	    			<img src="./images/nikelogo2.jpg">
 	    		</div>
-	    		<div class="item">
-	    			<a href="productList.shoes"><img src="images/3333.jpg" class="slideImg" style="width: 1200px; max-height: 600px;"></a>
+	    		<div class="item mainSlideIMG">
+	    			<img src="./images/nikelogo3.jpg">
 	    		</div>
     		</div>
     		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
@@ -31,5 +40,6 @@
     			<span class="glyphicon glyphicon-chevron-right"></span>
     		</a>
     	</div>
+    	
 </body>
 </html>
