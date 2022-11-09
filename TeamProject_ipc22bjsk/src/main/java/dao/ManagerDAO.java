@@ -329,6 +329,7 @@ public class ManagerDAO {
 									rs.getInt(9), // 조회수
 									rs.getString(10) // 이미지 파일명
 											);
+				System.out.println(rs.getString(10));
 			}else {
 				System.out.println("제품상세 불러오기 쿼리 실행 오류");
 			}
