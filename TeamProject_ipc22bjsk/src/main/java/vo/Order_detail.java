@@ -12,6 +12,7 @@ public class Order_detail {
 	private String address;
 	private String member_phone;
 	private String member_email;
+	private int order_status;
 	
 	
 	public Order_detail() {
@@ -36,7 +37,8 @@ public class Order_detail {
 			String member_email,
 			int product_no, 
 			int order_amount, 
-			int order_price
+			int order_price, 
+			int order_status
 			) {
 		super();
 		this.order_id = order_id;
@@ -47,6 +49,7 @@ public class Order_detail {
 		this.product_no = product_no;
 		this.order_amount = order_amount;
 		this.order_price = order_price;
+		this.order_status = order_status;
 	}
 
 	public int getOrder_detail_id() {
@@ -119,6 +122,14 @@ public class Order_detail {
 
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
+	}
+
+	public int getOrder_status() {
+		return order_status;
+	}
+
+	public void setOrder_status(int order_status) {
+		this.order_status = order_status;
 	}
 	
 	

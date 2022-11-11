@@ -86,7 +86,7 @@
 								<!-- 
 								input type="file"은 default value를 세팅할 수 없기때문에 
 								기존 파일명을 가져와 파일 선택하지 않았을 때 다시 넣어줄 값을 hidden타입에 넣어둔다 -->
-								<input type="hidden" name="orgin_product_image" value="${productDetail.product_image }" />
+								<input type="hidden" name="orgin_product_image" value="${productDetail.product_image}" />
 								현재 등록된 파일 :  ${productDetail.product_image } <br>
 								<img src="../images/${productDetail.product_image }"/>
 							</td>

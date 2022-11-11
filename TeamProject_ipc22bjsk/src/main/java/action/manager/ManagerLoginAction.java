@@ -37,7 +37,7 @@ public class ManagerLoginAction implements Action {
 			PrintWriter out = response.getWriter();//화면에 출력(★★주의  : jsp가 아니므로 직접 생성해야 함)
 			out.println("<script>");
 			out.println("alert('아이디나 비밀번호가 일치하지 않습니다.');");
-			out.println("location.href='managerLogin.adm';");
+			out.println("location.href='managerLogin.mgr';");
 			out.println("</script>");
 			
 		}else {//로그인에 성공하면=회원가입이 되어있으면서 id와 pw를 정확히 입력했으면
@@ -71,8 +71,8 @@ public class ManagerLoginAction implements Action {
 				session.setMaxInactiveInterval(1*60*60);//세션 수명시간을 1시간으로 설정(3600초=1시간)
 			
 				//★★주의 : 필요한 정보들을 session에 저장했으므로 리다이렉트(true) 방식으로 포워딩해도 무방하다.
-				request.setAttribute("showPage", "managerHome.jsp");
-				forward = new ActionForward("managerTemplate.jsp", true);//(※false : 리다이렉트 방식으로 포워딩해도 됨)		
+				//request.setAttribute("showPage", "managerHome.jsp");
+				forward = new ActionForward("managerHome.mgr", true);//(※false : 리다이렉트 방식으로 포워딩해도 됨)		
 			}		
 			
 		}

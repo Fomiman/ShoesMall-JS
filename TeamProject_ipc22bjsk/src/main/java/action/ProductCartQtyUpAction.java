@@ -18,7 +18,7 @@ public class ProductCartQtyUpAction implements Action {
 		
 		ProductCartQtyUpService.upCartQty(product_no,request);
 		
-		forward = new ActionForward("productCartList.shoes",true);
+		forward = new ActionForward("productCartList.shoes", true);
 		return forward;
 	}
 

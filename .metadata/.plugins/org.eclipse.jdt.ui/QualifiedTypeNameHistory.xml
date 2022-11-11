@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="svc.manager.OrderManagementService"/>
     <fullyQualifiedTypeName name="action.UserboardShowAcrion"/>
     <fullyQualifiedTypeName name="action.ProductListAction"/>
     <fullyQualifiedTypeName name="action.product.ProductListAction"/>
@@ -18,7 +17,6 @@
     <fullyQualifiedTypeName name="java.util.Stack"/>
     <fullyQualifiedTypeName name="java.util.concurrent.ConcurrentMap"/>
     <fullyQualifiedTypeName name="vo.ProductTBL"/>
-    <fullyQualifiedTypeName name="dao.ManagerDAO"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.MultipartRequest"/>
     <fullyQualifiedTypeName name="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"/>
@@ -50,14 +48,16 @@
     <fullyQualifiedTypeName name="java.sql.Statement"/>
     <fullyQualifiedTypeName name="dao.NoticeDAO"/>
     <fullyQualifiedTypeName name="action.manager.UpdateOrderStatusAction"/>
-    <fullyQualifiedTypeName name="java.sql.Connection"/>
-    <fullyQualifiedTypeName name="db.JdbcUtil"/>
     <fullyQualifiedTypeName name="dao.OrderDAO"/>
-    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="javax.print.attribute.ResolutionSyntax"/>
-    <fullyQualifiedTypeName name="vo.ActionForward"/>
     <fullyQualifiedTypeName name="action.manager.CancelOrderStatusAction"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="db.JdbcUtil"/>
+    <fullyQualifiedTypeName name="dao.ManagerDAO"/>
+    <fullyQualifiedTypeName name="oracle.net.aso.b"/>
+    <fullyQualifiedTypeName name="vo.ActionForward"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
 </qualifiedTypeNameHistroy>

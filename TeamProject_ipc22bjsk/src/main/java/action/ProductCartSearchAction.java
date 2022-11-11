@@ -36,8 +36,8 @@ public class ProductCartSearchAction implements Action {
 		}
 
 		request.setAttribute("totalMoney", totalMoney);
-		
-		forward = new ActionForward("product/productCartList.jsp", false);
+		request.setAttribute("showPage", "product/productCartList.jsp");
+		forward = new ActionForward("mainTemplate.jsp", false);
 		
 		
 		return forward;

@@ -218,7 +218,7 @@ public class ManagerDAO {
 		// 실시간 주문 목록보기
 		String sql = "select order_id, member_id,"
 				+ "concat(address1, ' ', address2, ' ', address3) as address, "
-				+ "member_phone, member_email, product_no, order_amount, order_price "
+				+ "member_phone, member_email, product_no, order_amount, order_price , order_status "
 				+ "from order_detail natural join orderTBL natural join memberTBL natural join deliver_address  "
 				+ "where order_id = ? ";
 		ArrayList<Order_detail> detailList = new ArrayList<Order_detail>();
@@ -235,7 +235,9 @@ public class ManagerDAO {
 							rs.getString("member_email"),
 							rs.getInt("product_no"),
 							rs.getInt("order_amount"),
-							rs.getInt("order_price") );
+							rs.getInt("order_price"),
+							rs.getInt("order_status")
+						);
 				detailList.add(od); 
 			}
 			
@@ -252,7 +254,7 @@ public class ManagerDAO {
 	/*************************** 관리자용 상품관리**********************************/
 	public int maxPagePM() { // 상품관리 페이지 최대 페이지수
 		int maxPageNum =0 ;
-		String sql = "select CEIL(count(*)/10) from productTBL";
+		String sql = "select CEIL(count(*)/3) from productTBL";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -271,14 +273,52 @@ public class ManagerDAO {
 		
 		return maxPageNum;
 	}
-	public ArrayList<ProductTBL> allProductList(int pageNum) { //상품목록 불러오기
+	public ArrayList<ProductTBL> allProductList(int pageNum, String orderProduct) { //상품목록 불러오기
 		// 실시간 주문 목록보기
-				int pageNum2 =0 ;
-				if(1<= pageNum && pageNum <= maxPage()){
-					pageNum2 = (pageNum-1)*3;
-				}
-		String sql = "select product_image, product_no, category_code, product_amount from productTBL order by product_no desc "
-				+ "limit "+pageNum2+", 3";
+		int productPerPage =0 ; // limit시작점 설정용
+		
+		if(1<= pageNum && pageNum <= maxPagePM()){
+			productPerPage = (pageNum-1)*3; //pageNum 1페이지 일때 0부터 시작하도록 상품이 보여질 갯수인 3의 배수로 증가하게 설정
+		}
+		
+		//221111 정렬기능용 문자열 값 세팅 
+		String orderby = "";
+		switch (orderProduct) {
+		case "default":
+			orderby = "product_no";
+			break;
+				
+		case "date1":
+			orderby = "product_date desc";	
+			break;
+		case "date2":
+			orderby = "product_date asc";	
+			break;
+		
+		case "amount1":
+			orderby = "product_amount desc";	
+			break;
+		case "amount2":
+			orderby = "product_amount asc";	
+			break;
+		
+		case "price1":
+			orderby = "product_price desc";	
+			break;
+		case "price2":
+			orderby = "product_price asc";	
+			break;
+			
+		case "size1":
+			orderby = "product_size desc";	
+			break;
+		case "size2":
+			orderby = "product_size asc";	
+			break;
+		}
+				
+		String sql = "select product_image, product_no, category_code, product_amount from productTBL order by "+orderby
+				+ " limit "+productPerPage+", 3";
 		ArrayList<ProductTBL> allProductList = new ArrayList<ProductTBL>();
 		
 		try {
@@ -329,6 +369,7 @@ public class ManagerDAO {
 									rs.getInt(9), // 조회수
 									rs.getString(10) // 이미지 파일명
 											);
+				System.out.println(rs.getString(10));
 			}else {
 				System.out.println("제품상세 불러오기 쿼리 실행 오류");
 			}

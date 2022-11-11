@@ -17,7 +17,7 @@
 <div class=" col-sm-4 col-md col-sm-4  col-12 col">
 <h3 class="headin5_amrc col_white_amrc pt2">Shose Mall</h3>
 <!--headin5_amrc-->
-<p class="mb10">대표이사 : 김아무개,홍길동<br>
+<p class="mb10">대표이사 : 조용원, 손주환<br>
 주소 : 대구광역시 달서구 성서대로<br>
 사업자등록번호 : 123-45-67890(신발쇼핑(주))</p>
 <p><i class="fa fa-location-arrow"></i>통신판매업 신고 : 대구 달서구 </p>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.OrderResultAction;
+import action.OrderbyAction;
 import action.ProductCartOrderAction;
 import action.ProductCartAddAction;
 import action.ProductCartListAction;
@@ -86,9 +87,20 @@ public class ProductFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				System.out.println("상품 상세보기 액션 에러 : "+e);
 			}
 		}
+		
+		else if (command.equals("/orderbyAction.shoes")) { // '상품 페이지 정렬기능' 
+			action = new OrderbyAction();
+
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("OrderbyAction 에러 : "+e);
+			}
+		}
+	
 
 
 		/*----------------------장바구니---------------------------------------------------*/

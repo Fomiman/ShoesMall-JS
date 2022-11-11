@@ -16,6 +16,12 @@ public class ProductListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		
+		String orderbySelect = "";
+		if(request.getParameter("orderbySelect")==null) {
+			orderbySelect = "default";
+		}else {
+			orderbySelect = request.getParameter("orderbySelect");
+		}
 		int productPageNum = 0 ;
 		if(request.getParameter("productPageNum")==null) {
 			productPageNum = 1;
@@ -25,11 +31,13 @@ public class ProductListAction implements Action {
 		
 		ProductListService productListService = new ProductListService();
 		
-		ArrayList<ProductTBL> productList= productListService.getProductList(request,productPageNum);
+		ArrayList<ProductTBL> productList= productListService.getProductList(request,productPageNum, orderbySelect);
 		
+		request.setAttribute("orderbySelect", orderbySelect);
 		request.setAttribute("productPageNum", productPageNum);
 		request.setAttribute("productList", productList);
 		request.setAttribute("showPage", "product/product.jsp");
+		
 		forward = new ActionForward("mainTemplate.jsp",false);
 		
 		return forward;

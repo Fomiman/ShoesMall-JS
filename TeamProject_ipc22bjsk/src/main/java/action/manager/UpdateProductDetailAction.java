@@ -27,14 +27,18 @@ public class UpdateProductDetailAction implements Action {
 		String product_decs = request.getParameter("product_decs");
 		String product_date = request.getParameter("product_date");
 		int product_hits = 0;
-		String product_image = request.getParameter("product_image");
-		if(product_image == null) { 
+		String product_image = request.getParameter("product_image"); // 선택된 사진 파일명
+		String product_image2 = ""; // 아래 생성자에 사용할 파일명 전달용 변수
+		if(product_image.equals("")) { 
 			// 바꿀 사진을 선택하지 않아서 값이  null 로 들어왔을때 기존 이미지 파일명 그대로 다시 가져와서 삽입
-			product_image = request.getParameter("orgin_product_image");
+			product_image2 = request.getParameter("orgin_product_image");
+		}else {
+			// 사진을 선택했을 경우 선택된 파일명으로 update 진행
+			product_image2 = product_image;
 		}
 		ProductTBL protbl = new ProductTBL(
 				product_no, category_code, product_name, product_size, product_price, 
-				product_amount, product_decs, product_date, product_hits, product_image);
+				product_amount, product_decs, product_date, product_hits, product_image2);
 		
 		
 		UpdateProductDetailService updateProductDetailService = new UpdateProductDetailService();

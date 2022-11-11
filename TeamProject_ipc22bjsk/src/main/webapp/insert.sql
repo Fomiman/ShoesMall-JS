@@ -14,8 +14,8 @@ show tables;
 select * from deliver_address;
 select * from memberTBL;
 select * from product_category;
-select * from productTbl;
-select * from managerTbl;
+select * from productTBL;
+select * from managerTBL;
 select * from user_board;
 select * from cartTBL;
 select * from orderTBL;
@@ -118,6 +118,25 @@ select CEIL(count(*)/10),count(*)/10 , count(*)%10 from orderTBL;
 
 select CEIL(1) from dual;
 
+select count(*) from productTBL;
+select CEIL(count(*)/10) from productTBL;
 select CEIL(count(*)/10) from productTBL;
 
+select * from productTBL;
+select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 0, 3;
+select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 3, 3;
+select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 6, 3;
+
+
+
 select post_no, post_subject ,member_id, post_date from memberTBL natural join user_board order by post_no desc limit  0 ,10;
+
+
+
+select * from productTBL order by 1 limit 0, 6 ;
+
+--delete from orderTBL where order_id >= 0 ;
+--update orderTBL set order_status = 0 where order_status in (1,2) ;
+
+-- 주문 승인 시 재고 감소 메서드
+--update productTBL set product_amount = product_amount-1 where product_no=1001270;

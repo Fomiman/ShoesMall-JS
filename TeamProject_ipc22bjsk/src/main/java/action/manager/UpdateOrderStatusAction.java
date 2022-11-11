@@ -16,10 +16,13 @@ public class UpdateOrderStatusAction implements Action {
 		ActionForward forward = null ;
 		
 		int order_id = Integer.parseInt(request.getParameter("order_id"));
+		String[] product_no = request.getParameterValues("product_no");
+		String[] order_amount = request.getParameterValues("order_amount");
+		
 		
 		UpdateOrderStatusService updateOrderStatusService = new UpdateOrderStatusService();
 		
-		boolean updateSuccess = updateOrderStatusService.updateOrderStatus(order_id);
+		boolean updateSuccess = updateOrderStatusService.updateOrderStatus(order_id,product_no,order_amount);
 		
 		if(updateSuccess) {
 			

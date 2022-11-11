@@ -45,7 +45,24 @@
 <body>
 <% int pageNum = (int)request.getAttribute("pageNum"); 
 	int maxPage = (int)request.getAttribute("maxPage");
-%>
+	String orderProduct = (String)request.getAttribute("orderProduct");
+%>	
+	<form action="showProductList.mgr">
+	<div class="orderbyDIV">
+	 <select name="orderProduct" class="orderProduct">
+	 	<option value="default" ${orderProduct eq "default" ? "selected" : ""}>정렬◈</option>
+	 	<option value="date1" ${orderProduct eq "default" ? "selected" : ""}>등록순▼</option>
+	 	<option value="date2" ${orderProduct eq "default" ? "selected" : ""}>등록순▲</option>
+	 	<option value="amount1" ${orderProduct eq "default" ? "selected" : ""}>재고순▼</option>
+	 	<option value="amount2" ${orderProduct eq "default" ? "selected" : ""}>재고순▲</option>
+	 	<option value="price1" ${orderProduct eq "default" ? "selected" : ""}>가격순▼</option>
+	 	<option value="price2" ${orderProduct eq "default" ? "selected" : ""}>가격순▲</option>
+	 	<option value="size1" ${orderProduct eq "default" ? "selected" : ""}>크기순▼</option>
+	 	<option value="size2" ${orderProduct eq "default" ? "selected" : ""}>크기순▲</option>
+	 </select>
+	 <input type="submit" value="정렬" />
+	 </div>
+	</form>
 		<div class="row">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #dddddd">
@@ -89,15 +106,15 @@
 			</li>
 			<% }else if(pageNum!=1) { %>
 			<li class="pageUL_LI">
-			<a href="showProductList.mgr?pageNum=${pageNum-1 }" class="btn btn-success">이전</a>
+			<a href="showProductList.mgr?pageNum=${pageNum-1 }&orderProduct=${orderProduct}" class="btn btn-success">이전</a>
 			</li>
 			<%} %>
 			<c:forEach var="i" begin="1" end="${maxPage }" step="1">
-			<li class="pageUL_LI"><a href="showProductList.mgr?pageNum=${i}">${i }</a> </li>
+			<li class="pageUL_LI"><a href="showProductList.mgr?pageNum=${i}&orderProduct=${orderProduct}">${i }</a> </li>
 			</c:forEach>
 			<%if(pageNum<maxPage){%>
 			<li class="pageUL_LI">
-			<a href="showProductList.mgr?pageNum=${pageNum+1 }" class="btn btn-success">다음</a>
+			<a href="showProductList.mgr?pageNum=${pageNum+1 }&orderProduct=${orderProduct}" class="btn btn-success">다음</a>
 			</li>
 			<%}else if(pageNum == maxPage){%>
 			<li class="pageUL_LI">
@@ -105,6 +122,8 @@
 			</li>
 			<%} %>
 			</ul>
+			현재 페이지 : ${pageNum }
+			최대 페이지  : ${maxPage }
 			</div>
 		</div>
 <script>//첫페이지, 마지막페이지 표시용

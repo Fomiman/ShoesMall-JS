@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width", initial-scale="1" >
 <title>장바구니 목록</title>
 <!-- <style type="text/css">
 #listForm {
@@ -76,8 +76,9 @@ text-align : center;
 </style> -->
 <style type="text/css">
 #listForm {
-   width: 1000px;
-   margin: auto;
+ max-width:100%;
+		max-height:100%;
+		margin: 0px auto;
    
 }
 
@@ -86,7 +87,7 @@ h3 {
 }
 
 table {
-   width: 1000px;
+   width: 90%;
    margin: auto;
   
 }
@@ -110,9 +111,15 @@ tbody {
 text-align:"center";
 backgrround-color: #EAEAEA;
 }
-
-
-
+#commandList{
+		text-align: center;
+	}
+.row {
+text-align : center;
+}
+.container2{
+padding-left : 25%;
+}
 </style>
 
 </head>
@@ -176,7 +183,7 @@ backgrround-color: #EAEAEA;
 			<br><br>
 			<hr class="one">
 			<h3>배송 정보</h3>
-	<div class="container">
+	<div class="container2">
  
 	<div class="col-lg-8 well">
 	<div class="row">
@@ -212,11 +219,13 @@ backgrround-color: #EAEAEA;
 					</div>
 				</form> 
 				</div>
-				<input type="button" src="" value="홈으로">
+				<nav id = "commandList">
+			<button type="button" class="btn btn-default"><a href="mainTemplate.jsp">홈으로</a></button>
+		</nav>
 	</div>
 	</div>
 		<br>
 <br>
-
+</section>
 </body>
 </html>
