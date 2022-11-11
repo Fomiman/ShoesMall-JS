@@ -11,12 +11,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width", initial-scale="1" >
 <title>장바구니 목록</title>
 <style type="text/css">
 #listForm {
-	width: 1200px;
-	margin: auto;
+		max-width:95%;
+		max-height:100%;
+		margin: 0px auto;
 }
 
 h2 {
@@ -24,7 +25,7 @@ h2 {
 }
 
 table {
-	width: 1000px;
+	width: 90%;
 	margin: auto;
 }
 
@@ -97,6 +98,7 @@ table {
 </script>
 </head>
 <body>
+
 	<c:if test="${startMoney != null }">
 		<c:set var="startMoney" value="${startMoney}"></c:set>
 	</c:if>
@@ -107,33 +109,33 @@ table {
 
 	<section id="listForm">
 
-		<c:if test="${cartList !=null && cartList.size()>0 }">
+		
 			<h2>장바구니 목록</h2>
 
 			<form method="post" action="#" name="f">
 
 				<table>
 					<tr id="select">
-						<td colspan="7">
+						<td colspan="8">
 						<select id="startMoney" name="startMoney">
-								<option>=최하=</option>
-								<option>40000</option>
-								<option>50000</option>
-								<option>60000</option>
-								<option>70000</option>
-								<option>80000</option>
-								<option>90000</option>
+								<option value="0">=최하=</option>
+								<option value="40000">40000</option>
+								<option value="50000">50000</option>
+								<option value="60000">60000</option>
+								<option value="70000">70000</option>
+								<option value="80000">80000</option>
+								<option value="90000">90000</option>
 						</select> 
 						<select id="endMoney" name="endMoney">
-								<option>=최고=</option>
-								<option>40000</option>
-								<option>50000</option>
-								<option>60000</option>
-								<option>70000</option>
-								<option>80000</option>
-								<option>90000</option>
-						</select> <!--[검색]버튼을 클릭하면 '최하가격과~최고가격으로 장바구니 항목을 이 가격으로 다시 검색하는 요청'  --> <input
-							type="submit" value="검색" formaction="productCartSearch.shoes" />
+								<option value="999999">=최고=</option>
+								<option value="40000">40000</option>
+								<option value="50000">50000</option>
+								<option value="60000">60000</option>
+								<option value="70000">70000</option>
+								<option value="80000">80000</option>
+								<option value="90000">90000</option>
+						</select> <!--[검색]버튼을 클릭하면 '최하가격과~최고가격으로 장바구니 항목을 이 가격으로 다시 검색하는 요청'  --> 
+						<input type="submit" value="검색" formaction="productCartSearch.shoes" />
 						</td>
 					</tr>
 					<!-- 가격별 검색부분 처리(끝)----------------------------------- -->
@@ -154,62 +156,60 @@ table {
 						<td>수량</td>
 						<td>제품삭제</td>
 					</tr>
-
+				<c:if test="${cartList !=null && cartList.size()>0 }">
 					<c:forEach var="cartTBL" items="${cartList }" varStatus="i">
 
 						<tr>
-							<td><input type="checkbox" id="remove" name="remove"
-								value="${cartTBL.product_name }" /></td>
-							<td>${i.index+1}<!-- 번호값계산 -->
-							</td>
-							<td><img src="images/${cartTBL.product_image }"
-								id="cartImage" /></td>
+							<td><input type="checkbox" id="remove" name="remove" value="${cartTBL.product_name }" /></td>
+							<td>${i.index+1}<!-- 번호값계산 --> </td>
+							<td><img src="images/${cartTBL.product_image }" id="cartImage" /></td>
 							<td>${cartTBL.product_no }</td>
 							<td>${cartTBL.product_name }</td>
 							<td>${cartTBL.product_price}원</td>
 							<td>
-								<!--▲ 클릭시 : 장바구니 항목의 수량 증가 요청 (이때, kind값을 파라미터로 전송)  --> <a
-								href="javascript:checkQtyUp('${cartTBL.product_no}')"> <!-- 문자는 '' 항상 신경 -->
-									<img src="images/up.jpg" id="upImage" border="0" />
-							</a> <br> ${cartTBL.product_amount } <!--현재 수량  --> <br> <!--▼ 클릭시 : 장바구니 항목의 수량 감소 요청 (이때, 'kind값'과 '현재수량'을 파라미터로 전송) 
-            	  '현재수량'전송이유? 수량이 최소 2이상인 것만 감소가 가능하므로...--> <a
-								href="javascript:checkQtyDown('${cartTBL.product_no}',${cartTBL.product_amount})">
-									<!-- 숫자는 ''안써도됨 --> <img src="images/down.jpg" id="downImage"
-									border=0 />
-							</a>
-							<td colspan="5" style="text-align: center;"><input
-								class="btn btn-default" type="submit" value="삭제"
-								formaction="productCartRemove.shoes" /></td>
-
+								<!--▲ 클릭시 : 장바구니 항목의 수량 증가 요청 (이때, kind값을 파라미터로 전송)  --> 
+								<a href="javascript:checkQtyUp('${cartTBL.product_no}')"> <!-- 문자는 '' 항상 신경 -->
+									<img src="images/up.jpg" id="upImage" border="0" /> 
+								</a> <br> 
+								${cartTBL.product_amount } <!--현재 수량  --> <br> 
+								<!--▼ 클릭시 : 장바구니 항목의 수량 감소 요청 (이때, 'kind값'과 '현재수량'을 파라미터로 전송) '현재수량'전송이유? 수량이 최소 2이상인 것만 감소가 가능하므로...--> 
+								<a href="javascript:checkQtyDown('${cartTBL.product_no}',${cartTBL.product_amount})"> <!-- 숫자는 ''안써도됨 --> 
+									<img src="images/down.jpg" id="downImage" border=0 />
+								</a>
+							<td colspan="5" style="text-align: center;">
+								<input class="btn btn-default" type="submit" value="삭제" formaction="productCartRemove.shoes" />
+							</td>
 						</tr>
 
 					</c:forEach>
 					<tr>
-						<td colspan="7" style="text-align: right;">
+						<td colspan="8" style="text-align: right;">
 							<h4>총 금액 : ${totalMoney}원</h4>
 						</td>
 					</tr>
+					</c:if>
+					<!--------------------- 장바구니에 담긴 것 없을때 ------------------------------------------  -->
+					<c:if test="${cartList == null }">
+						<tr>
+							<td colspan="8">
+								<section class="div_empty">장바구니가 비어있습니다</section>
+							</td>
+						</tr>
+					</c:if>
 				</table>
-				<%--  <button type="submit" class="btn btn-default" formaction="productCartOrder.shoes?totalmoney = ${totalMoney }">구매하기</button> --%>
+				<!-- 하단 버튼  -->
 				<nav id="commandList">
 					<input type="submit" class="btn btn-default" value="쇼핑 계속하기"
-						formaction="productList.shoes"> <input type="submit"
-						class="btn btn-default" value="구매하기"
+						formaction="productList.shoes"> 
+					<input type="submit" class="btn btn-default" value="구매하기"
 						formaction="productCartOrder.shoes?totalMoney=${totalMoney}">
 				</nav>
 			</form>
 
-		</c:if>
+		
 
-		<!-----------------------------------------------------------------------------------------  -->
-		<c:if test="${cartList == null }">
-			<section class="div_empty">장바구니가 비어있습니다</section>
-		</c:if>
+		
 		<!------------------------------------------------------------------------------------------------  -->
-		<%-- <nav id="commandList">
-   	<button type="button" class="btn btn-default">	<a href="productList.shoes">쇼핑 계속하기</a></button>
-    <button type="button" class="btn btn-default"><a href ="productCartOrder.shoes?totalmoney = ${totalMoney }">구매하기</a></button>
-   </nav> --%>
 	</section>
 	<br>
 </body>

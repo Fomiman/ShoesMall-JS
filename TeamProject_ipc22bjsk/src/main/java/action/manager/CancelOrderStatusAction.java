@@ -16,10 +16,13 @@ public class CancelOrderStatusAction implements Action {
 ActionForward forward = null ;
 		
 		int order_id = Integer.parseInt(request.getParameter("order_id"));
+		int order_status = Integer.parseInt(request.getParameter("order_status"));
+		String[] product_no = request.getParameterValues("product_no");
+		String[] order_amount = request.getParameterValues("order_amount");
 		
 		CancelOrderStatusServiece cancelOrderStatusServiece = new CancelOrderStatusServiece();
 		
-		boolean cancelSuccess = cancelOrderStatusServiece.cancelOrderStatus(order_id);
+		boolean cancelSuccess = cancelOrderStatusServiece.cancelOrderStatus(order_id,order_status,product_no,order_amount);
 		
 		if(cancelSuccess) {
 

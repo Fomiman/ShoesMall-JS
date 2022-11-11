@@ -59,13 +59,44 @@ public class ProductDAO {
 			return maxPageNum;
 		}
 	//모든 신발 목록 조회
-	public ArrayList<ProductTBL> selectProductList(int productPageNum) {
+	public ArrayList<ProductTBL> selectProductList(int productPageNum, String orderbySelect) {
 		int pageNum2 =0 ;
 		if(1<= productPageNum && productPageNum <= maxPage()){
 			pageNum2 = (productPageNum-1)*6;
 		}
+		//221111 정렬기능용 문자열 값 세팅 
+		String orderby = "";
+		switch (orderbySelect) {
+		case "default":
+			orderby = "product_no";
+			break;
+				
+		case "new1":
+			orderby = "product_date desc";	
+			break;
+		
+		case "new2":
+			orderby = "product_date asc";	
+			break;
+		
+		case "price1":
+			orderby = "product_price desc";	
+			break;
+		
+		case "price2":
+			orderby = "product_price asc";	
+			break;
+		
+		case "name1":
+			orderby = "product_name desc";	
+			break;
+		case "name2":
+			orderby = "product_name asc";	
+			break;
+		}
+		
 		ArrayList<ProductTBL> productList = null;
-		String sql = "select * from productTBL limit "+pageNum2+", 6";
+		String sql = "select * from productTBL order by "+orderby+" limit "+pageNum2+", 6" ;
 		System.out.println("pageNum2 : "+pageNum2);
 		try {
 			pstmt = con.prepareStatement(sql);

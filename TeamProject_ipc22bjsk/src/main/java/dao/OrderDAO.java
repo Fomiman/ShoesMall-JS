@@ -91,7 +91,7 @@ public class OrderDAO {
 		return myOrderList;
 	}
 
-
+	// 현재 사용자의 주문 내역 불러오기
 	public ArrayList<Order_detail> selectMyOrderDetailList(int order_id) {
 		ArrayList<Order_detail> myOrderDetailList = null;
 		return null;
@@ -119,6 +119,62 @@ public class OrderDAO {
 		
 		return updateSuccess;
 	}
+	
+	// 주문 승인 시 재고 감소 메서드
+		public int ProductAmountDecrease(String[] product_no, String[] order_amount) {
+			// 제품 갯수(product_no의 길이만큼의 반복횟수)만큼 정상적으로 실행되었는지 확인하기위한 변수
+			int decreaseSuccess = 0;
+			
+				try {
+					for(int i =0 ; i<product_no.length; i++) { // 들어있는 제품의 종류 수 만큼 반복시킨다.
+						String sql = "update productTBL set product_amount = product_amount-"+order_amount[i]+" where product_no="+product_no[i];
+							
+						pstmt = con.prepareStatement(sql);
+						int updateStatus = pstmt.executeUpdate();
+						
+						if(updateStatus>0) {
+							decreaseSuccess ++;
+						}else {
+							System.out.println("재고 수량 감소 실패");
+						}
+					}
+					
+				} catch (SQLException e) {
+					System.out.println("ProductAmountDecrease 메서드 에러"+e);
+				} finally {
+					close(pstmt);
+				}
+			
+			return decreaseSuccess;
+		}
+		//주문 승인상태에서 취소 시 감소한 수량만큼 다시 증가 시키는 메서드 
+		public int ProductAmountIncrease(String[] product_no, String[] order_amount) {
+			// 제품 갯수(product_no의 길이만큼의 반복횟수)만큼 정상적으로 실행되었는지 확인하기위한 변수
+			int increaseSuccess = 0;
+			
+				try {
+					for(int i =0 ; i<product_no.length; i++) { // 들어있는 제품의 종류 수 만큼 반복시킨다.
+						String sql = "update productTBL set product_amount = product_amount+"+order_amount[i]+" where product_no="+product_no[i];
+							
+						pstmt = con.prepareStatement(sql);
+						int updateStatus = pstmt.executeUpdate();
+						
+						if(updateStatus>0) {
+							increaseSuccess ++;
+						}else {
+							System.out.println("재고 수량 증가 실패");
+						}
+					}
+					
+				} catch (SQLException e) {
+					System.out.println("ProductAmountIncrease 메서드 에러"+e);
+				} finally {
+					close(pstmt);
+				}
+			
+			return increaseSuccess;
+		}
+		
 	// 실시간 주문관리 - 주문 취소 버튼 메서드
 	public boolean cancelOrderStatus(int order_id) {
 		boolean cancelSuccess = false;
@@ -142,5 +198,7 @@ public class OrderDAO {
 		
 		return cancelSuccess;
 	}
+
+	
 
 }

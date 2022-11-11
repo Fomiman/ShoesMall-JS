@@ -13,7 +13,7 @@ import vo.ProductTBL;
 public class ProductListService {
 
 	
-		public ArrayList<ProductTBL> getProductList(HttpServletRequest request, int productPageNum){
+		public ArrayList<ProductTBL> getProductList(HttpServletRequest request, int productPageNum, String orderbySelect){
 			
 			Connection con = getConnection();
 			
@@ -21,7 +21,7 @@ public class ProductListService {
 			
 			productDAO.setConnection(con);
 			
-			ArrayList<ProductTBL> productList = productDAO.selectProductList(productPageNum);
+			ArrayList<ProductTBL> productList = productDAO.selectProductList(productPageNum, orderbySelect);
 			int MaxProductPageNum = productDAO.maxPage();
 			
 			request.setAttribute("MaxProductPageNum", MaxProductPageNum);
