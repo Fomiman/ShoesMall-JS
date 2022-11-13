@@ -39,8 +39,8 @@
 	}
 
 	#productImage{
-		max-width: 150px;
-		max-height: 150px;
+		max-width: 200px;
+		max-height: 200px;
 		border: none;
 	}
 	
@@ -67,6 +67,18 @@
 		margin-right: 20px;
 		line-height: 40px;
 	}
+.carbox {
+  display: block; 
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    transition: box-shadow .25s; 
+}
+.carbox:hover {
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
 	
 </style>
 </head>
@@ -79,18 +91,24 @@ int MaxProductPageNum = (int)request.getAttribute("MaxProductPageNum");
  <section id="listForm">
 	<c:if test ="${productList != null }">
 		<table class="productListTBL">
+		
 			<tr>
+			  
 				<c:forEach var="productTBL"  items="${productList}" varStatus="i">
 					<td class="productListTD">
+					<div class="carbox">
 						<a href="productView.shoes?product_no=${productTBL.product_no}">
 						<img src="images/${productTBL.product_image }" id="productImage" >
 						</a><br>
 						상품명 : ${productTBL.product_name}<br/>
 						사이즈 : ${productTBL.product_size}<br/>
 						가격 : ${productTBL.product_price}원<br/>
+						</div>
 					</td>
+				
 					<input type="hidden" id="width-var" value="">
 					<c:if test="${((i.index+1) mod 3)==0}">
+					
 						</tr>
 						<tr>
 					</c:if>	

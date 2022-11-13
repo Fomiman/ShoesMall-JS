@@ -99,6 +99,27 @@ table {
 </head>
 <body>
 
+<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div class="panel-title">
+							<div class="row">
+								<div class="col-xs-6">
+									<h5>
+										<span class="glyphicon glyphicon-shopping-cart"></span>
+										Shopping Cart
+									</h5>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				
+<!-- *********************************************************************** -->
 	<c:if test="${startMoney != null }">
 		<c:set var="startMoney" value="${startMoney}"></c:set>
 	</c:if>
@@ -110,7 +131,7 @@ table {
 	<section id="listForm">
 
 		
-			<h2>장바구니 목록</h2>
+			<!-- <h2>장바구니 목록</h2> -->
 
 			<form method="post" action="#" name="f">
 
@@ -182,7 +203,8 @@ table {
 						</tr>
 
 					</c:forEach>
-					<tr>
+					</c:if>
+					<%-- <tr>
 						<td colspan="8" style="text-align: right;">
 							<h4>총 금액 : ${totalMoney}원</h4>
 						</td>
@@ -195,22 +217,43 @@ table {
 								<section class="div_empty">장바구니가 비어있습니다</section>
 							</td>
 						</tr>
-					</c:if>
+					</c:if> --%>
 				</table>
+				<!-- **************************************** -->
+				<div class="panel-footer">
+						<div class="row text-center">
+							<div class="col-xs-9">
+								<h4 class="text-right">
+									총 금액 : <strong>${totalMoney}원</strong>
+								</h4>
+							</div>
+							<nav id="commandList">
+								<input type="submit" class="btn btn-default" value="쇼핑 계속하기"
+									formaction="productList.shoes"> 
+									<input type="submit" class="btn btn-default" value="구매하기"
+									formaction="productCartOrder.shoes?totalMoney=${totalMoney}">
+							</nav>
+						</div>
+					</div>
+				<!-- **************************************** -->
 				<!-- 하단 버튼  -->
-				<nav id="commandList">
+				<%-- <nav id="commandList">
 					<input type="submit" class="btn btn-default" value="쇼핑 계속하기"
 						formaction="productList.shoes"> 
 					<input type="submit" class="btn btn-default" value="구매하기"
 						formaction="productCartOrder.shoes?totalMoney=${totalMoney}">
-				</nav>
+				</nav> --%>
 			</form>
 
-		
 
 		
 		<!------------------------------------------------------------------------------------------------  -->
 	</section>
 	<br>
+	
+	
+		</div>
+		</div>
+	</div>
 </body>
 </html>

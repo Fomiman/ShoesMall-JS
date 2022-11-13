@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 
 <title>footer</title>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"><!-- 아이콘 스타일용 css 링크 -->
+<!-- <link href="./css/footer.css" rel="stylesheet"> -->
 </head>
 <body>
 <!--footer starts from here-->
@@ -38,7 +40,7 @@
 <li><a href="#">E-mail : lotteon@lotte.net</a></li>
 </ul>
 <!--footer_ul_amrc ends here-->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 
     			<div class="col-md-12">
                     <ul class="social-network social-circle">
