@@ -39,8 +39,8 @@
 	}
 
 	#productImage{
-		max-width: 150px;
-		max-height: 150px;
+		max-width: 200px;
+		max-height: 200px;
 		border: none;
 	}
 	
@@ -48,16 +48,39 @@
 		margin-left: 70%;
 	}
 	
-	@media (max-width: 768px) {
+	
+	@media (max-width: 992px) {
+		.productListTD {
+			padding: 10px;
+		}
+		
+		.orderbyDIV {
+			margin-left: 60%;
+		}
+		
+		#productImage{
+			max-width: 180px;
+			max-height: 180px;
+			border: none;
+		}
+	}
+	
+	@media (max-width: 767px) {
 		.productListTD {
 			padding: 0px;
 		}
 		
 		.orderbyDIV {
-		margin-left: 60%;
-	}
+			margin-left: 60%;
+		}
 		
+		#productImage{
+			max-width: 150px;
+			max-height: 150px;
+			border: none;
+		}
 	}
+	
 		
 	
 	.pageDIV {
@@ -75,6 +98,20 @@
 		margin-right: 20px;
 		line-height: 40px;
 	}
+	
+	.carbox {
+		display: block; 
+	    margin-bottom: 20px;
+	    line-height: 1.42857143;
+	    background-color: #fff;
+	    border-radius: 3px;
+	    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+	    transition: box-shadow .25s; 
+	}
+	.carbox:hover {
+	  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	}
+	
 	
 
 </style>
@@ -106,6 +143,7 @@ String orderbySelect = (String)request.getAttribute("orderbySelect");
 			<tr>
 				<c:forEach var="productTBL"  items="${productList}" varStatus="i">
 					<td class="productListTD">
+					<div class="carbox">
 						<a href="productView.shoes?product_no=${productTBL.product_no}">
 						<img src="images/${productTBL.product_image }" id="productImage" >
 						</a><br>
@@ -118,6 +156,7 @@ String orderbySelect = (String)request.getAttribute("orderbySelect");
 						<c:if test="${productTBL.product_amount eq 0 }">
 							[품절]<br/>
 						</c:if>
+						</div>
 					</td>
 					<input type="hidden" id="width-var" value="">
 					<c:if test="${((i.index+1) mod 3)==0}">
