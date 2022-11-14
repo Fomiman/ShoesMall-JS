@@ -6787,6 +6787,7 @@ button.close {
 
 .navbar-nav > li {
 	transform: skew(-20deg, 0deg);
+	
 }
 
 .navbar-nav > .dropdown {
@@ -6804,6 +6805,7 @@ button.close {
 .navbar {
 /*	background: linear-gradient(45deg, red, black);*/
 background-color: black;
+overflow: hidden;
 }
 
 .navbar-right > .dropdown >.dropdown-toggle,

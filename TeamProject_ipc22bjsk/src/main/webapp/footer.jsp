@@ -16,7 +16,9 @@
 
 <div class="container bottom_border">
 <div class="row">
+
 <div class=" col-sm-4 col-md col-sm-4  col-12 col">
+
 <h3 class="headin5_amrc col_white_amrc pt2">Shose Mall</h3>
 <!--headin5_amrc-->
 <p class="mb10">대표이사 : 조용원, 손주환<br>
@@ -29,6 +31,7 @@
 
 </div>
 
+
 <div class=" col-sm-4 col-md  col-6 col">
 <h3 class="headin5_amrc col_white_amrc pt2">고객 센터</h3>
 <!--headin5_amrc-->
@@ -40,9 +43,9 @@
 <li><a href="#">E-mail : lotteon@lotte.net</a></li>
 </ul>
 <!--footer_ul_amrc ends here-->
-
-
-    			<div class="col-md-12">
+</div>
+<br>
+<div class="col-md-4">
                     <ul class="social-network social-circle">
                         <li><a href="#" class="icoRss" title="Rss" target="_blank"><i class="fa fa-rss"></i></a></li>
                         <li><a href="https://ko-kr.facebook.com" class="icoFacebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
@@ -51,13 +54,11 @@
                         <li><a href="https://kr.linkedin.com/" class="icoLinkedin" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                     </ul>				
 				</div>
-</div>
 
 </div>
-
+	
 
 </div>
-
 
 <div class="container">
 
