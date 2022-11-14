@@ -60,8 +60,8 @@ if (session.getAttribute("manager_id") != null) {
 
  %>
 		<div class="row" style="margin-bottom: 20px">
-			<table class="table table-striped"
-				style="text-align: center; border: 1px solid #dddddd">
+			<table class="table table-striped tableNoBorder"
+				style="text-align: center; border-bottom: 1px solid #dddddd">
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">번호</th>

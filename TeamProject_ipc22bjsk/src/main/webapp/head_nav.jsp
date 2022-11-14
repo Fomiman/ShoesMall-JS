@@ -31,14 +31,15 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="userHome.usr">메인</a></li> <!-- 메인 페이지 -->
-                <li><a href="productList.shoes">나이키</a></li>
-                <li><a href="productList2.shoes">아디다스</a></li>
-                <li><a href="userBoard.usr">게시판</a></li>
-                <li><a href="serviceCenter.usr">고객센터</a></li>
+                <li class="active"><a href="userHome.usr">Main</a></li> <!-- 메인 페이지 -->
+                <li><a href="productList.shoes">NIKE</a></li>
+                <li><a href="productList2.shoes">ADIDAS</a></li>
+                <li><a href="serviceCenter.usr">NOTICE</a></li>
             </ul>
             
             <ul class="nav navbar-nav navbar-right">
+            	<li><a href="userBoard.usr">Community</a></li>
+                
                 <li class="dropdown">
                 <a href="#" class = "dropdown-toggle"
                     data-toggle="dropdown" role ="button" 
@@ -47,11 +48,12 @@
                     <%
 		            	if (member_id == null){
 		            %>
-		            접속하기<span class="caret"></span></a>
+		            Sign in<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="userLogin.usr">로그인</a></li>
                         <li><a href="join.usr">회원가입</a></li>
-                        <li><a href="productCartList.shoes">장바구니</a></li>                    
+                        <li><a href="productCartList.shoes">장바구니</a></li>
+                        <li><a href="serviceCenter.usr">고객센터</a></li>                    
                         <li><a href="managerHome.usr">관리자 페이지 이동</a></li>  
                     <%
 		            	}else{
@@ -61,6 +63,7 @@
                         <li><a href="userLogoutAction.usr">로그아웃</a></li>
                         <li><a href="productCartList.shoes">장바구니</a></li>
                         <li><a href="userMyPage.usr">마이페이지</a></li>
+                        <li><a href="serviceCenter.usr">고객센터</a></li>
 					<% }  %>
 					</ul>
                 </li>

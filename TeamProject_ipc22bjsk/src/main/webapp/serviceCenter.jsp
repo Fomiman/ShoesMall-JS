@@ -21,7 +21,7 @@
 		<div class="row">
 			<!-- 공지사항 -->
 			<table class="table table-striped"
-				style="text-align: center; border: 1px solid #dddddd">
+				style="text-align: center; border-bottom: 1px solid #dddddd">
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;" colspan="3">공지사항</th>
@@ -67,6 +67,5 @@
 			</table>
 		</div>
 
-	<h1>1:1문의 서비스 준비 중</h1>
 </body>
 </html>
