@@ -9,112 +9,8 @@
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width", initial-scale="1" >  <!-- 반응형 웹에 사용하는 메타태그 -->
 <title>상품 리스트 </title>
-<style type="text/css">
 
-	#listForm{
-		max-width:95%;
-		max-height:100%;
-		margin: 0px auto;
-		margin-bottom: 20px;
-	}
-	
-	h2{
-		text-align:center;
-	}
-	
-	.productListTBL{
-		margin: 0px auto;
-		max-width:550px;
-	}
-	
-	.productListTD {
-		padding: 40px;
-	}
-
-	.div_empty{
-		background-color:red;
-		max-width: 100%;
-		max-height: 100%;
-		text-align: center;
-	}
-
-	#productImage{
-		max-width: 200px;
-		max-height: 200px;
-		border: none;
-	}
-	
-	.orderbyDIV {
-		margin-left: 70%;
-	}
-	
-	
-	@media (max-width: 992px) {
-		.productListTD {
-			padding: 10px;
-		}
-		
-		.orderbyDIV {
-			margin-left: 60%;
-		}
-		
-		#productImage{
-			max-width: 180px;
-			max-height: 180px;
-			border: none;
-		}
-	}
-	
-	@media (max-width: 767px) {
-		.productListTD {
-			padding: 0px;
-		}
-		
-		.orderbyDIV {
-			margin-left: 60%;
-		}
-		
-		#productImage{
-			max-width: 150px;
-			max-height: 150px;
-			border: none;
-		}
-	}
-	
-		
-	
-	.pageDIV {
-		display: flex;
-		
-	}
-	
-	.pageUL {
-		list-style-type: none;
-		margin: 0px auto;
-	}
-	
-	.pageUL_LI {
-		float: left; 
-		margin-right: 20px;
-		line-height: 40px;
-	}
-	
-	.carbox {
-		display: block; 
-	    margin-bottom: 20px;
-	    line-height: 1.42857143;
-	    background-color: #fff;
-	    border-radius: 3px;
-	    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
-	    transition: box-shadow .25s; 
-	}
-	.carbox:hover {
-	  box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-	}
-	
-	
-
-</style>
+<link rel="stylesheet" href="css/productPage.css">
 </head>
 <body>
 <% 
@@ -135,7 +31,7 @@ String orderbySelect = (String)request.getAttribute("orderbySelect");
 	 			<option value="name1" ${orderbySelect eq "name1" ? "selected" : ""}>이름순▼</option>
 	 			<option value="name2" ${orderbySelect eq "name2" ? "selected" : ""}>이름순▲</option>
 	 		</select>
-	 		<input type="submit" name="orderbyBTN" value="정렬하기" />
+	 		<input type="submit" name="orderbyBTN" class="orderbyBTN" value="정렬하기" />
 	 	</div>
  	</form>
 	<c:if test ="${productList != null }">
