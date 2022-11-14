@@ -57,7 +57,7 @@
 						<th style="background-color: #eeeeee; text-align: center;">주문번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">회원번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">주문일</th>
-						<th style="background-color: #eeeeee; text-align: center;">주문처리상태</th>
+						<th style="background-color: #eeeeee; text-align: center;" colspan="2">주문처리상태</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,6 +70,7 @@
 								<td>${order.member_code}</td>
 								<td>${order.order_date }</td>
 								<td>${order.order_status }</td>
+								<td><a href="orderDetail.mgr?order_id=${order.order_id}"><input type="button" value="상세보기"/></a></td>
 							</tr>
 							<!-- 행 끝 -->
 						</c:forEach>
