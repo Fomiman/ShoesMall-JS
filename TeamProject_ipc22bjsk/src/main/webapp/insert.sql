@@ -1,13 +1,13 @@
 --drop table deliver_address;
---drop table memberTBL;
---drop table product_category;
---drop table productTbl;
---drop table managertbl;
+--drop table managerTBL;
 --drop table user_board;
 --drop table cartTBL;
---drop table orderTBL;
 --drop table order_detail;
 --drop table noticeTBL;
+--drop table memberTBL;
+--drop table product_category;
+--drop table productTBL;
+--drop table orderTBL;
 
 show tables;
 
@@ -23,13 +23,13 @@ select * from order_detail;
 select * from noticeTBL;
 
 
-insert into deliver_address values(0, '123','123','123');
 --insert into deliver_address values(1, '','','');
 --delete from deliver_address where member_code = 1;
 --update deliver_address set address1='대구광역시', address2='달서구',address3='상인동' where member_code=0;
 
 --delete from memberTBL where member_code =1;
-insert into memberTBL values ('000000', 'user123' ,'user123' , 'user','1993-05-03','010-1111-2222','metalwing53@gmail.com','M');
+insert into memberTBL values ('000001', 'user123' ,'user123' , 'user','1993-05-03','010-1111-2222','metalwing53@gmail.com','M');
+insert into deliver_address values(1, '123','123','123');
 
 insert into product_category values('나이키','나이키');
 insert into product_category values('아디다스','아디다스');
@@ -71,36 +71,36 @@ insert into managerTBL values ('admin123', 'admin123' ,'metalwing53@gmail.com');
 --insert into user_board;
 
 --insert into cartTBL;
+--select * from orderTBL;
+insert into orderTBL values(1,1, 100000 ,'2022-10-29',0);
 
-insert into orderTBL values(0,0, 100000 ,'2022-10-29',0);
-
-insert into order_detail values(0,0,1001280,1,50000);
-insert into order_detail values(1,0,1001270,1,50000);
+insert into order_detail values(0,1,1001280,1,50000);
+insert into order_detail values(1,1,1001270,1,50000);
 
 insert into noticeTBL values(1, '123','123','2022-10-30');
 
 /*******************************************************************************************************************************/
-select  * from Order_detail natural join ordertbl natural join membertbl natural join deliver_address where order_id = 0;
-select order_id, member_id,concat(address1, " ", address2, " ", address3) as address, member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
-
-select order_id, member_id,concat(address1, " ", address2, " ", address3) as address,  member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
-
-
-select member_code, member_id, member_name, member_phone from memberTBL order by 1 desc;
-
-select member_code, member_id, member_pwd, member_name, member_birth, member_phone, member_email, member_gender, address1, address2, address3 from memberTBL natural join deliver_address;
-
-select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL;
-
-
-select * from producttbl;
-
-select * from ordertbl natural join order_detail;
-select order_id, product_no, order_amount, order_price, order_date from ordertbl natural join order_detail;
+--select  * from Order_detail natural join ordertbl natural join membertbl natural join deliver_address where order_id = 0;
+--select order_id, member_id,concat(address1, " ", address2, " ", address3) as address, member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
+--
+--select order_id, member_id,concat(address1, " ", address2, " ", address3) as address,  member_phone, member_email, product_no, order_amount, order_price from Order_detail natural join ordertbl natural join membertbl natural join deliver_address  where order_id = 0;
+--
+--
+--select member_code, member_id, member_name, member_phone from memberTBL order by 1 desc;
+--
+--select member_code, member_id, member_pwd, member_name, member_birth, member_phone, member_email, member_gender, address1, address2, address3 from memberTBL natural join deliver_address;
+--
+--select ifnull(max(notice_no),0)+1 as notice_no from NoticeTBL;
+--
+--
+--select * from producttbl;
+--
+--select * from ordertbl natural join order_detail;
+--select order_id, product_no, order_amount, order_price, order_date from ordertbl natural join order_detail;
 
 --ProductDAO / insertOrderProduct()
-select * from orderTBL;
-select * from order_detail;
+--select * from orderTBL;
+--select * from order_detail;
 
 --select ifnull(max(order_id),0)+1 from orderTBL;
 --insert into orderTBL(order_id, member_code, order_date,order_status,totalmoney) values(1, 0,now(),'0',100000);
@@ -112,31 +112,30 @@ select * from order_detail;
 --delete from order_detail where order_id = 1;
 
 
-select count(*) from orderTBL;
+--select count(*) from orderTBL;
 
-select CEIL(count(*)/10),count(*)/10 , count(*)%10 from orderTBL;
+--select CEIL(count(*)/10),count(*)/10 , count(*)%10 from orderTBL;
 
-select CEIL(1) from dual;
+--select CEIL(1) from dual;
 
-select count(*) from productTBL;
-select CEIL(count(*)/10) from productTBL;
-select CEIL(count(*)/10) from productTBL;
+--select count(*) from productTBL;
+--select CEIL(count(*)/10) from productTBL;
+--select CEIL(count(*)/10) from productTBL;
 
-select * from productTBL;
-select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 0, 3;
-select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 3, 3;
-select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 6, 3;
+--select * from productTBL;
+--select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 0, 3;
+--select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 3, 3;
+--select product_image, product_no, product_name, category_code, product_amount from productTBL order by product_no desc  limit 6, 3;
 
+--select post_no, post_subject ,member_id, post_date from memberTBL natural join user_board order by post_no desc limit  0 ,10;
 
-
-select post_no, post_subject ,member_id, post_date from memberTBL natural join user_board order by post_no desc limit  0 ,10;
-
-
-
-select * from productTBL order by 1 limit 0, 6 ;
+--select * from productTBL order by 1 limit 0, 6 ;
 
 --delete from orderTBL where order_id >= 0 ;
 --update orderTBL set order_status = 0 where order_status in (1,2) ;
 
 -- 주문 승인 시 재고 감소 메서드
 --update productTBL set product_amount = product_amount-1 where product_no=1001270;
+
+
+
