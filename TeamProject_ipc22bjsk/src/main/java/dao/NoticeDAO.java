@@ -80,7 +80,7 @@ public class NoticeDAO {
 			writeCount = pstmt.executeUpdate();//업데이트를 성공하면 1을 리턴받음			
 			
 		} catch (Exception e) {			
-			System.out.println("[NoticeDAO] write 에러:"+ e);
+			System.out.println("[NoticeDAO] insertPost 에러:"+ e);
 		} finally {
 			close(rs);
 			close(pstmt);
