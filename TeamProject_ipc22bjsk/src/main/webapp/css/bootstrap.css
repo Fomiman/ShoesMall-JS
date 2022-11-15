@@ -6805,7 +6805,19 @@ button.close {
 .navbar {
 /*	background: linear-gradient(45deg, red, black);*/
 background-color: black;
-overflow: hidden;
+}
+
+@media (max-width: 768px) {
+	.navbar-header{
+		transform: skew(0deg, 0deg);
+		margin-left: 0px;
+		padding-left: 0px;
+		margin-right: 0px;
+		padding-right: 0px;
+	}
+	.navbar-header >a {
+		transform: skew(-20deg, 0deg);
+	}
 }
 
 .navbar-right > .dropdown >.dropdown-toggle,
