@@ -187,7 +187,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ipc22bjsk`.`noticeTBL` (
   `notice_no` INT NOT NULL,
-  `notice_title` NVARCHAR(50) NOT NULL,
+  `notice_subject` NVARCHAR(50) NOT NULL,
   `notice_text` TEXT NOT NULL,
   `notice_date` DATE NOT NULL,
   PRIMARY KEY (`notice_no`))
