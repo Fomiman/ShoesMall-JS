@@ -67,7 +67,15 @@
 	
 @media (min-width: 768px) {
     .omb_login .omb_forgotPwd {
-        text-align: right;
+        text-align: center;
 		margin-top:10px;
  	}		
 }
+
+@media (max-width: 992px) {
+    .hidden-xs {
+		font-size: medium;
+        text-align: center;
+ 	}		
+}
+
