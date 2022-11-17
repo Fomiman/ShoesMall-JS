@@ -60,7 +60,7 @@
                 </li>
                 <li><a href="userBoard.mgr">게시판관리</a></li>
                 <li><a href="userManagement.mgr">회원관리</a></li>
-                <li><a href="serviceCenter.mgr">고객센터</a></li>
+                <li><a href="serviceCenter.mgr">Notice</a></li>
             </ul>
              <% }%>
              

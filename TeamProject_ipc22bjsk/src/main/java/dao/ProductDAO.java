@@ -93,6 +93,13 @@ public class ProductDAO {
 		case "name2":
 			orderby = "product_name asc";	
 			break;
+			
+		case "size1":
+			orderby = "product_size desc";	
+			break;
+		case "size2":
+			orderby = "product_size asc";	
+			break;
 		}
 		
 		ArrayList<ProductTBL> productList = null;
