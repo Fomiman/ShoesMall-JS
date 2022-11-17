@@ -72,7 +72,7 @@
 						<!-- 여러상품 한번에 주문할때 여기 부분 반복으로 나타내기 -->
 					<c:forEach var="detail" items="${detailList }" varStatus="status">
 					<tr><th colspan="3" style="background-color: #eeeeee; text-align: center;">
-					------------------주문 제품정보------------------</th></tr>
+					주문 제품정보</th></tr>
 						<tr>
 							<td>제품번호</td>
 							<td colspan="2">
