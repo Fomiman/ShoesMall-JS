@@ -6824,5 +6824,9 @@ background-color: black;
 .navbar-right > .dropdown >.dropdown-toggle:focus,
 .navbar-right > .dropdown >.dropdown-toggle:hover {
 	font-weight: 500;
-	color: whitesmoke;
+	color: whitesmoke ;
+}
+
+.headerbar {
+	margin-bottom: 20px;
 }

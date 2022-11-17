@@ -19,7 +19,7 @@ public class ProductRegistService {
 		
 		productDAO.setConnection(con);
 		
-	int insertCount = ProductDAO.insertProduct(productTBL);
+		int insertCount = productDAO.insertProduct(productTBL);
 		
 		boolean isRegistSuccess = false;	
 		if(insertCount>0){
