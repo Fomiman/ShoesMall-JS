@@ -1586,6 +1586,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 30px;
 }
 
 	
@@ -4971,7 +4972,7 @@ a.badge:focus {
   padding-bottom: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eee;
+  background-color: lightgray;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -6824,5 +6825,20 @@ background-color: black;
 .navbar-right > .dropdown >.dropdown-toggle:focus,
 .navbar-right > .dropdown >.dropdown-toggle:hover {
 	font-weight: 500;
-	color: whitesmoke;
+	color: whitesmoke ;
+}
+
+.headerbar {
+	margin-bottom: 20px;
+}
+
+.table {
+	border-radius: 6px;
+}
+
+@media (min-width: 769px) {
+	.jumbotron {
+			margin: 0px auto;
+			max-width: 60%;
+	}
 }

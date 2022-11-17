@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class SHA256 {
 	
-	private static String salt ="맥카페";//임시 소금(멤버변수로 선언)	
+	private static String salt ="ShoesMall-JS";//임시 소금(멤버변수로 선언)	
 	
 	private static String prePassword;	
 	
@@ -85,7 +85,7 @@ public class SHA256 {
 		
 		} catch (Exception e) {			
 			//e.printStackTrace();
-			System.out.println(e);
+			System.out.println("암호화 메서드 encodeSHA256 오류 : "+e);
 		}
 		System.out.println("encodeSHA256 : "+result);
 		return result;

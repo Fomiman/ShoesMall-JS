@@ -54,7 +54,7 @@
 	
 					</div>
 	
-					<input type="submit" class="btn btn-primary form-control" value="정보수정">
+					<input type="submit" class="btn btn-primary form-control" value="정보수정" style="margin-bottom: 5px;">
 					<input type="submit" class="btn btn-primary form-control" value="회원탈퇴" formaction="deleteUserAccount.mgr?member_code=${memberDetail. member_code}"/>
 				</form>
 				

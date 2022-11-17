@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>관리자용 헤더 네비</title>
 </head>
-<body>
+<body class="headerbar">
 
 <%
 	String manager_id = null;
