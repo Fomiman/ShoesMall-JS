@@ -30,6 +30,8 @@ String orderbySelect = (String)request.getAttribute("orderbySelect");
 	 			<option value="price2" ${orderbySelect eq "price2" ? "selected" : ""}>가격순▲</option>
 	 			<option value="name1" ${orderbySelect eq "name1" ? "selected" : ""}>이름순▼</option>
 	 			<option value="name2" ${orderbySelect eq "name2" ? "selected" : ""}>이름순▲</option>
+	 			<option value="size1" ${orderbySelect eq "name1" ? "selected" : ""}>사이즈순▼</option>
+	 			<option value="size2" ${orderbySelect eq "name2" ? "selected" : ""}>사이즈순▲</option>
 	 		</select>
 	 		<input type="submit" name="orderbyBTN" class="orderbyBTN" value="정렬하기" />
 	 	</div>
