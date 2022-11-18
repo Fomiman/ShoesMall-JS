@@ -69,7 +69,14 @@
 								<td><a href="orderDetail.mgr?order_id=${order.order_id}">${order.order_id }</a></td>
 								<td>${order.member_code}</td>
 								<td>${order.order_date }</td>
-								<td>${order.order_status }</td>
+								<td>
+									<c:choose>
+										<c:when test="${order.order_status eq 0 }">[처리대기]</c:when>
+										<c:when test="${order.order_status eq 1 }">[승인]</c:when>
+										<c:when test="${order.order_status eq 2 }">[취소]</c:when>
+										<c:otherwise>[주문 상태 오류 : DB에서 확인 바람]</c:otherwise>
+									</c:choose>
+								</td>
 								<td><a href="orderDetail.mgr?order_id=${order.order_id}"><input type="button" value="상세보기"/></a></td>
 							</tr>
 							<!-- 행 끝 -->
